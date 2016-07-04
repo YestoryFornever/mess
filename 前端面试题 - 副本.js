@@ -15,137 +15,137 @@ ES6:3
 前端框架相关:2
 
 
-    前端同学，来，说说es3，es5，es6的区别；
-    各个浏览器内核的区别；
-    页面具体的渲染流程；
-    说说hybrid和h5的优缺点；
-    在谈谈当下流行的react到底是个什么东东，解决了什么问题；
-    amd，cmd是什么；
-    mvc，mvp，mvvm等怎么区分，
-    以及应用场景；谈谈你对其他前端框架或者前端库的了解，underscore，jquery，backbone，angular，requirejs，seajs，bootstrap，flux，knockout...；
-    再来谈谈前端工程化打包工具，gunt，webpack啥的会用么，会写插件么；
+	前端同学，来，说说es3，es5，es6的区别；
+	各个浏览器内核的区别；
+	页面具体的渲染流程；
+	说说hybrid和h5的优缺点；
+	在谈谈当下流行的react到底是个什么东东，解决了什么问题；
+	amd，cmd是什么；
+	mvc，mvp，mvvm等怎么区分，
+	以及应用场景；谈谈你对其他前端框架或者前端库的了解，underscore，jquery，backbone，angular，requirejs，seajs，bootstrap，flux，knockout...；
+	再来谈谈前端工程化打包工具，gunt，webpack啥的会用么，会写插件么；
 
-    HTML>
-        1.  文档类型Doctype
-            1>. <!DOCTYPE>标签的定义与用法;
-            	定义浏览器以什么文档标准渲染当前文档，
-            	没有结束标签，不区分大小写，
-            	如果没有的时候会导致文档以quick模式（怪异模式、兼容模式）渲染。
-                /*DOCTYPE不是html标签（没有结束标签）。
-                html5不区分大小写。
-                <!DOCTYPE>声明位于位于HTML文档中的第一行，处于 <html> 标签之前。告知浏览器的解析器用什么文档标准解析这个文档。
-                DOCTYPE不存在或格式不正确会导致文档以兼容模式呈现。*/
+	HTML>
+		1.文档类型Doctype
+			1>. <!DOCTYPE>标签的定义与用法;
+				定义浏览器以什么文档标准渲染当前文档，
+				没有结束标签，不区分大小写，
+				如果没有的时候会导致文档以quick模式（怪异模式、兼容模式）渲染。
+				/*DOCTYPE不是html标签（没有结束标签）。
+				html5不区分大小写。
+				<!DOCTYPE>声明位于位于HTML文档中的第一行，处于 <html> 标签之前。告知浏览器的解析器用什么文档标准解析这个文档。
+				DOCTYPE不存在或格式不正确会导致文档以兼容模式呈现。*/
 
-            2>. 浏览器标准模式（严格模式）和混杂模式（怪异模式、兼容模式）之间的区别是什么？
-                盒子模型 渲染模式的不同
-                使用 window.top.document.compatMode 可显示为什么模式
-                document.write(document.compatMode == "CSS1Compat" ? "当前处于标准模式" : "当前处于混杂模式");
+			2>. 浏览器标准模式（严格模式）和混杂模式（怪异模式、兼容模式）之间的区别是什么？
+				盒子模型 渲染模式的不同
+				使用 window.top.document.compatMode 可显示为什么模式
+				document.write(document.compatMode == "CSS1Compat" ? "当前处于标准模式" : "当前处于混杂模式");
 
-            3>. 标准模式（严格模式）与混杂模式（怪异模式、兼容模式）:如何触发这两种模式，区分它们有何意义?
-            　　用于声明文档使用那种规范(HTML/XHTML)一般为 严格 过度 基于框架的html文档
-            　　加入XMl声明可触发，解析方式更改为IE5.5 拥有IE5.5的bug
+			3>. 标准模式（严格模式）与混杂模式（怪异模式、兼容模式）:如何触发这两种模式，区分它们有何意义?
+			　　用于声明文档使用那种规范(HTML/XHTML)一般为 严格 过度 基于框架的html文档
+			　　加入XMl声明可触发，解析方式更改为IE5.5 拥有IE5.5的bug
 
-            4>. 标准模式（严格模式）与混杂模式（怪异模式、兼容模式）各有什么区别?
-                标准模式的排版 和JS运作模式都是以该浏览器支持的最高标准运行。在兼容模式中，页面以宽松的向后兼容的方式显示,模拟老式浏览器的行为以防止站点无法工作。
+			4>. 标准模式（严格模式）与混杂模式（怪异模式、兼容模式）各有什么区别?
+				标准模式的排版 和JS运作模式都是以该浏览器支持的最高标准运行。在兼容模式中，页面以宽松的向后兼容的方式显示,模拟老式浏览器的行为以防止站点无法工作。
 
-            5>. XHTML和HTML有什么区别？
-                HTML是一种基本的WEB网页设计语言，XHTML是一个基于XML的置标语言
-                最主要的不同：
-                XHTML 元素必须被正确地嵌套。
-                XHTML 元素必须被关闭。
-                标签名必须用小写字母。
-                XHTML 文档必须拥有根元素。
+			5>. XHTML和HTML有什么区别？
+				HTML是一种基本的WEB网页设计语言，XHTML是一个基于XML的置标语言
+				最主要的不同：
+				XHTML 元素必须被正确地嵌套。
+				XHTML 元素必须被关闭。
+				标签名必须用小写字母。
+				XHTML 文档必须拥有根元素。
 
-            6>. HTML5 为什么只需要写 <!DOCTYPE HTML>？
-                HTML5 不基于 SGML，因此不需要对DTD进行引用，但是需要doctype来规范浏览器的行为（让浏览器按照它们应该的方式来运行）；
-                而HTML4.01基于SGML,所以需要对DTD进行引用，才能告知浏览器文档所使用的文档类型。
+			6>. HTML5 为什么只需要写 <!DOCTYPE HTML>？
+				HTML5 不基于 SGML，因此不需要对DTD进行引用，但是需要doctype来规范浏览器的行为（让浏览器按照它们应该的方式来运行）；
+				而HTML4.01基于SGML,所以需要对DTD进行引用，才能告知浏览器文档所使用的文档类型。
 
-            7>. 你知道多少种文档类型？
-                HTML 5
-                    <!DOCTYPE html>
-                HTML 4.01 Strict
-                    <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-                    该 DTD 包含所有 HTML 元素和属性，但不包括展示性的和弃用的元素（比如 font）。不允许框架集（Framesets）。
-                HTML 4.01 Transitional
-                    <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-                    该 DTD 包含所有 HTML 元素和属性，包括展示性的和弃用的元素（比如 font）。不允许框架集（Framesets）。
-                HTML 4.01 Frameset
-                    <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
-                    该 DTD 等同于 HTML 4.01 Transitional，但允许框架集内容。
-                XHTML 1.0 Strict
-                    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-                    该 DTD 包含所有 HTML 元素和属性，但不包括展示性的和弃用的元素（比如 font）。不允许框架集（Framesets）。必须以格式正确的 XML 来编写标记。
-                XHTML 1.0 Transitional
-                    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-                    该 DTD 包含所有 HTML 元素和属性，包括展示性的和弃用的元素（比如 font）。不允许框架集（Framesets）。必须以格式正确的 XML 来编写标记。
-                XHTML 1.0 Frameset
-                    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
-                    该 DTD 等同于 XHTML 1.0 Transitional，但允许框架集内容。
-                XHTML 1.1
-                    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-                    该 DTD 等同于 XHTML 1.0 Strict，但允许添加模型（例如提供对东亚语系的 ruby 支持）。
+			7>. 你知道多少种文档类型？
+				HTML 5
+					<!DOCTYPE html>
+				HTML 4.01 Strict
+					<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+					该 DTD 包含所有 HTML 元素和属性，但不包括展示性的和弃用的元素（比如 font）。不允许框架集（Framesets）。
+				HTML 4.01 Transitional
+					<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+					该 DTD 包含所有 HTML 元素和属性，包括展示性的和弃用的元素（比如 font）。不允许框架集（Framesets）。
+				HTML 4.01 Frameset
+					<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
+					该 DTD 等同于 HTML 4.01 Transitional，但允许框架集内容。
+				XHTML 1.0 Strict
+					<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+					该 DTD 包含所有 HTML 元素和属性，但不包括展示性的和弃用的元素（比如 font）。不允许框架集（Framesets）。必须以格式正确的 XML 来编写标记。
+				XHTML 1.0 Transitional
+					<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+					该 DTD 包含所有 HTML 元素和属性，包括展示性的和弃用的元素（比如 font）。不允许框架集（Framesets）。必须以格式正确的 XML 来编写标记。
+				XHTML 1.0 Frameset
+					<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+					该 DTD 等同于 XHTML 1.0 Transitional，但允许框架集内容。
+				XHTML 1.1
+					<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+					该 DTD 等同于 XHTML 1.0 Strict，但允许添加模型（例如提供对东亚语系的 ruby 支持）。
 
-          2.  行内元素有哪些？块级元素有哪些？ 空(void)元素有那些？
-              块级元素: address blockquote center dir div dl fieldsetform h(1-6) hr menu  ol p pre table ul
-              行内元素: a b br cite em font i img input label select small span strike  strong sub sup textarea tt u
-              可变元素(根据上下文决定是块级元素还是行内元素): button iframe
-              常见的空元素:
-                    <br> <hr> <img> <input> <link> <meta>
-                     鲜为人知的有：
-                   <area> <base> <col> <command> <embed> <keygen> <param> <source> <track> <wbr>
+		2.行内元素有哪些？块级元素有哪些？ 空(void)元素有那些？
+			块级元素: address blockquote center dir div dl fieldsetform h(1-6) hr menuol p pre table ul
+			行内元素: a b br cite em font i img input label select small span strikestrong sub sup textarea tt u
+			可变元素(根据上下文决定是块级元素还是行内元素): button iframe
+			常见的空元素:
+					<br> <hr> <img> <input> <link> <meta>
+					 鲜为人知的有：
+				 <area> <base> <col> <command> <embed> <keygen> <param> <source> <track> <wbr>
 
-          3.  你真的了解HTML么？（雅虎面试题）
-               有这么一段HTML，请挑毛病：
-               <P>  哥写的不是HTML，是寂寞。<br><br>  我说：<br>不要迷恋哥，哥只是一个传说
+		3.你真的了解HTML么？（雅虎面试题）
+			 有这么一段HTML，请挑毛病：
+			 <P>哥写的不是HTML，是寂寞。<br><br>我说：<br>不要迷恋哥，哥只是一个传说
 
-               *考点1：html和 xhtml的区别
-               这行代码在html 4.01 strict下是完全正确的，在xhtml 1.0 strict下是错误一堆的。所以明显是一个考点。在xhtml下所有标签是闭合的，p,br需要闭合, 标签不允许大写，P要小写。同时nbsp和br必须包含在容器里。html下这些都不是错。p在html里是可选闭合标签，是可以不用闭合的。
-               这个考点告诉你xhtml是多么苛刻。这是基本考点，答对，你能拿到60分。
-               *考点2：考样式分离
-               用nbsp控制缩进是不合理的。应该用CSS干这事。所以应该删掉nbsp
-               *考点3：合理使用标签
-               br是强制折行标签，p是段落。原题用连续的br制造两个段落的效果，效果是达到了，但显然用的不合理，段落间距后期无法再控制。正确的做法是用两个p表现两个段落。“我说”后面是正常的文字折行用br是合理的。
-               上面全答对，你就能拿到100分。
+			 *考点1：html和 xhtml的区别
+			 这行代码在html 4.01 strict下是完全正确的，在xhtml 1.0 strict下是错误一堆的。所以明显是一个考点。在xhtml下所有标签是闭合的，p,br需要闭合, 标签不允许大写，P要小写。同时nbsp和br必须包含在容器里。html下这些都不是错。p在html里是可选闭合标签，是可以不用闭合的。
+			 这个考点告诉你xhtml是多么苛刻。这是基本考点，答对，你能拿到60分。
+			 *考点2：考样式分离
+			 用nbsp控制缩进是不合理的。应该用CSS干这事。所以应该删掉nbsp
+			 *考点3：合理使用标签
+			 br是强制折行标签，p是段落。原题用连续的br制造两个段落的效果，效果是达到了，但显然用的不合理，段落间距后期无法再控制。正确的做法是用两个p表现两个段落。“我说”后面是正常的文字折行用br是合理的。
+			 上面全答对，你就能拿到100分。
 
-               对原题改进的结果：
-               html 4.01:
-                    <p>哥写的不是HTML，是寂寞。<p>我说：<br> 不要迷恋哥，哥只是一个传说
-               xhtml 1.0:
-                    <p>哥写的不是HTML，是寂寞。</p><p>我说：<br /> 不要迷恋哥，哥只是一个传说</p>
-               加分：合理的用语义化标签
-               在前面的基础上合理的用语义化标签，对内容进行必要的标记，是加分的。但过度的使用标签，就画蛇添足了。如“我说”的话，可以用q标签标注。
-                    <p>哥写的不是HTML，是寂寞。
-                    <p>我说：<br> <q>不要迷恋哥，哥只是一个传说</q>
-               我觉得这就够了，如果再进一步，“我”用cite标注，“HTML” 用abbr或acronym标注（至于再讨论abbr和acronym的区别就太较真了），也OK。再复杂就没必要了。
-                    <p> 哥写的不是<abbr title=”Hyper Text Markup Language”>HTML</abbr>，是寂寞。
-                    <p><cite> 我</cite>说：<br> <q>不要迷恋哥，哥只是一个传说</q>
+			 对原题改进的结果：
+			 html 4.01:
+					<p>哥写的不是HTML，是寂寞。<p>我说：<br> 不要迷恋哥，哥只是一个传说
+			 xhtml 1.0:
+					<p>哥写的不是HTML，是寂寞。</p><p>我说：<br /> 不要迷恋哥，哥只是一个传说</p>
+			 加分：合理的用语义化标签
+			 在前面的基础上合理的用语义化标签，对内容进行必要的标记，是加分的。但过度的使用标签，就画蛇添足了。如“我说”的话，可以用q标签标注。
+					<p>哥写的不是HTML，是寂寞。
+					<p>我说：<br> <q>不要迷恋哥，哥只是一个传说</q>
+			 我觉得这就够了，如果再进一步，“我”用cite标注，“HTML” 用abbr或acronym标注（至于再讨论abbr和acronym的区别就太较真了），也OK。再复杂就没必要了。
+					<p> 哥写的不是<abbr title=”Hyper Text Markup Language”>HTML</abbr>，是寂寞。
+					<p><cite> 我</cite>说：<br> <q>不要迷恋哥，哥只是一个传说</q>
 
-          4.  请解释一下什么是语义化的HTML。
-               内容使用特定标签，通过标签就能大概了解整体页面的布局分布
-               用正确的标签做正确的事情。
-               html语义化让页面的内容结构化，结构更清晰，便于对浏览器、搜索引擎解析;
-               即使在没有样式CSS情况下也以一种文档格式显示，并且是容易阅读的;
-               搜索引擎的爬虫也依赖于HTML标记来确定上下文和各个关键字的权重，利于SEO;
-               使阅读源代码的人对网站更容易将网站分块，便于阅读维护理解。
+		4.请解释一下什么是语义化的HTML。
+			 内容使用特定标签，通过标签就能大概了解整体页面的布局分布
+			 用正确的标签做正确的事情。
+			 html语义化让页面的内容结构化，结构更清晰，便于对浏览器、搜索引擎解析;
+			 即使在没有样式CSS情况下也以一种文档格式显示，并且是容易阅读的;
+			 搜索引擎的爬虫也依赖于HTML标记来确定上下文和各个关键字的权重，利于SEO;
+			 使阅读源代码的人对网站更容易将网站分块，便于阅读维护理解。
 
-          5.  对WEB标准以及W3C的理解与认识？
-            标签闭合、标签小写、不乱嵌套、提高搜索机器人搜索几率、使用外链css和js脚本、结构行为表现的分离、文件下载与页面速度更快、内容能被更多的用户所访问、内容能被更广泛的设备所访问、更少的代码和组件，容易维护、改版方便，不需要变动页面内容、提供打印版本而不需要复制内容、提高网站易用性;
+		5.对WEB标准以及W3C的理解与认识？
+			标签闭合、标签小写、不乱嵌套、提高搜索机器人搜索几率、使用外链css和js脚本、结构行为表现的分离、文件下载与页面速度更快、内容能被更多的用户所访问、内容能被更广泛的设备所访问、更少的代码和组件，容易维护、改版方便，不需要变动页面内容、提供打印版本而不需要复制内容、提高网站易用性;
 
-          6. html5
-               1>. html5有哪些新特性？如何处理HTML5新标签的浏览器兼容问题？如何区分HTML和HTML5？
-                    * HTML5 现在已经不是 SGML 的子集，主要是关于图像，位置，存储，多任务等功能的增加。
-                    绘画 canvas;
-                    用于媒介回放的 video 和 audio 元素;
+		6. html5
+			 1>. html5有哪些新特性？如何处理HTML5新标签的浏览器兼容问题？如何区分HTML和HTML5？
+					* HTML5 现在已经不是 SGML 的子集，主要是关于图像，位置，存储，多任务等功能的增加。
+					绘画 canvas;
+					用于媒介回放的 video 和 audio 元素;
 					本地离线存储 (可对比cookie)
 						localStorage 长期存储数据，浏览器关闭后数据不丢失;
-                    	sessionStorage 的数据在浏览器关闭后自动删除;
-                    语意化更好的内容元素，比如 article、footer、header、nav、section;
-                    表单控件，calendar、date、time、email、url、search;
-                    新的技术webworker, websocket, Geolocation;
+						sessionStorage 的数据在浏览器关闭后自动删除;
+					语意化更好的内容元素，比如 article、footer、header、nav、section;
+					表单控件，calendar、date、time、email、url、search;
+					新的技术webworker, websocket, Geolocation;
 
 			2>. HTML5移除的元素：
-			  纯表现的元素：basefont，big，center，font, s, strike, tt, u;
-			  对可用性产生负面影响的元素：frame，frameset，noframes；
+			纯表现的元素：basefont，big，center，font, s, strike, tt, u;
+			对可用性产生负面影响的元素：frame，frameset，noframes；
 
 			3>. 支持HTML5新标签：
 				 IE8/IE7/IE6支持通过document.createElement方法产生的标签，
@@ -237,7 +237,7 @@ ES6:3
 			Css盒模型:内容，border ,margin，padding
 			（1）有两种， IE 盒子模型、W3C 盒子模型;
 			（2）盒模型： 内容(content)、填充(padding)、边界(margin)、 边框(border);
-			（3）区  别： IE的content部分把 border 和 padding计算了进去;
+			（3）区别： IE的content部分把 border 和 padding计算了进去;
 
 		2.	页面导入样式时，使用link和@import有什么区别？
 			内联 内嵌 外链 导入
@@ -248,16 +248,16 @@ ES6:3
 			（2）页面被加载的时，link会同时被加载，而@import引用的CSS会等到页面被加载完再加载;
 			（3）import是CSS 2.1 提出的，只在IE5以上才能被识别，而link是XHTML标签，无兼容问题;
 
-		3.  介绍所知道的CSS hack技巧（如：_, *, +, \9, !important）
+		3.介绍所知道的CSS hack技巧（如：_, *, +, \9, !important）
 				_marging \\IE 6
 				+margin \\IE 7
 				Marging:0 auto \9 所有Ie
 				Margin \0 \\IE 8
 
-		4.  CSS层叠是什么？介绍一下
+		4.CSS层叠是什么？介绍一下
 				层叠就是优先级，内联>内嵌>外链>导入
 
-		5.  CSS浏览器兼容问题
+		5.CSS浏览器兼容问题
 			*你做的页面在哪些流览器测试过?这些浏览器的内核（渲染引擎）分别是什么?
 				Ie(Trident，即Ie内核) 火狐(Gecko) 谷歌(webkit) opera(Elektra 7.0 Presto 2013 年 Webkit) Safari(Webkit)
 js引擎	 Chakra								OdinMonkey V8					 Carakan
@@ -276,43 +276,43 @@ js引擎	 Chakra								OdinMonkey V8					 Carakan
 				* png24位的图片在iE6浏览器上出现背景，解决方案是做成PNG8.
 				* 浏览器默认的margin和padding不同。解决方案是加一个全局的*{margin:0;padding:0;}来统一。
 				* IE6双边距bug:块属性标签float后，又有横行的margin情况下，在ie6显示margin比设置的大。
-				  浮动ie产生的双倍距离 #box{ float:left; width:10px; margin:0 0 0 100px;}
-				  这种情况之下IE会产生20px的距离，解决方案是在float的标签样式控制中加入 ——_display:inline;将其转化为行内属性。(_这个符号只有ie6会识别)
-				  渐进识别的方式，从总体中逐渐排除局部。
-				  首先，巧妙的使用“\9”这一标记，将IE游览器从所有情况中分离出来。
-				  接着，再次使用“+”将IE8和IE7、IE6分离开来，这样IE8已经独立识别。
-				  css
-					  .bb{
-						  background-color:#f1ee18;/*所有识别*/
-						  .background-color:#00deff\9; /*IE6、7、8识别*/
-						  +background-color:#a200ff;/*IE6、7识别*/
-						  _background-color:#1e0bd1;/*IE6识别*/
-					  }
-				*  IE下,可以使用获取常规属性的方法来获取自定义属性,
-				   也可以使用getAttribute()获取自定义属性;
-				   Firefox下,只能使用getAttribute()获取自定义属性。
-				   解决方法:统一通过getAttribute()获取自定义属性。
-				*  IE下,even对象有x,y属性,但是没有pageX,pageY属性;
-				   Firefox下,event对象有pageX,pageY属性,但是没有x,y属性。
-				*  解决方法：（条件注释）缺点是在IE浏览器下可能会增加额外的HTTP请求数。
-				*  Chrome 中文界面下默认会将小于 12px 的文本强制按照 12px 显示,
-				   可通过加入 CSS 属性 -webkit-text-size-adjust: none; 解决。
+				浮动ie产生的双倍距离 #box{ float:left; width:10px; margin:0 0 0 100px;}
+				这种情况之下IE会产生20px的距离，解决方案是在float的标签样式控制中加入 ——_display:inline;将其转化为行内属性。(_这个符号只有ie6会识别)
+				渐进识别的方式，从总体中逐渐排除局部。
+				首先，巧妙的使用“\9”这一标记，将IE游览器从所有情况中分离出来。
+				接着，再次使用“+”将IE8和IE7、IE6分离开来，这样IE8已经独立识别。
+				css
+					.bb{
+						background-color:#f1ee18;/*所有识别*/
+						.background-color:#00deff\9; /*IE6、7、8识别*/
+						+background-color:#a200ff;/*IE6、7识别*/
+						_background-color:#1e0bd1;/*IE6识别*/
+					}
+				*IE下,可以使用获取常规属性的方法来获取自定义属性,
+				 也可以使用getAttribute()获取自定义属性;
+				 Firefox下,只能使用getAttribute()获取自定义属性。
+				 解决方法:统一通过getAttribute()获取自定义属性。
+				*IE下,even对象有x,y属性,但是没有pageX,pageY属性;
+				 Firefox下,event对象有pageX,pageY属性,但是没有x,y属性。
+				*解决方法：（条件注释）缺点是在IE浏览器下可能会增加额外的HTTP请求数。
+				*Chrome 中文界面下默认会将小于 12px 的文本强制按照 12px 显示,
+				 可通过加入 CSS 属性 -webkit-text-size-adjust: none; 解决。
 				超链接访问过后hover样式就不出现了 被点击访问过的超链接样式不在具有hover和active了解决方法是改变CSS属性的排列顺序:
-				L-V-H-A :  a:link {} a:visited {} a:hover {} a:active {}
+				L-V-H-A :a:link {} a:visited {} a:hover {} a:active {}
 
-		6.  position的值relative和absolute定位原点是？
+		6.position的值relative和absolute定位原点是？
 			absolute
-			  生成绝对定位的元素，相对于值不为 static的第一个父元素进行定位。
+			生成绝对定位的元素，相对于值不为 static的第一个父元素进行定位。
 			fixed （老IE不支持）
-			  生成绝对定位的元素，相对于浏览器窗口进行定位。
+			生成绝对定位的元素，相对于浏览器窗口进行定位。
 			relative
-			  生成相对定位的元素，相对于其正常位置进行定位。
+			生成相对定位的元素，相对于其正常位置进行定位。
 			static
-			  默认值。没有定位，元素出现在正常的流中（忽略 top, bottom, left, right z-index 声明）。
+			默认值。没有定位，元素出现在正常的流中（忽略 top, bottom, left, right z-index 声明）。
 			inherit
-			  规定从父元素继承 position 属性的值。
+			规定从父元素继承 position 属性的值。
 
-		7.  CSS3的新内容
+		7.CSS3的新内容
 			@Font-face 特性
 			Word-wrap & Text-overflow 样式
 			文字渲染（Text-decoration）
@@ -324,7 +324,7 @@ js引擎	 Chakra								OdinMonkey V8					 Carakan
 			CSS3 的盒子模型
 			CSS3 的 Transitions, Transforms 和 Animation
 
-		8.  什么是FOUC？你如何来避免FOUC？
+		8.什么是FOUC？你如何来避免FOUC？
 			1. 由于css引入使用了@import
 			2. 或者存在多个style标签
 			3. 以及css文件在页面底部引入
@@ -399,32 +399,32 @@ js引擎	 Chakra								OdinMonkey V8					 Carakan
 			优先级就近原则，同权重情况下样式定义最近者为准;
 			载入样式以最后载入的定位为准;
 			优先级为:
-			   !important >  id > class > tag
+			 !important >id > class > tag
 				important 比 内联优先级高
 
 		20. CSS3
 			*新增伪类有那些？
 				举例：
 				p:first-of-type 选择属于其父元素的首个 <p> 元素的每个 <p> 元素。
-				p:last-of-type  选择属于其父元素的最后 <p> 元素的每个 <p> 元素。
-				p:only-of-type  选择属于其父元素唯一的 <p> 元素的每个 <p> 元素。
-				p:only-child        选择属于其父元素的唯一子元素的每个 <p> 元素。
-				p:nth-child(2)  选择属于其父元素的第二个子元素的每个 <p> 元素。
+				p:last-of-type选择属于其父元素的最后 <p> 元素的每个 <p> 元素。
+				p:only-of-type选择属于其父元素唯一的 <p> 元素的每个 <p> 元素。
+				p:only-child选择属于其父元素的唯一子元素的每个 <p> 元素。
+				p:nth-child(2)选择属于其父元素的第二个子元素的每个 <p> 元素。
 
-				:after          在元素之前添加内容,也可以用来做清除浮动。
-				:before         在元素之后添加内容
+				:after在元素之前添加内容,也可以用来做清除浮动。
+				:before 在元素之后添加内容
 				:enabled
-				:disabled       控制表单控件的禁用状态。
-				:checked        单选框或复选框被选中。
+				:disabled 控制表单控件的禁用状态。
+				:checked单选框或复选框被选中。
 			*CSS3有哪些新特性？
-				新增各种CSS选择器  （: not(.input)：所有 class 不是“input”的节点）
-				圆角           （border-radius:8px）
-				多列布局        （multi-column layout）
-				阴影和反射        （Shadow\Reflect）
-				文字特效      （text-shadow、）
-				文字渲染      （Text-decoration）
-				线性渐变      （gradient）
-				旋转          （transform）
+				新增各种CSS选择器（: not(.input)：所有 class 不是“input”的节点）
+				圆角 （border-radius:8px）
+				多列布局（multi-column layout）
+				阴影和反射（Shadow\Reflect）
+				文字特效（text-shadow、）
+				文字渲染（Text-decoration）
+				线性渐变（gradient）
+				旋转（transform）
 				增加了旋转,缩放,定位,倾斜,动画，多背景
 				transform:\scale(0.85,0.90)\ translate(0px,-30px)\ skew(-9deg,0deg)\Animation:
 			*请解释一下CSS3的Flexbox（弹性盒布局模型）,以及适用场景？
@@ -437,33 +437,33 @@ js引擎	 Chakra								OdinMonkey V8					 Carakan
 				margin:0 auto;
 			}
 			* 居中一个浮动元素
-			  确定容器的宽高 宽500 高 300 的层
-			  设置层的外边距
+			确定容器的宽高 宽500 高 300 的层
+			设置层的外边距
 			.div {
 				width:500px ; height:300px;//高度可以不设
 				margin: -150px 0 0 -250px;
-				position:relative;         //相对定位
-				background-color:pink;     //方便看效果
+				position:relative; //相对定位
+				background-color:pink; //方便看效果
 				left:50%;
 				top:50%;
 			}
 			* 让绝对定位的div居中
-			  position: absolute;
-			  width: 1200px;
-			  background: none;
-			  margin: 0 auto;
-			  top: 0;
-			  left: 0;
-			  bottom: 0;
-			  right: 0;
+			position: absolute;
+			width: 1200px;
+			background: none;
+			margin: 0 auto;
+			top: 0;
+			left: 0;
+			bottom: 0;
+			right: 0;
 
 		22. display有哪些值？说明他们的作用。
-			block         象块类型元素一样显示。
-			none          缺省值。象行内元素类型一样显示。
-			inline-block  象行内元素一样显示，但其内容象块类型元素一样显示。
-			list-item     象块类型元素一样显示，并添加样式列表标记。
-			table         此元素会作为块级表格来显示
-			inherit       规定应该从父元素继承 display 属性的值
+			block 象块类型元素一样显示。
+			none缺省值。象行内元素类型一样显示。
+			inline-block象行内元素一样显示，但其内容象块类型元素一样显示。
+			list-item 象块类型元素一样显示，并添加样式列表标记。
+			table 此元素会作为块级表格来显示
+			inherit 规定应该从父元素继承 display 属性的值
 
 		23. li与li之间有看不见的空白间隔是什么原因引起的？有什么解决办法？
 			行框的排列会受到中间空白（回车\空格）等的影响，因为空格也属于字符,这些空白也会被应用样式，占据空间，所以会有间隔，把字符大小设为0，就没有空格了。
@@ -471,11 +471,11 @@ js引擎	 Chakra								OdinMonkey V8					 Carakan
 		24. 用纯CSS创建一个三角形的原理是什么？
 			把上、左、右三条边隐藏掉（颜色设为 transparent）
 			#demo {
-			  width: 0;
-			  height: 0;
-			  border-width: 20px;
-			  border-style: solid;/*double有惊喜*/
-			  border-color: transparent transparent red transparent;
+			width: 0;
+			height: 0;
+			border-width: 20px;
+			border-style: solid;/*double有惊喜*/
+			border-color: transparent transparent red transparent;
 			}
 
 		25. 一个满屏 品 字布局 如何设计?
@@ -613,13 +613,13 @@ js引擎	 Chakra								OdinMonkey V8					 Carakan
 
 		58. 什么是CSS 预处理器 / 后处理器？
 		- 预处理器例如：LESS、Sass、Stylus，用来预编译Sass或less，增强了css代码的复用性，
-		  还有层级、mixin、变量、循环、函数等，具有很方便的UI组件模块化开发能力，极大的提高工作效率。
+		还有层级、mixin、变量、循环、函数等，具有很方便的UI组件模块化开发能力，极大的提高工作效率。
 		- 后处理器例如：PostCSS，通常被视为在完成的样式表中根据CSS规范处理CSS，让其更有效；目前最常做的
-		  是给CSS属性添加浏览器私有前缀，实现跨浏览器兼容性的问题。
+		是给CSS属性添加浏览器私有前缀，实现跨浏览器兼容性的问题。
 
 	Javascript>
-		1.  HTTP协议的状态消息码（有哪些？代表什么意义？）
-		2.  AJAX
+		1.HTTP协议的状态消息码（有哪些？代表什么意义？）
+		2.AJAX
 			1>. AJAX是什么？
 				Ajax是异步JavaScript和XML，用于在Web页面中实现异步数据交互。
 				优点：
@@ -664,7 +664,7 @@ js引擎	 Chakra								OdinMonkey V8					 Carakan
 				(4)发送HTTP请求
 				(5)获取异步调用返回的数据
 				(6)使用JavaScript和DOM实现局部刷新
-		3.  继承
+		3.继承
 			1>.	Javascript继承有哪两种形式？
 				你能解释一下JavaScript中的继承是如何工作的吗？
 				子构造函数中执行父构造函数，并用call\apply改变this
@@ -707,24 +707,24 @@ js引擎	 Chakra								OdinMonkey V8					 Carakan
 					var demo = new Child();
 					alert(demo.age);
 					alert(demo.name);//得到被继承的属性
-				  }
-				  * JavaScript继承的几种实现方式？
-				  * 参考：构造函数的继承，非构造函数的继承；
+				}
+				* JavaScript继承的几种实现方式？
+				* 参考：构造函数的继承，非构造函数的继承；
 
-		4.  封装
+		4.封装
 			1>. 简述javascript封装
-		5.  this
+		5.this
 			1>.this关键字的使用场合和用法（如在构造函数中、setTimeout中）
 			2>.写出3个使用this的典型应用
-				事件： 如onclick  this->发生事件的对象
-				构造函数          this->new 出来的object
-				call/apply        改变this
+				事件： 如onclickthis->发生事件的对象
+				构造函数this->new 出来的object
+				call/apply改变this
 			3>.对this的理解
 				* this总是指向函数的直接调用者（而非间接调用者）；
 				* 如果有new关键字，this指向new出来的那个对象；
 				* 在事件中，this指向触发这个事件的对象，特殊的是，IE中的attachEvent中的this总是指向全局对象Window;
 
-		6.  闭包
+		6.闭包
 			1>. 以下代码点击<p>会输出什么？为什么？能想出几种解决办法。
 				//子函数能被外部调用到，则该作用连上的所有变量都会被保存下来。
 				<!DOCTYPE HTML>
@@ -793,7 +793,7 @@ js引擎	 Chakra								OdinMonkey V8					 Carakan
 				}
 				var sayAlert = say667();
 				sayAlert()//执行结果应该弹出的667
-		7.  数据类型
+		7.数据类型
 			1>.	Javascript的数据类型都有什么？
 				基本数据类型：String, Boolean, Number, Undefined, Null
 				引用数据类型：Object(Array, Date, RegExp, Function)
@@ -810,7 +810,7 @@ js引擎	 Chakra								OdinMonkey V8					 Carakan
 				方法三.方法一二皆有漏洞，在ECMA Script5中定义了新方法Array.isArray(), 保证其兼容性，最好的方法如下：
 				if(typeof Array.isArray==="undefined")
 				{
-				  Array.isArray = function(arg){
+				Array.isArray = function(arg){
 						return Object.prototype.toString.call(arg)==="[object Array]"
 					};
 				}
@@ -827,7 +827,7 @@ js引擎	 Chakra								OdinMonkey V8					 Carakan
 				原始数据类型直接存储在栈(stack)中的简单数据段，占据空间小、大小固定，属于被频繁使用数据，所以放入栈中存储；
 				引用数据类型存储在堆(heap)中的对象,占据空间大、大小不固定,如果存储在栈中，将会影响程序运行的性能；引用数据类型在栈中存储了指针，该指针指向堆中该实体的起始地址。当解释器寻找引用值时，会首先检索其
 				在栈中的地址，取得地址后从堆中获得实体
-		8.  cookie
+		8.cookie
 			1>. 简述cookie操作以及cookie的属性
 			2>.	请描述一下 cookies，sessionStorage 和 localStorage 的区别？
 				cookie是网站为了标示用户身份而储存在用户本地终端（Client Side）上的数据（通常经过加密）。
@@ -839,27 +839,27 @@ js引擎	 Chakra								OdinMonkey V8					 Carakan
 					sessionStorage和localStorage 虽然也有存储大小的限制，但比cookie大得多，可以达到5M或更大。
 
 				有期时间：
-					localStorage    存储持久数据，浏览器关闭后数据不丢失除非主动删除数据；
-					sessionStorage  数据在当前浏览器窗口关闭后自动删除。
-					cookie          设置的cookie过期时间之前一直有效，即使窗口或浏览器关闭
-		9.  IE和FireFox的兼容性都知道哪些？
+					localStorage存储持久数据，浏览器关闭后数据不丢失除非主动删除数据；
+					sessionStorage数据在当前浏览器窗口关闭后自动删除。
+					cookie设置的cookie过期时间之前一直有效，即使窗口或浏览器关闭
+		9.IE和FireFox的兼容性都知道哪些？
 				1>.IE与FF脚本兼容性问题
 					obj.addEventListener(sEv, fn, false);
 					obj.attachEvent('on'+sEv,fn);
 					detachevet
 					removeEventListener
 					DOMContentLoaded
-					onreadystatechange  complete
+					onreadystatechangecomplete
 					DOMMouseScroll FF
-					onmousewheel   非FF
+					onmousewheel 非FF
 					event.wheelDelta 上滚120 下-120
-					event.detail     上滚-3   下3
+					event.detail 上滚-3 下3
 					obj.getCurrentStyle[attr]
 					getComputedStyle(obj,false)[attr]
 					XMLHttpRequest
 					ActiveXObject('Mircorsoft.XMLHttp')
 					FF本地能设置读取cookie 其他不行
-					event  ev
+					eventev
 					事件源
 					srcElement||target
 					toElement||relatedTarget
@@ -871,18 +871,18 @@ js引擎	 Chakra								OdinMonkey V8					 Carakan
 					Var target = ev.srcElement||ev.target
 		10. DOM操作（添加、移除、移动、复制、创建和查找结点）——基础题，一般不会问
 			1）创建新节点
-			createDocumentFragment()    //创建一个DOM片段
-			createElement()   //创建一个具体的元素
-			createTextNode()   //创建一个文本节点
+			createDocumentFragment()//创建一个DOM片段
+			createElement() //创建一个具体的元素
+			createTextNode() //创建一个文本节点
 			2）添加、移除、替换、插入
-			appendChild()      //添加
-			removeChild()      //移除
-			replaceChild()      //替换
-			insertBefore()      //插入
+			appendChild()//添加
+			removeChild()//移除
+			replaceChild()//替换
+			insertBefore()//插入
 			3）查找
-			getElementsByTagName()    //通过标签名称
-			getElementsByName()     //通过元素的Name属性的值
-			getElementById()        //通过元素Id，唯一性
+			getElementsByTagName()//通过标签名称
+			getElementsByName() //通过元素的Name属性的值
+			getElementById()//通过元素Id，唯一性
 				obj.appendChidl()
 				obj.innersetBefore
 				obj.replaceChild
@@ -931,12 +931,12 @@ js引擎	 Chakra								OdinMonkey V8					 Carakan
 			callee是返回正在被执行的function函数，也就是所指定的function对象的正文。
 			那么问题来了？如果一对兔子每月生一对兔子；一对新生兔，从第二个月起就开始生兔子；假定每对兔子都是一雌一雄，试问一对兔子，第n个月能繁殖成多少对兔子？（使用callee完成）
 			var result=[];
-			function fn(n){  //典型的斐波那契数列
-			   if(n==1){
+			function fn(n){//典型的斐波那契数列
+			 if(n==1){
 					return 1;
-			   }else if(n==2){
-					   return 1;
-			   }else{
+			 }else if(n==2){
+					 return 1;
+			 }else{
 					if(result[n]){
 							return result[n];
 					}else{
@@ -944,7 +944,7 @@ js引擎	 Chakra								OdinMonkey V8					 Carakan
 							result[n]=arguments.callee(n-1)+arguments.callee(n-2);
 							return result[n];
 					}
-			   }
+			 }
 			}
 		15.	规避javascript多人开发函数重名问题
 				命名空间
@@ -964,9 +964,9 @@ js引擎	 Chakra								OdinMonkey V8					 Carakan
 		17.call和apply的区别
 			Object.call(this,obj1,obj2,obj3)
 			Object.apply(this,arguments)
-			  例子中用 add 来替换 sub，add.call(sub,3,1) == add(3,1) ，所以运行结果为：alert(4);
+			例子中用 add 来替换 sub，add.call(sub,3,1) == add(3,1) ，所以运行结果为：alert(4);
 
-			  注意：js 中的函数其实是对象，函数名是对 Function 对象的引用。
+			注意：js 中的函数其实是对象，函数名是对 Function 对象的引用。
 
 				function add(a,b)
 				{
@@ -1022,7 +1022,7 @@ js引擎	 Chakra								OdinMonkey V8					 Carakan
 				function Func(){}
 				Func.prototype.name = "Sean";
 				Func.prototype.getInfo = function() {
-				  return this.name;
+				return this.name;
 				}
 				var person = new Func();//现在可以参考var person = Object.create(oldObject);
 				console.log(person.getInfo());//它拥有了Func的属性和方法
@@ -1052,12 +1052,12 @@ js引擎	 Chakra								OdinMonkey V8					 Carakan
 				3、用function来模拟参构造函数来实现（用this关键字定义构造的上下文属性）
 
 					function Pet(name,age,hobby){
-					   this.name=name;//this作用域：当前对象
-					   this.age=age;
-					   this.hobby=hobby;
-					   this.eat=function(){
-						  alert("我叫"+this.name+",我喜欢"+this.hobby+",是个程序员");
-					   }
+					 this.name=name;//this作用域：当前对象
+					 this.age=age;
+					 this.hobby=hobby;
+					 this.eat=function(){
+						alert("我叫"+this.name+",我喜欢"+this.hobby+",是个程序员");
+					 }
 					}
 					var maidou =new Pet("麦兜",25,"coding");//实例化、创建对象
 					maidou.eat();//调用eat方法
@@ -1069,7 +1069,7 @@ js引擎	 Chakra								OdinMonkey V8					 Carakan
 					 wcDog.name="旺财";
 					 wcDog.age=3;
 					 wcDog.work=function(){
-					   alert("我是"+wcDog.name+",汪汪汪......");
+					 alert("我是"+wcDog.name+",汪汪汪......");
 					 }
 					 wcDog.work();
 
@@ -1090,12 +1090,12 @@ js引擎	 Chakra								OdinMonkey V8					 Carakan
 				5、用混合方式来创建
 
 					function Car(name,price){
-					  this.name=name;
-					  this.price=price;
+					this.name=name;
+					this.price=price;
 					}
 					 Car.prototype.sell=function(){
-					   alert("我是"+this.name+"，我现在卖"+this.price+"万元");
-					  }
+					 alert("我是"+this.name+"，我现在卖"+this.price+"万元");
+					}
 					var camry =new Car("凯美瑞",27);
 					camry.sell();
 
@@ -1112,8 +1112,8 @@ js引擎	 Chakra								OdinMonkey V8					 Carakan
 		27.* 什么是window对象? 什么是document对象?
 
 		28.* null，undefined 的区别？
-			null        表示一个对象被定义了，值为“空值”；
-			undefined   表示不存在这个值。
+			null表示一个对象被定义了，值为“空值”；
+			undefined 表示不存在这个值。
 
 
 			typeof undefined
@@ -1156,17 +1156,17 @@ js引擎	 Chakra								OdinMonkey V8					 Carakan
 			为未来新版本的Javascript标准化做铺垫。
 
 		30.如何判断一个对象是否属于某个类？
-		  使用instanceof （待完善）
-		   if(a instanceof Person){
-			   alert('yes');
-		   }
+		使用instanceof （待完善）
+		 if(a instanceof Person){
+			 alert('yes');
+		 }
 
 		31.new操作符具体干了什么呢?
 			 1、创建一个空对象，并且 this 变量引用该对象，同时还继承了该函数的原型。
 			 2、属性和方法被加入到 this 引用的对象中。
 			 3、新创建的对象由 this 所引用，并且最后隐式的返回 this 。
 
-			var obj  = {};
+			var obj= {};
 			obj.__proto__ = Base.prototype;
 			Base.call(obj);
 
@@ -1235,9 +1235,9 @@ js引擎	 Chakra								OdinMonkey V8					 Carakan
 					// ...
 				})
 		39.异步加载JS的方式有哪些？
-		  (1) defer，只支持IE
-		  (2) async：
-		  (3) 创建script，插入到DOM中，加载完毕后callBack
+		(1) defer，只支持IE
+		(2) async：
+		(3) 创建script，插入到DOM中，加载完毕后callBack
 
 		40.documen.write和 innerHTML的区别
 			document.write只能重绘整个页面
@@ -1262,12 +1262,12 @@ js引擎	 Chakra								OdinMonkey V8					 Carakan
 		46.把 Script 标签 放在页面的最底部的body封闭之前 和封闭之后有什么区别？浏览器会如何解析它们？
 
 	jQuery>
-		1.  Jquery源码是否读过？
+		1.Jquery源码是否读过？
 			JQuery的源码看过吗？能不能简单概况一下它的实现原理？
 		2.	说说基本架构或者Jquery.fn.init中都做了哪些判断
 		3.	jQuery.fn的init方法返回的this指的是什么对象？为什么要返回this？
-		4.  都知道哪些不好的jquery书写方式
-		5.  Sizzle是否读过
+		4.都知道哪些不好的jquery书写方式
+		5.Sizzle是否读过
 		6.	jquery中如何将数组转化为json字符串，然后再转化回来？
 			jQuery中没有提供这个功能，所以你需要先编写两个jQuery的扩展：
 			$.fn.stringifyArray = function(array) {
@@ -1298,7 +1298,7 @@ js引擎	 Chakra								OdinMonkey V8					 Carakan
 		15.	Jquery与jQuery UI 有啥区别？
 				jQuery是一个js库，主要提供的功能是选择器，属性修改和事件绑定等等。
 				jQuery UI则是在jQuery的基础上，利用jQuery的扩展性，设计的插件。
-		 		提供了一些常用的界面元素，诸如对话框、拖动行为、改变大小行为等等
+				提供了一些常用的界面元素，诸如对话框、拖动行为、改变大小行为等等
 		16.	jQuery和Zepto的区别？各自的使用场景？
 		17.	Zepto的点透问题如何解决？
 		18.	jQueryUI如何自定义组件?
@@ -1320,25 +1320,25 @@ js引擎	 Chakra								OdinMonkey V8					 Carakan
 
 	Angular>
 	Nodejs>
-		1.  Node.js的适用场景？
+		1.Node.js的适用场景？
 		2.	知道route, middleware, cluster, nodemon, pm2, server-side rendering么?
 		3.	对Node的优点和缺点提出了自己的看法？
 			*（优点）因为Node是基于事件驱动和无阻塞的，所以非常适合处理并发请求，
-			  因此构建在Node上的代理服务器相比其他技术实现（如Ruby）的服务器表现要好得多。
-			  此外，与Node代理服务器交互的客户端代码是由javascript语言编写的，
-			  因此客户端和服务器端都用同一种语言编写，这是非常美妙的事情。
+			因此构建在Node上的代理服务器相比其他技术实现（如Ruby）的服务器表现要好得多。
+			此外，与Node代理服务器交互的客户端代码是由javascript语言编写的，
+			因此客户端和服务器端都用同一种语言编写，这是非常美妙的事情。
 			*（缺点）Node是一个相对新的开源项目，所以不太稳定，它总是一直在变，
-			  而且缺少足够多的第三方库支持。看起来，就像是Ruby/Rails当年的样子。
+			而且缺少足够多的第三方库支持。看起来，就像是Ruby/Rails当年的样子。
 	其他>
-		1.  都使用和了解过哪些编辑器？都使用和了解过哪些日常工具？
-		2.  都知道哪些浏览器内核？开发过的项目都兼容哪些浏览器？
-		3.  国内外的js牛人都知道哪些？
-		4.  瀑布流或者流式布局是否有了解？（是否是css相关）
-		5.  正则表达式有系统的学习过么？（邮箱验证、URL验证、贪婪匹配、懒惰匹配）
-		6.  Nodejs是否了解过？到什么程度？说说个人的理解和看法
-		7.  HTML5都有哪些新的JS API？
-		8.  前端优化的知识都知道哪些？
-		9.  基础算法题(如快读排序，能否一两句说说重要的核心原理或者数组消重)
+		1.都使用和了解过哪些编辑器？都使用和了解过哪些日常工具？
+		2.都知道哪些浏览器内核？开发过的项目都兼容哪些浏览器？
+		3.国内外的js牛人都知道哪些？
+		4.瀑布流或者流式布局是否有了解？（是否是css相关）
+		5.正则表达式有系统的学习过么？（邮箱验证、URL验证、贪婪匹配、懒惰匹配）
+		6.Nodejs是否了解过？到什么程度？说说个人的理解和看法
+		7.HTML5都有哪些新的JS API？
+		8.前端优化的知识都知道哪些？
+		9.基础算法题(如快读排序，能否一两句说说重要的核心原理或者数组消重)
 		10. 是否有接触或了解过重构
 		11. 你能描述一下你制作一个网页的工作流程吗？
 		12. 你能描述一下渐进增强和优雅降级之间的不同吗?
@@ -1387,8 +1387,8 @@ js引擎	 Chakra								OdinMonkey V8					 Carakan
 		23.常见的浏览器内核有哪些？
 			Trident内核：IE,MaxThon,TT,The World,360,搜狗浏览器等。[又称MSHTML]
 			Gecko内核：Netscape6及以上版本，FF,MozillaSuite/SeaMonkey等
-			Presto内核：Opera7及以上。      [Opera内核原为：Presto，现为：Blink;]
-			Webkit内核：Safari,Chrome等。   [ Chrome的：Blink（WebKit的分支）]
+			Presto内核：Opera7及以上。[Opera内核原为：Presto，现为：Blink;]
+			Webkit内核：Safari,Chrome等。 [ Chrome的：Blink（WebKit的分支）]
 
 		24.	解释一下 Backbone 的 MVC 实现方式？
 
@@ -1488,7 +1488,7 @@ js引擎	 Chakra								OdinMonkey V8					 Carakan
 
 			（6） 避免使用CSS Expression（css表达式)又称Dynamic properties(动态属性)。
 
-			（7） 图片预加载，将样式表放在顶部，将脚本放在底部  加上时间戳。
+			（7） 图片预加载，将样式表放在顶部，将脚本放在底部加上时间戳。
 
 			（8） 避免在页面的主体布局中使用table，table要等其中的内容完全下载之后才会显示出来，显示比div+css布局慢。
 			对普通的网站有一个统一的思路，就是尽量向前端优化、减少数据库操作、减少磁盘IO。向前端优化指的是，在不影响功能和体验的情况下，能在浏览器执行的不要在服务端执行，能在缓存服务器上直接返回的不要到应用服务器，程序能直接取得的结果不要到外部取得，本机内能取得的数据不要到远程取，内存能取到的不要到磁盘取，缓存中有的不要去数据库查询。减少数据库操作指减少更新次数、缓存结果减少查询次数、将数据库执行的操作尽可能的让你的程序完成（例如join查询），减少磁盘IO指尽量不使用文件系统作为缓存、减少读写文件次数等。程序优化永远要优化慢的部分，换语言是无法“优化”的。
@@ -1497,30 +1497,30 @@ js引擎	 Chakra								OdinMonkey V8					 Carakan
 			* http状态码有那些？分别代表是什么意思？
 			简单版
 			[
-				100  Continue   继续，一般在发送post请求时，已发送了http header之后服务端将返回此信息，表示确认，之后发送具体参数信息
-				200  OK         正常返回信息
-				201  Created    请求成功并且服务器创建了新的资源
-				202  Accepted   服务器已接受请求，但尚未处理
-				301  Moved Permanently  请求的网页已永久移动到新位置。
-				302 Found       临时性重定向。
-				303 See Other   临时性重定向，且总是使用 GET 请求新的 URI。
-				304  Not Modified 自从上次请求后，请求的网页未修改过。
+				100Continue 继续，一般在发送post请求时，已发送了http header之后服务端将返回此信息，表示确认，之后发送具体参数信息
+				200OK 正常返回信息
+				201Created请求成功并且服务器创建了新的资源
+				202Accepted 服务器已接受请求，但尚未处理
+				301Moved Permanently请求的网页已永久移动到新位置。
+				302 Found 临时性重定向。
+				303 See Other 临时性重定向，且总是使用 GET 请求新的 URI。
+				304Not Modified 自从上次请求后，请求的网页未修改过。
 
-				400 Bad Request  服务器无法理解请求的格式，客户端不应当尝试再次使用相同的内容发起请求。
+				400 Bad Request服务器无法理解请求的格式，客户端不应当尝试再次使用相同的内容发起请求。
 				401 Unauthorized 请求未授权。
-				403 Forbidden   禁止访问。
-				404 Not Found   找不到如何与 URI 相匹配的资源。
+				403 Forbidden 禁止访问。
+				404 Not Found 找不到如何与 URI 相匹配的资源。
 
-				500 Internal Server Error  最常见的服务器端错误。
+				500 Internal Server Error最常见的服务器端错误。
 				503 Service Unavailable 服务器端暂时无法处理请求（可能是过载或维护）。
 			]
 
-		  完整版
-		  1**(信息类)：表示接收到请求并且继续处理
+		完整版
+		1**(信息类)：表示接收到请求并且继续处理
 			100——客户必须继续发出请求
 			101——客户要求服务器根据请求转换HTTP协议版本
 
-		  2**(响应成功)：表示动作被成功接收、理解和接受
+		2**(响应成功)：表示动作被成功接收、理解和接受
 			200——表明该请求被成功地完成，所请求的资源发送回客户端
 			201——提示知道新文件的URL
 			202——接受和处理、但处理未完成
@@ -1529,7 +1529,7 @@ js引擎	 Chakra								OdinMonkey V8					 Carakan
 			205——服务器完成了请求，用户代理必须复位当前已经浏览过的文件
 			206——服务器已经完成了部分用户的GET请求
 
-		  3**(重定向类)：为了完成指定的动作，必须接受进一步处理
+		3**(重定向类)：为了完成指定的动作，必须接受进一步处理
 			300——请求的资源可在多处得到
 			301——本网页被永久性转移到另一个URL
 			302——请求的网页被转移到一个新的地址，但客户访问仍继续通过原始URL地址，重定向，新的URL会在response中的Location中返回，浏览器将会使用新的URL发出新的Request。
@@ -1539,7 +1539,7 @@ js引擎	 Chakra								OdinMonkey V8					 Carakan
 			306——前一版本HTTP中使用的代码，现行版本中不再使用
 			307——申明请求的资源临时性删除
 
-		  4**(客户端错误类)：请求包含错误语法或不能正确执行
+		4**(客户端错误类)：请求包含错误语法或不能正确执行
 			400——客户端请求有语法错误，不能被服务器所理解
 			401——请求未经授权，这个状态代码必须和WWW-Authenticate报头域一起使用
 			HTTP 401.1 - 未授权：登录失败
@@ -1580,7 +1580,7 @@ js引擎	 Chakra								OdinMonkey V8					 Carakan
 			416——请求中包含Range请求头字段，在当前请求资源范围内没有range指示值，请求也不包含If-Range请求头字段
 			417——服务器不满足请求Expect头字段指定的期望值，如果是代理服务器，可能是下一级服务器不能满足请求长。
 
-		  5**(服务端错误类)：服务器不能正确执行一个正确的请求
+		5**(服务端错误类)：服务器不能正确执行一个正确的请求
 			HTTP 500 - 服务器遇到错误，无法完成请求
 			　　HTTP 500.100 - 内部服务器错误 - ASP 错误
 			　　HTTP 500-11 服务器关闭
@@ -1589,16 +1589,16 @@ js引擎	 Chakra								OdinMonkey V8					 Carakan
 			　　HTTP 500-14 - 应用程序无效
 			　　HTTP 500-15 - 不允许请求 global.asa
 			　　Error 501 - 未实现
-		  HTTP 502 - 网关错误
-		  HTTP 503：由于超载或停机维护，服务器目前无法使用，一段时间后可能恢复正常
+		HTTP 502 - 网关错误
+		HTTP 503：由于超载或停机维护，服务器目前无法使用，一段时间后可能恢复正常
 
 
 		45 一个页面从输入 URL 到页面加载显示完成，这个过程中都发生了什么？（流程说的越详细越好）
-		  注：这题胜在区分度高，知识点覆盖广，再不懂的人，也能答出几句，
-		  而高手可以根据自己擅长的领域自由发挥，从URL规范、HTTP协议、DNS、CDN、数据库查询、
-		  到浏览器流式解析、CSS规则构建、layout、paint、onload/domready、JS执行、JS API绑定等等；
+		注：这题胜在区分度高，知识点覆盖广，再不懂的人，也能答出几句，
+		而高手可以根据自己擅长的领域自由发挥，从URL规范、HTTP协议、DNS、CDN、数据库查询、
+		到浏览器流式解析、CSS规则构建、layout、paint、onload/domready、JS执行、JS API绑定等等；
 
-		  详细版：
+		详细版：
 			1、浏览器会开启一个线程来处理这个请求，对 URL 分析判断如果是 http 协议就按照 Web 方式来处理;
 			2、调用浏览器内核中的对应方法，比如 WebView 中的 loadUrl 方法;
 			3、通过DNS解析获取网址的IP地址，设置 UA 等信息发出第二个GET请求;
@@ -1610,7 +1610,7 @@ js引擎	 Chakra								OdinMonkey V8					 Carakan
 			9、文档树建立，根据标记请求所需指定MIME类型的文件（比如css、js）,同时设置了cookie;
 			10、页面开始渲染DOM，JS根据DOM API操作DOM,执行事件绑定等，页面显示完成。
 
-		  简洁版：
+		简洁版：
 			浏览器根据请求的URL交给DNS域名解析，找到真实IP，向服务器发起请求；
 			服务器交给后台处理完成后返回数据，浏览器接收文件（HTML、JS、CSS、图象等）；
 			浏览器对加载到的资源（HTML、JS、CSS等）进行语法解析，建立相应的内部数据结构（如HTML的DOM）；
@@ -1727,7 +1727,7 @@ js引擎	 Chakra								OdinMonkey V8					 Carakan
 
 			比如：navigator.userAgent
 			//"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/537.36
-			  (KHTML, like Gecko) Chrome/41.0.2272.101 Safari/537.36
+			(KHTML, like Gecko) Chrome/41.0.2272.101 Safari/537.36
 
 		82* What is a Polyfill?
 			polyfill 是“在旧版浏览器上复制标准 API 的 JavaScript 补充”,可以动态地加载 JavaScript 代码或库，在不支持这些标准 API 的浏览器中模拟它们。
