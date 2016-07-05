@@ -37,30 +37,35 @@ ES6:3
 				DOCTYPE不存在或格式不正确会导致文档以兼容模式呈现。*/
 
 			2>. 浏览器标准模式（严格模式）和混杂模式（怪异模式、兼容模式）之间的区别是什么？
-				盒子模型 渲染模式的不同
+				标准模式浏览器根据规范呈现页面
+				混杂模式中浏览器以一种宽松的向后兼容的方式呈现页面，以防老站点无法工作。
+
+				盒子模型渲染模式的不同
+				盒子模型分两类：W3C标准盒子模型 和 IE盒子模型
+				这两个的关键差别在于
+				W3C标准盒子模型的宽高（width/height）不包含padding和border;
+				IE盒子模型的宽高（width/height）包含padding和border。
+				(offsetWidth=borderLeft+paddingLeft+contentWidth+paddingRight+borderRight)
+
 				使用 window.top.document.compatMode 可显示为什么模式
-				document.write(document.compatMode == "CSS1Compat" ? "当前处于标准模式" : "当前处于混杂模式");
+				document.write(document.compatMode == "CSS1Compat" ? "标准模式" : "混杂模式");
 
-			3>. 标准模式（严格模式）与混杂模式（怪异模式、兼容模式）:如何触发这两种模式，区分它们有何意义?
-			　　用于声明文档使用那种规范(HTML/XHTML)一般为 严格 过度 基于框架的html文档
-			　　加入XMl声明可触发，解析方式更改为IE5.5 拥有IE5.5的bug
+			3>. 标准模式（严格模式）与混杂模式（怪异模式、兼容模式）:如何触发这两种模式
+			　　通过声明doctype来触发，没有doctype或格式错误会导致页面以混杂模式呈现
 
-			4>. 标准模式（严格模式）与混杂模式（怪异模式、兼容模式）各有什么区别?
-				标准模式的排版 和JS运作模式都是以该浏览器支持的最高标准运行。在兼容模式中，页面以宽松的向后兼容的方式显示,模拟老式浏览器的行为以防止站点无法工作。
-
-			5>. XHTML和HTML有什么区别？
+			4>. XHTML和HTML有什么区别？
 				HTML是一种基本的WEB网页设计语言，XHTML是一个基于XML的置标语言
 				最主要的不同：
-				XHTML 元素必须被正确地嵌套。
-				XHTML 元素必须被关闭。
-				标签名必须用小写字母。
-				XHTML 文档必须拥有根元素。
+					XHTML 文档必须拥有根元素。
+					XHTML 元素必须被正确地嵌套。
+					XHTML 元素必须被关闭。
+					标签名必须用小写字母。
 
-			6>. HTML5 为什么只需要写 <!DOCTYPE HTML>？
+			5>. HTML5 为什么只需要写 <!DOCTYPE HTML>？
 				HTML5 不基于 SGML，因此不需要对DTD进行引用，但是需要doctype来规范浏览器的行为（让浏览器按照它们应该的方式来运行）；
 				而HTML4.01基于SGML,所以需要对DTD进行引用，才能告知浏览器文档所使用的文档类型。
 
-			7>. 你知道多少种文档类型？
+			6>. 你知道多少种文档类型？
 				HTML 5
 					<!DOCTYPE html>
 				HTML 4.01 Strict
