@@ -286,7 +286,8 @@ ES6:3
 				给不想要提示的 form 或某个 input 设置为 autocomplete=off。
 
 		7.	iframe有那些缺点？
-			*iframe会阻塞主页面的Onload事件；
+			*iframe会阻塞主页面的Onload事件
+				window的onload事件需要在所有iframe加载完毕后(包含里面的元素)才会触发。在Safari和Chrome里，通过JavaScript动态设置iframe的SRC可以避免这种阻塞情况。
 			*搜索引擎的检索程序无法解读这种页面，不利于SEO;
 			*iframe和主页面共享连接池，而浏览器对相同域的连接有限制，所以会影响页面的并行加载。
 			使用iframe之前需要考虑这两个缺点。如果需要使用iframe，最好是通过javascript
