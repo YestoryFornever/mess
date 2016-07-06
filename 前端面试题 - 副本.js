@@ -248,8 +248,8 @@ ES6:3
 					新的技术webworker, websocket, Geolocation;
 
 			2>. HTML5移除的元素：
-			纯表现的元素：basefont，big，center，font, s, strike, tt, u;
-			对可用性产生负面影响的元素：frame，frameset，noframes；
+				纯表现的元素：basefont，big，center，font, s, strike, tt, u;
+				对可用性产生负面影响的元素：frame，frameset，noframes；
 
 			3>. 支持HTML5新标签：
 				 IE8/IE7/IE6支持通过document.createElement方法产生的标签，
@@ -277,12 +277,10 @@ ES6:3
 					FALLBACK:
 					/ /offline.html
 				3、在离线状态时，操作window.applicationCache进行需求实现。
-				详细的使用请参考：有趣的HTML5：离线存储
 
 			5>. 浏览器是怎么对HTML5的离线储存资源进行管理和加载的呢？
 				在线的情况下，浏览器发现html头部有manifest属性，它会请求manifest文件，如果是第一次访问app，那么浏览器就会根据manifest文件的内容下载相应的资源并且进行离线存储。如果已经访问过app并且资源已经离线存储了，那么浏览器就会使用离线的资源加载页面，然后浏览器会对比新的manifest文件与旧的manifest文件，如果文件没有发生改变，就不做任何操作，如果文件改变了，那么就会重新下载文件中的资源并进行离线存储。
 				离线的情况下，浏览器就直接使用离线存储的资源。
-				详细的使用请参考：有趣的HTML5：离线存储
 
 			6>. HTML5的form如何关闭自动完成功能？
 				给不想要提示的 form 或某个 input 设置为 autocomplete=off。
