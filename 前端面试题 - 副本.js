@@ -90,14 +90,102 @@ ES6:3
 					<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 					该 DTD 等同于 XHTML 1.0 Strict，但允许添加模型（例如提供对东亚语系的 ruby 支持）。
 
-		2.行内元素有哪些？块级元素有哪些？ 空(void)元素有那些？
-			块级元素: address blockquote center dir div dl fieldsetform h(1-6) hr menuol p pre table ul
-			行内元素: a b br cite em font i img input label select small span strikestrong sub sup textarea tt u
-			可变元素(根据上下文决定是块级元素还是行内元素): button iframe
+		2.块级元素有哪些？行内元素有哪些？空(void)元素有那些？
+			块级元素(block element)
+				◎ address - 地址
+				◎ blockquote - 块引用
+				◎ center - 举中对齐块
+				◎ dd - 定义列表中定义条目描述
+				◎ dir - 目录列表
+				◎ div - 常用块级容易，也是css layout的主要标签
+				◎ dl - 定义列表
+				◎ fieldset - form控制组
+				◎ form - 交互表单
+				◎ h1 - 大标题
+				◎ h2 - 副标题
+				◎ h3 - 3级标题
+				◎ h4 - 4级标题
+				◎ h5 - 5级标题
+				◎ h6 - 6级标题
+				◎ hr - 水平分隔线
+				◎ isindex - input prompt
+				◎ menu - 菜单列表
+				◎ noframes - frames可选内容，（对于不支持frame的浏览器显示此区块内容
+				◎ noscript - 可选脚本内容（不支持脚本或禁用脚本时显示的内容）
+				◎ ol - 有序列表
+				◎ p - 段落
+				◎ pre - 格式化文本
+				◎ table - 表格
+				◎ tfoot - 表脚注
+				◎ ul - 无序列表
+				◎ article - 文章内容(HTML5)
+				◎ aside - 伴随内容(HTML5)
+				◎ audio - 音频播放(HTML5)
+				◎ canvas - 绘制图形(HTML5)
+				◎ figcaption - 图文信息组标题(HTML5)
+				◎ fiture - 图文信息组(HTML5)
+				◎ footer - 尾段或尾页(HTML5)
+				◎ header - 区段头或页头(HTML5)
+				◎ hgroup - 标题组(HTML5)
+				◎ output - 表单输出(HTML5)
+				◎ section - 页面区段(HTML5)
+				◎ video - 视频(HTML5)
+
+			行内元素(inline element)
+				◎ a - 锚点
+				◎ abbr - 缩写
+				◎ acronym - 首字
+				◎ b - 粗体(不推荐)
+				◎ bdo - bidi override
+				◎ big - 大字体
+				◎ br - 换行
+				◎ cite - 引用
+				◎ code - 计算机代码(在引用源码的时候需要)
+				◎ dfn - 定义字段
+				◎ em - 强调
+				◎ font - 字体设定(不推荐)
+				◎ i - 斜体
+				◎ img - 图片
+				◎ input - 输入框
+				◎ kbd - 定义键盘文本
+				◎ label - 表格标签
+				◎ q - 短引用
+				◎ s - 中划线(不推荐)
+				◎ samp - 定义范例计算机代码
+				◎ select - 项目选择
+				◎ small - 小字体文本
+				◎ span - 常用内联容器，定义文本内区块
+				◎ strike - 中划线
+				◎ strong - 粗体强调
+				◎ sub - 下标
+				◎ sup - 上标
+				◎ textarea - 多行文本输入框
+				◎ tt - 电传文本
+				◎ u - 下划线
+				◎ var - 定义变量
+				>>行内元素设置width、height、padding-top、padding-bottom、maring-top、margin-bottom是无效的
+
+			可变元素(可变元素为根据上下文语境决定该元素为块元素或者内联元素)
+				◎ applet - java applet
+				◎ button - 按钮
+				◎ del - 删除文本
+				◎ iframe - inline frame
+				◎ ins - 插入的文本
+				◎ map - 图片区块(map)
+				◎ object - object对象
+				◎ script - 客户端脚本
+
 			常见的空元素:
-					<br> <hr> <img> <input> <link> <meta>
-					 鲜为人知的有：
-				 <area> <base> <col> <command> <embed> <keygen> <param> <source> <track> <wbr>
+					<br> <hr> <img> <link> <meta> <input> <textarea> <select> <object>
+					鲜为人知的有：
+					<area> <base> <col> <command> <embed> <keygen> <param> <source> <track> <wbr>
+			替换元素：
+				浏览器根据元素的标签和属性，来决定元素的具体显示内容。
+				例如浏览器会根据img标签的src属性的值来获取图片信心并显示出来，
+				而如果查看html代码，则看不到图片的实际内容；又比如input标签的type属性来确定显示的是输入框还是单选按钮等。
+				在(X)html中的<input> <textarea> <select> <object>都是替换元素。这些元素往往没有实际内容，即是一个空元素。
+			不可替换元素：
+				HTML中大部分元素都是不可替换元素，其内容直接表现在浏览器。
 
 		3.你真的了解HTML么？（雅虎面试题）
 			 有这么一段HTML，请挑毛病：
@@ -126,12 +214,12 @@ ES6:3
 					<p><cite> 我</cite>说：<br> <q>不要迷恋哥，哥只是一个传说</q>
 
 		4.请解释一下什么是语义化的HTML。
-			 内容使用特定标签，通过标签就能大概了解整体页面的布局分布
-			 用正确的标签做正确的事情。
-			 html语义化让页面的内容结构化，结构更清晰，便于对浏览器、搜索引擎解析;
-			 即使在没有样式CSS情况下也以一种文档格式显示，并且是容易阅读的;
-			 搜索引擎的爬虫也依赖于HTML标记来确定上下文和各个关键字的权重，利于SEO;
-			 使阅读源代码的人对网站更容易将网站分块，便于阅读维护理解。
+			内容使用特定标签，通过标签就能大概了解整体页面的布局分布
+			用正确的标签做正确的事情。
+			html语义化让页面的内容结构化，结构更清晰，便于对浏览器、搜索引擎解析;
+			即使在没有样式CSS情况下也以一种文档格式显示，并且是容易阅读的;
+			搜索引擎的爬虫也依赖于HTML标记来确定上下文和各个关键字的权重，利于SEO;
+			使阅读源代码的人对网站更容易将网站分块，便于阅读维护理解。
 
 		5.对WEB标准以及W3C的理解与认识？
 			标签闭合、标签小写、不乱嵌套、提高搜索机器人搜索几率、使用外链css和js脚本、结构行为表现的分离、文件下载与页面速度更快、内容能被更多的用户所访问、内容能被更广泛的设备所访问、更少的代码和组件，容易维护、改版方便，不需要变动页面内容、提供打印版本而不需要复制内容、提高网站易用性;
