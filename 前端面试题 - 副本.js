@@ -295,9 +295,11 @@ ES6:3
 
 		8.	Label的作用是什么？是怎么用的？（加 for 或 包裹）
 			label标签来定义表单控制间的关系,当用户选择该标签时，浏览器会自动将焦点转到和标签相关的表单控件上。
-			<label for="Name">Number:</label>
-			<input type=“text“name="Name" id="Name"/>
-			<label>Date:<input type="text" name="B"/></label>
+			for
+				<label for="name">Number:</label>
+				<input type="text" name="name" id="name"/>
+			包裹
+				<label>Date:<input type="text" name="date"/></label>
 
 		9.	如何实现浏览器内多个标签页之间的通信? (阿里)
 			WebSocket、SharedWorker;
