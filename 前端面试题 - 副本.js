@@ -655,7 +655,6 @@ js引擎	 Chakra								OdinMonkey V8					 Carakan
 		33.使用 CSS 预处理器吗？喜欢那个？
 		SASS (SASS、LESS没有本质区别，只因为团队前端都是用的SASS)
 
-
 		34.CSS优化、提高性能的方法有哪些？
 
 		35.浏览器是怎样解析CSS选择器的？
@@ -1366,8 +1365,7 @@ js引擎	 Chakra								OdinMonkey V8					 Carakan
 		46.把 Script 标签 放在页面的最底部的body封闭之前 和封闭之后有什么区别？浏览器会如何解析它们？
 
 	jQuery>
-		1.Jquery源码是否读过？
-			JQuery的源码看过吗？能不能简单概况一下它的实现原理？
+		1.	JQuery的源码看过吗？能不能简单概况一下它的实现原理？
 			var jquery = function(){
 				return new jquery.fn.init();
 			}
@@ -1378,9 +1376,98 @@ js引擎	 Chakra								OdinMonkey V8					 Carakan
 			jquery.extend 		=>		$.fn();
 			jquery.fn.extend 	=>		$("x").fn();
 
-		2.	说说基本架构或者Jquery.fn.init中都做了哪些判断
-		3.	jQuery.fn的init方法返回的this指的是什么对象？为什么要返回this？
-		4.	都知道哪些不好的jquery书写方式
+		2.	jquery.extend 与 jquery.fn.extend的区别？
+			jquery.extend 		=>		$.fn();
+			jquery.fn.extend 	=>		$("x").fn();
+		3.	说说基本架构或者Jquery.fn.init中都做了哪些判断
+			if ( !selector ) {
+				//处理 $(""), $(null), $(undefined), $(false)
+			}
+
+			// 处理 strings
+			if ( typeof selector === "string" ) {
+				// 处理$("< />")
+				if ( selector[0] === "<" && selector[ selector.length - 1 ] === ">" && selector.length >= 3 ) {
+					// Assume that strings that start and end with <> are HTML and skip the regex check
+					match = [ null, selector, null ];
+
+				} else {
+					match = rquickExpr.exec( selector );
+				}
+
+				// Match html or make sure no context is specified for #id
+				if ( match && (match[1] || !context) ) {
+
+					// HANDLE: $(html) -> $(array)
+					if ( match[1] ) {
+						context = context instanceof jQuery ? context[0] : context;
+
+						// Option to run scripts is true for back-compat
+						// Intentionally let the error be thrown if parseHTML is not present
+						jQuery.merge( this, jQuery.parseHTML(
+							match[1],
+							context && context.nodeType ? context.ownerDocument || context : document,
+							true
+						) );
+
+						// HANDLE: $(html, props)
+						if ( rsingleTag.test( match[1] ) && jQuery.isPlainObject( context ) ) {
+							for ( match in context ) {
+								// Properties of context are called as methods if possible
+								if ( jQuery.isFunction( this[ match ] ) ) {
+									this[ match ]( context[ match ] );
+
+								// ...and otherwise set as attributes
+								} else {
+									this.attr( match, context[ match ] );
+								}
+							}
+						}
+
+						return this;
+
+					// HANDLE: $(#id)
+					} else {
+						elem = document.getElementById( match[2] );
+
+						// Support: Blackberry 4.6
+						// gEBID returns nodes no longer in the document (#6963)
+						if ( elem && elem.parentNode ) {
+							// Inject the element directly into the jQuery object
+							this.length = 1;
+							this[0] = elem;
+						}
+
+						this.context = document;
+						this.selector = selector;
+						return this;
+					}
+
+				// HANDLE: $(expr, $(...))
+				} else if ( !context || context.jquery ) {
+					return ( context || rootjQuery ).find( selector );
+
+				// HANDLE: $(expr, context)
+				// (which is just equivalent to: $(context).find(expr)
+				} else {
+					return this.constructor( context ).find( selector );
+				}
+
+			// 处理$(DOMElement)
+			} else if ( selector.nodeType ) {
+				this.context = this[0] = selector;
+				this.length = 1;
+				return this;
+
+			// 处理$(function)
+			} else if ( jQuery.isFunction( selector ) ) {
+				return typeof rootjQuery.ready !== "undefined" ?
+					rootjQuery.ready( selector ) :
+					// Execute immediately if ready is not present
+					selector( jQuery );
+			}
+
+		4.	jQuery.fn的init方法返回的this指的是什么对象？为什么要返回this？
 		5.	Sizzle是否读过
 		6.	jquery中如何将数组转化为json字符串，然后再转化回来？
 			jQuery中没有提供这个功能，所以你需要先编写两个jQuery的扩展：
@@ -1391,16 +1478,44 @@ js引擎	 Chakra								OdinMonkey V8					 Carakan
 			$.fn.parseArray = function(array) {
 				return JSON.parse(array)
 			}
-
 			然后调用：
 			$("").stringifyArray(array)
+
 		7.	jQuery 的属性拷贝(extend)的实现原理是什么，如何实现深拷贝？
-		8.	jquery.extend 与 jquery.fn.extend的区别？
+		8.	都知道哪些不好的jquery书写方式
 		9.	jQuery 的队列是如何实现的？队列可以用在哪些地方？
 		10.	谈一下Jquery中的bind(),live(),delegate(),on()的区别？
 		11.	JQuery一个对象可以同时绑定多个事件，这是如何实现的？
 		12.	是否知道自定义事件。jQuery里的fire函数是什么意思，什么时候用？
 		13.	jQuery 是通过哪个方法和 Sizzle 选择器结合的？（jQuery.fn.find()进入Sizzle）
+			jQuery.find = Sizzle;
+			jQuery.fn.extend({
+				find: function( selector ) {
+					var i,
+						len = this.length,
+						ret = [],
+						self = this;
+
+					if ( typeof selector !== "string" ) {
+						return this.pushStack( jQuery( selector ).filter(function() {
+							for ( i = 0; i < len; i++ ) {
+								if ( jQuery.contains( self[ i ], this ) ) {
+									return true;
+								}
+							}
+						}) );
+					}
+
+					for ( i = 0; i < len; i++ ) {
+						jQuery.find( selector, self[ i ], ret );
+					}
+
+					// Needed because $( selector, context ) becomes $( context ).find( selector )
+					ret = this.pushStack( len > 1 ? jQuery.unique( ret ) : ret );
+					ret.selector = this.selector ? this.selector + " " + selector : selector;
+					return ret;
+				},
+			});
 		14.	针对 jQuery性能的优化方法？
 			*基于Class的选择性的性能相对于Id选择器开销很大，因为需遍历所有DOM元素。
 			*频繁操作的DOM，先缓存起来再操作。用Jquery的链式调用更好。
@@ -1424,8 +1539,6 @@ js引擎	 Chakra								OdinMonkey V8					 Carakan
 			live类似delegate，但是父节点固定为document，不推荐使用，貌似有bug
 
 		21.	是否知道自定义事件。jQuery里的fire函数是什么意思，什么时候用？
-
-		22.	jQuery 是通过哪个方法和 Sizzle 选择器结合的？（jQuery.fn.find()进入Sizzle）
 
 	Angular>
 	Nodejs>
@@ -1454,7 +1567,7 @@ js引擎	 Chakra								OdinMonkey V8					 Carakan
 		13. 你如何对网站的文件和资源进行优化？
 
 		14. 为什么利用多个域名来存储网站资源会更有效？
-			//确保用户在不同地区能用最快的速度打开网站，其中某个域名崩溃用户也能通过其他郁闷访问网站
+			//确保用户在不同地区能用最快的速度打开网站，其中某个域名崩溃用户也能通过其他域名访问网站
 
 		15. 请说出三种减低页面加载时间的方法
 			1、压缩css、js文件

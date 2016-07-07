@@ -17,7 +17,8 @@
 	dom.style.color = '#000';
 
 4>.	当一个DOM节点被点击时，我们希望执行一个函数，应该怎么做？
-	直接在DOM里绑定事件：<div onclick="test()"></div>
+	直接在DOM里绑定事件：<div onclick='test()'><div>
+
 	在JS里通过onclick绑定：xxx.onclick = test
 	通过事件添加进行绑定：
 		addEvent: function(element, type, handle){
@@ -854,3 +855,492 @@
 				return ev;
 			}
 		};
+
+========================================================================================================
+markyun.Event = {
+    // 页面加载完成后
+    readyEvent : function(fn) {
+        if (fn==null) {
+            fn=document;
+        }
+        var oldonload = window.onload;
+        if (typeof window.onload != 'function') {
+            window.onload = fn;
+        } else {
+            window.onload = function() {
+                 oldonload();
+                 fn();
+            };
+        }
+    },
+    // 视能力分别使用dom0||dom2||IE方式 来绑定事件
+    // 参数： 操作的元素,事件名称 ,事件处理程序
+    addEvent1 : function(element, type, handler) {
+        if (element.addEventListener) {
+            //事件类型、需要执行的函数、是否捕捉
+            element.addEventListener(type, handler, false);
+        } else if (element.attachEvent) {
+            element.attachEvent('on' + type, function() {
+                 handler.call(element);
+            });
+        } else {
+            element['on' + type] = handler;
+        }
+    },
+    addEvent2: function(element, type, handle){
+        try{ // Chrome、FireFox、Opera、Safari、IE9.0及其以上版本
+            element.addEventListener(type,handle,false);
+        }catch(e){
+            try{ // IE8.0及其以下版本
+                element.attachEvent('on' + type,handle);
+            }catch(e){ // 早期浏览器
+                element['on' + type] = handle;
+            }
+        }
+    },
+    // 移除事件
+    removeEvent : function(element, type, handler) {
+        if (element.removeEventListener) {
+            element.removeEventListener(type, handler, false);
+        } else if (element.datachEvent) {
+            element.detachEvent('on' + type, handler);
+        } else {
+            element['on' + type] = null;
+        }
+    },
+    // 阻止事件 (主要是事件冒泡，因为IE不支持事件捕获)
+    stopPropagation : function(ev) {
+        if (ev.stopPropagation) {
+            ev.stopPropagation();
+        } else {
+            ev.cancelBubble = true;
+        }
+    },
+    // 取消事件的默认行为
+    preventDefault : function(event) {
+        if (event.preventDefault) {
+            event.preventDefault();
+        } else {
+            event.returnValue = false;
+        }
+    },
+    // 获取事件目标
+    getTarget : function(event) {
+       return event.target || event.srcElement;
+    },
+    // 获取event对象的引用，取到事件的所有信息，确保随时能使用event；
+    getEvent : function(e) {
+       var ev = e || window.event;
+       if (!ev) {
+            var c = this.getEvent.caller;
+            while (c) {
+                 ev = c.arguments[0];
+                 if (ev && Event == ev.constructor) {
+                      break;
+                 }
+                 c = c.caller;
+            }
+       }
+       return ev;
+    }
+};
+
+setInterval(function(){
+    var oDate = new Date();
+    var oYear = oDate.getFullYear();
+    var oNewDate = new Date();
+    oNewDate.setFullYear(oYear, 11, 31, 23, 59, 59);
+    var oMonth = oDate.getMonth();
+    function MD(n){
+        switch (n) {
+            case "2":return 28;
+                break;
+            case "4":
+            case "6":
+            case "9":
+            case "11":return 30;
+
+            default:return 31;
+        }
+    }
+    console.log((oNewDate.getMonth()-oDate.getMonth())+"月"+(MD(oDate.getMonth())-oDate.getDate())+"日"+(23-oDate.getHours())+"时"+(59-oDate.getMinutes())+"分"+(60-oDate.getSeconds())+"秒");
+},1000);
+
+function isString(obj) {
+    return typeof(obj) == 'string' && obj.constructor == String;
+}
+
+var str = '2two两二';
+console.log(getStrlen(str))
+function getStrlen(str){
+    var json = {len:0};
+    var re = /[\u4e00-\u9fa5]/;
+    for (var i = 0; i < str.length; i++) {
+        if(re.test(str.charAt(i))){
+            json['len']++;
+        }
+    };
+    return json['len']+str.length;
+}
+
+var str = 'asdfssaaasasasasaa';
+var obj = {};
+for (var i = 0; i < str.length; i++) {
+    if(!obj[str[i]]){
+        obj[str[i]]=1;
+    }else{
+        obj[str[i]]+=1;
+    }
+}
+var max = 0;
+var itemname = "";
+for (var item in obj) {
+    if (obj.hasOwnProperty(item)) {
+        obj[item]>max &&(
+            itemname=item,
+            max=obj[item]
+        );
+        console.log(itemname);
+    }
+}
+
+//define
+(function(window){
+    function fn(str){
+      this.str=str;
+    }
+    fn.prototype.format = function(){
+        var arg = arguments;
+        return this.str.replace(/\{(\d+)()\}/ig,function(a,b/*第一个括号*/,c/*第二个括号*/,d){
+            console.log(a);
+            console.log(b);
+            console.log(c);
+            console.log(d);
+            return arg[b]||"";
+        });
+    }
+    window.fn = fn;
+})(window);
+//use
+(function(){
+    var t = new fn('<p><a href="{0}">{1}</a><span>{2}</span></p>');
+    console.log(t.format('http://www.xxxxx.com','YYYYY','Welcome'));
+})();
+
+var whenReady = (function() {               //这个函数返回whenReady()函数
+    var funcs = [];             //当获得事件时，要运行的函数
+    var ready = false;          //当触发事件处理程序时,切换为true
+
+    //当文档就绪时,调用事件处理程序
+    function handler(e) {
+      if(ready) return;       //确保事件处理程序只完整运行一次
+
+      //如果发生onreadystatechange事件，但其状态不是complete的话,那么文档尚未准备好
+      if(e.type === 'onreadystatechange' && document.readyState !== 'complete') {
+           return;
+      }
+
+      //运行所有注册函数
+      //注意每次都要计算funcs.length
+      //以防这些函数的调用可能会导致注册更多的函数
+      for(var i=0; i<funcs.length; i++) {
+           funcs[i].call(document);
+      }
+      //事件处理函数完整执行,切换ready状态, 并移除所有函数
+      ready = true;
+      funcs = null;
+    }
+    //为接收到的任何事件注册处理程序
+    if(document.addEventListener) {
+      document.addEventListener('DOMContentLoaded', handler, false);
+      document.addEventListener('readystatechange', handler, false);            //IE9+
+      window.addEventListener('load', handler, false);
+    }else if(document.attachEvent) {
+      document.attachEvent('onreadystatechange', handler);
+      window.attachEvent('onload', handler);
+    }
+    //返回whenReady()函数
+    return function whenReady(fn) {
+      if(ready) { fn.call(document); }
+      else { funcs.push(fn); }
+    }
+})();
+
+if(!Function.prototype.bind){
+    Function.prototype.bind = function(context) {
+        var that = this;
+        return function () {
+            return that.apply(context,arguments);
+        }
+    }
+}
+var User = {
+    count: 1,
+    getCount: function(){
+        return this.count;
+    }
+};
+//console.log(User.getCount());  // what?
+var func = User.getCount.bind(User);
+//console.log(func());  // what?
+
+function log(){
+    console.log.call(console,arguments);
+}
+
+String.prototype.spacify = function(){
+    return this.split("").filter(function(item,index){return item!==" "}).join(" ")
+};
+
+// 检测
+//     some every
+// 处理数组
+//     map(return item) filter(return true/false 过滤)
+// 执行操作
+//     forEach
+
+if(window.addEventListener){
+    var addListener = function(el,type,listener,useCapture){
+        el.addEventListener(type,listener,useCapture);
+    };
+}else if(document.all){
+    addListener = function(el,type,listener){
+        el.attachEvent("on"+type,function(){
+            listener.apply(el);
+        });
+    }
+}
+//
+function addEvent(elem, type, handler){
+    if(elem.addEventListener){
+        elem.addEventListener(type, handler, false);
+    }else if(elem.attachEvent){
+        elem['temp' + type + handler] = handler;
+        elem[type + handler] = function(){
+            elem['temp' + type + handler].apply(elem);
+        };
+        elem.attachEvent('on' + type, elem[type + handler]);
+    }else{
+        elem['on' + type] = handler;
+    }
+}
+
+function queryDom(str) {
+    var rslt = [];
+    switch(str[0]){
+        case "#":
+            return document.getElementById(str);
+            break;
+        case ".":
+            if(document.getElementsByClassName){
+                rslt = document.getElementsByClassName(str);
+            }else{
+                var allDoms = document.getElementsByTagName("*") ;
+                for(var i = 0, len = allDoms.length; i < len; i++) {
+                     if(allDoms[i].className.search(new RegExp(regResult[2])) > -1) {
+                          result.push(allDoms[i]);
+                     }
+                }
+            }
+            return rslt;
+            break;
+        default:
+            return document.getElementsByTagName(str);
+    }
+}
+
+$(function(){
+    var lis = document.getElementById("test").children;
+    for(var i=0;i<lis.length;i++){
+        (function(a){
+            lis[a].onclick = function(){
+                alert(a);
+            };
+        })(i);
+    }
+});
+
+function Dog() {
+    this.wow = function() {
+        console.log("wow");
+    }
+    this.yelp = function() {
+        this.wow();
+    }
+}
+function MadDog() {
+    this.yelp = function () {
+        var self = this;
+        setInterval(function() {
+            self.wow();
+        },500);
+    }
+}
+var ADog = new Dog();
+MadDog.prototype = ADog;
+var AMadDog = new MadDog();
+AMadDog.yelp();
+
+if(!Array.prototype.trim){
+    Array.prototype.trim = function () {
+        var arr = [];
+        for (var i = 0; i < this.length; i++) {
+            arr.indexOf(this[i])===-1 && arr.push(this[i]);
+        }
+        return arr;
+    }
+}
+
+if(!Object.prototype.clone){//复制引用型数据
+    Object.prototype.clone = function() {
+        var o = this.constructor === Array ? [] : {};
+        for(var e in this){
+               o[e] = typeof this[e] === "object" ? this[e].clone() : this[e];
+        }
+        return o;
+    }
+}
+function clone(obj){
+    var oNew = new obj.constructor(obj.valueOf());
+    if(obj.constructor == Object){
+        for(var i in obj){
+            oNew[i] = obj[i];
+            if(typeof(oNew[i]) == 'object'){
+                clone(oNew[i]);
+            }
+        }
+    }
+    return oNew;
+}
+
+// function trimSpace(str) {
+//     return str.replace(/(^\s+|\s+$)/g,"");
+// }
+if(!String.prototype.trimSpace){
+    String.prototype.trimSpace = function(){
+        return this.replace(/(^\s+|\s+$)/g,"");
+    }
+}
+
+for(var i=1;i<=3;i++){//<=最后i是n+1;<最后i是<;
+    setTimeout((function(){
+        console.log(i);
+    })(i),0);
+};
+
+var regMail = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((.[a-zA-Z0-9_-]{2,3}){1,2})$/;
+
+var urlstr = "http:\/\/item.xxx.com/item.htm?a=1&b=2&c=&d=xxx&e";
+function serilizeUrl(url) {
+    var result = {};
+    url = url.split("?")[1];
+    var map = url.split("&");
+    for(var i = 0, len = map.length; i < len; i++) {
+       result[map[i].split("=")[0]] = map[i].split("=")[1];
+    }
+    return result;
+}
+
+var array1 = ['a','b','c'];
+var array2 = ['d','e','f'];
+var newArr = array1.concat(array2);
+newArr.splice(1,1);
+
+var iArray = [];
+function getRandom(istart, iend){
+    var iChoice = iend - istart +1;
+    return Math.floor(Math.random() * iChoice + istart);
+}
+for(var i=0; i<10; i++){
+    iArray.push(getRandom(10,100));
+}
+iArray.sort();
+
+function escapeHtml(str) {
+    return str.replace(/[<>"&]/g, function(match) {
+        switch (match) {
+            case "<":
+                 return "&lt;";
+            case ">":
+                 return "&gt;";
+            case "&":
+                 return "&amp;";
+            case "\"":
+                 return "&quot;";
+        }
+    });
+}
+
+var tmpstr = "<tr><td>{$id}</td><td>{$name}</td></tr>";
+tmpstr.replace(/\{\$id\}/,"10").replace(/\{\$name\}/,"Tony");
+
+var d = new Date();
+// 获取年，getFullYear()返回4位的数字
+var year = d.getFullYear();
+// 获取月，月份比较特殊，0是1月，11是12月
+var month = d.getMonth() + 1;
+// 变成两位
+month = month < 10 ? '0' + month : month;
+// 获取日
+var day = d.getDate();
+day = day < 10 ? '0' + day : day;
+console.log(year + '-' + month + '-' + day);
+
+var numberArray = [3,6,2,4,1,5];//[3,6,10,2,4,1,5]
+numberArray.sort(function(pre,nex){return pre-nex;});//正序排序
+numberArray.sort(function(pre,nex){return nex-pre;});//倒序排序
+numberArray.reverse();//倒排
+function reverse(arr){
+    var rsltArr = [];
+    while(arr.length>0){
+        rsltArr.push(arr.pop());
+    }
+    return rsltArr;
+}
+
+var foo="get-element-by-id";
+foo.replace(/(-\w)/g,function(item){
+    return item[1].toUpperCase();
+});
+function combo(msg){
+    var arr=msg.split("-");
+    for(var i=1;i<arr.length;i++){
+       arr[i]=arr[i].charAt(0).toUpperCase()+arr[i].substr(1,arr[i].length-1);
+    }
+    msg=arr.join("");
+    return msg;
+}
+
+var stringArray = ["a", "b", "c", "d"];
+console.log(stringArray.join(" "));
+
+function getStyle(obj,attr,value)
+{
+    if(!obj)return;
+    if(!value)
+    {
+        if(obj.currentStyle){
+            return obj.currentStyle(attr)
+        }else{
+            //obj.getComputedStyle(attr,false)
+            return document.defaultView.getComputedStyle(obj,null)[attr];
+        }
+    }else{
+        obj.style[attr]=value
+    }
+}
+
+function commafy(num) {//仅给最后三个字符前加逗号
+    num = num + '';
+    var reg = /(-?\d+)(\d{3})/g;
+    if(reg.test(num)){
+        num = num.replace(reg, '$1,$2');
+    }
+    return num;
+}
+
+(function() {
+    [].forEach.call(document.querySelectorAll("*"), function(a){
+        a.style.outline = "1px solid #"+(~~(Math.random()*(1<<24))).toString(16)
+    });
+})();
