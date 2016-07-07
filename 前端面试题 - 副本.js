@@ -1,7 +1,7 @@
 281
 每天40题，一周搞定
 HTML:14
-jquery:26
+jquery:22
 
 CSS:58
 
@@ -10,10 +10,13 @@ js:46
 代码题:45
 
 node:3
-其他:84
+其他:86
 ES6:3
 前端框架相关:2
 
+jquery源码
+html5离线存储
+javascript代码
 
 	前端同学，来，说说es3，es5，es6的区别；
 	各个浏览器内核的区别；
@@ -31,10 +34,6 @@ ES6:3
 				定义浏览器以什么文档标准渲染当前文档，
 				没有结束标签，不区分大小写，
 				如果没有的时候会导致文档以quick模式（怪异模式、兼容模式）渲染。
-				/*DOCTYPE不是html标签（没有结束标签）。
-				html5不区分大小写。
-				<!DOCTYPE>声明位于位于HTML文档中的第一行，处于 <html> 标签之前。告知浏览器的解析器用什么文档标准解析这个文档。
-				DOCTYPE不存在或格式不正确会导致文档以兼容模式呈现。*/
 
 			2>. 浏览器标准模式（严格模式）和混杂模式（怪异模式、兼容模式）之间的区别是什么？
 				标准模式浏览器根据规范呈现页面
@@ -275,7 +274,7 @@ ES6:3
 					NETWORK:
 					resourse/logo.png
 					FALLBACK:
-					/ /offline.html
+					offline.html
 				3、在离线状态时，操作window.applicationCache进行需求实现。
 
 			5>. 浏览器是怎么对HTML5的离线储存资源进行管理和加载的呢？
@@ -1369,10 +1368,20 @@ js引擎	 Chakra								OdinMonkey V8					 Carakan
 	jQuery>
 		1.Jquery源码是否读过？
 			JQuery的源码看过吗？能不能简单概况一下它的实现原理？
+			var jquery = function(){
+				return new jquery.fn.init();
+			}
+			jquery.fn = jquery.prototype;
+			jquery.fn.init = function(){}
+			jquery.fn.init.prototype = jquery.fn;
+
+			jquery.extend 		=>		$.fn();
+			jquery.fn.extend 	=>		$("x").fn();
+
 		2.	说说基本架构或者Jquery.fn.init中都做了哪些判断
 		3.	jQuery.fn的init方法返回的this指的是什么对象？为什么要返回this？
-		4.都知道哪些不好的jquery书写方式
-		5.Sizzle是否读过
+		4.	都知道哪些不好的jquery书写方式
+		5.	Sizzle是否读过
 		6.	jquery中如何将数组转化为json字符串，然后再转化回来？
 			jQuery中没有提供这个功能，所以你需要先编写两个jQuery的扩展：
 			$.fn.stringifyArray = function(array) {
@@ -1401,27 +1410,22 @@ js引擎	 Chakra								OdinMonkey V8					 Carakan
 			 for 循环每一次循环都查找了数组 (arr) 的.length 属性，在开始循环的时候设置一个变量来存储这个数字，可以让循环跑得更快：
 			 for (var i = size, length = arr.length; i < length; i++) {}
 		15.	Jquery与jQuery UI 有啥区别？
-				jQuery是一个js库，主要提供的功能是选择器，属性修改和事件绑定等等。
-				jQuery UI则是在jQuery的基础上，利用jQuery的扩展性，设计的插件。
-				提供了一些常用的界面元素，诸如对话框、拖动行为、改变大小行为等等
+			jQuery是一个js库，主要提供的功能是选择器，属性修改和事件绑定等等。
+			jQuery UI则是在jQuery的基础上，利用jQuery的扩展性，设计的插件。
+			提供了一些常用的界面元素，诸如对话框、拖动行为、改变大小行为等等
 		16.	jQuery和Zepto的区别？各自的使用场景？
 		17.	Zepto的点透问题如何解决？
 		18.	jQueryUI如何自定义组件?
 		19.	jQuery 的 slideUp动画 ，如果目标元素是被外部事件驱动, 当鼠标快速地连续触发外部元素事件, 动画会滞后的反复执行，该如何处理呢?
+		20.	谈一下Jquery中的bind(),live(),delegate(),on()的区别？
+			全部都可以用on来实现，
+			bind灵活，直接绑定事件，
+			delegate是用父级节点去代理，
+			live类似delegate，但是父节点固定为document，不推荐使用，貌似有bug
 
-		20.	把 Script 标签 放在页面的最底部的body封闭之前 和封闭之后有什么区别？浏览器会如何解析它们？
+		21.	是否知道自定义事件。jQuery里的fire函数是什么意思，什么时候用？
 
-		21.	移动端的点击事件的有延迟，时间是多久，为什么会有？ 怎么解决这个延时？（click 有 300ms 延迟,为了实现safari的双击事件的设计，浏览器要知道你是不是要双击操作。）
-
-		22.	知道各种JS框架(Angular, Backbone, Ember, React, Meteor, Knockout...)么? 能讲出他们各自的优点和缺点么?
-
-		23.	Underscore 对哪些 JS 原生对象进行了扩展以及提供了哪些好用的函数方法？
-
-		24.	谈一下Jquery中的bind(),live(),delegate(),on()的区别？
-
-		25.	是否知道自定义事件。jQuery里的fire函数是什么意思，什么时候用？
-
-		26.	jQuery 是通过哪个方法和 Sizzle 选择器结合的？（jQuery.fn.find()进入Sizzle）
+		22.	jQuery 是通过哪个方法和 Sizzle 选择器结合的？（jQuery.fn.find()进入Sizzle）
 
 	Angular>
 	Nodejs>
@@ -1844,6 +1848,13 @@ js引擎	 Chakra								OdinMonkey V8					 Carakan
 			比如： html5shiv、Geolocation、Placeholder
 
 		84* 我们给一个dom同时绑定两个点击事件，一个用捕获，一个用冒泡。会执行几次事件，会先执行冒泡还是捕获？
+		85.	把 Script 标签 放在页面的最底部的body封闭之前 和封闭之后有什么区别？浏览器会如何解析它们？
+
+		86.	移动端的点击事件的有延迟，时间是多久，为什么会有？ 怎么解决这个延时？（click 有 300ms 延迟,为了实现safari的双击事件的设计，浏览器要知道你是不是要双击操作。）
+
+		87.	知道各种JS框架(Angular, Backbone, Ember, React, Meteor, Knockout...)么? 能讲出他们各自的优点和缺点么?
+
+		88.	Underscore 对哪些 JS 原生对象进行了扩展以及提供了哪些好用的函数方法？
 
 	ECMAScript6 相关
 		* Object.is() 与原来的比较操作符“ ===”、“ ==”的区别？
