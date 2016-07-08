@@ -1,0 +1,305 @@
+1.文档类型Doctype
+	1>. <!DOCTYPE>标签的定义与用法;
+		定义浏览器以什么文档标准渲染当前文档，
+		没有结束标签，不区分大小写，
+		如果没有的时候会导致文档以quick模式（怪异模式、兼容模式）渲染。
+
+	2>. 浏览器标准模式（严格模式）和混杂模式（怪异模式、兼容模式）之间的区别是什么？
+		标准模式浏览器根据规范呈现页面
+		混杂模式中浏览器以一种宽松的向后兼容的方式呈现页面，以防老站点无法工作。
+
+		盒子模型渲染模式的不同
+		盒子模型分两类：W3C标准盒子模型 和 IE盒子模型
+		这两个的关键差别在于
+		W3C标准盒子模型的宽高（width/height）不包含padding和border;
+		IE盒子模型的宽高（width/height）包含padding和border。
+		(offsetWidth=borderLeft+paddingLeft+contentWidth+paddingRight+borderRight)
+
+		使用 window.top.document.compatMode 可显示为什么模式
+		document.write(document.compatMode == "CSS1Compat" ? "标准模式" : "混杂模式");
+
+	3>. 标准模式（严格模式）与混杂模式（怪异模式、兼容模式）:如何触发这两种模式
+	　　通过声明doctype来触发，没有doctype或格式错误会导致页面以混杂模式呈现
+
+	4>. XHTML和HTML有什么区别？
+		HTML是一种基本的WEB网页设计语言，XHTML是一个基于XML的置标语言
+		最主要的不同：
+			XHTML 文档必须拥有根元素。
+			XHTML 元素必须被正确地嵌套。
+			XHTML 元素必须被关闭。
+			标签名必须用小写字母。
+
+	5>. HTML5 为什么只需要写 <!DOCTYPE HTML>？
+		HTML5 不基于 SGML，因此不需要对DTD进行引用，但是需要doctype来规范浏览器的行为（让浏览器按照它们应该的方式来运行）；
+		而HTML4.01基于SGML,所以需要对DTD进行引用，才能告知浏览器文档所使用的文档类型。
+
+	6>. 你知道多少种文档类型？
+		HTML 5
+			<!DOCTYPE html>
+		HTML 4.01 Strict
+			<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+			该 DTD 包含所有 HTML 元素和属性，但不包括展示性的和弃用的元素（比如 font）。不允许框架集（Framesets）。
+		HTML 4.01 Transitional
+			<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+			该 DTD 包含所有 HTML 元素和属性，包括展示性的和弃用的元素（比如 font）。不允许框架集（Framesets）。
+		HTML 4.01 Frameset
+			<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
+			该 DTD 等同于 HTML 4.01 Transitional，但允许框架集内容。
+		XHTML 1.0 Strict
+			<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+			该 DTD 包含所有 HTML 元素和属性，但不包括展示性的和弃用的元素（比如 font）。不允许框架集（Framesets）。必须以格式正确的 XML 来编写标记。
+		XHTML 1.0 Transitional
+			<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+			该 DTD 包含所有 HTML 元素和属性，包括展示性的和弃用的元素（比如 font）。不允许框架集（Framesets）。必须以格式正确的 XML 来编写标记。
+		XHTML 1.0 Frameset
+			<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+			该 DTD 等同于 XHTML 1.0 Transitional，但允许框架集内容。
+		XHTML 1.1
+			<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+			该 DTD 等同于 XHTML 1.0 Strict，但允许添加模型（例如提供对东亚语系的 ruby 支持）。
+
+2.块级元素有哪些？行内元素有哪些？空(void)元素有那些？
+	块级元素(block element)
+		◎ address - 地址
+		◎ blockquote - 块引用
+		◎ center - 举中对齐块
+		◎ dd - 定义列表中定义条目描述
+		◎ dir - 目录列表
+		◎ div - 常用块级容易，也是css layout的主要标签
+		◎ dl - 定义列表
+		◎ fieldset - form控制组
+		◎ form - 交互表单
+		◎ h1 - 大标题
+		◎ h2 - 副标题
+		◎ h3 - 3级标题
+		◎ h4 - 4级标题
+		◎ h5 - 5级标题
+		◎ h6 - 6级标题
+		◎ hr - 水平分隔线
+		◎ isindex - input prompt
+		◎ menu - 菜单列表
+		◎ noframes - frames可选内容，（对于不支持frame的浏览器显示此区块内容
+		◎ noscript - 可选脚本内容（不支持脚本或禁用脚本时显示的内容）
+		◎ ol - 有序列表
+		◎ p - 段落
+		◎ pre - 格式化文本
+		◎ table - 表格
+		◎ tfoot - 表脚注
+		◎ ul - 无序列表
+		◎ article - 文章内容(HTML5)
+		◎ aside - 伴随内容(HTML5)
+		◎ audio - 音频播放(HTML5)
+		◎ canvas - 绘制图形(HTML5)
+		◎ figcaption - 图文信息组标题(HTML5)
+		◎ fiture - 图文信息组(HTML5)
+		◎ footer - 尾段或尾页(HTML5)
+		◎ header - 区段头或页头(HTML5)
+		◎ hgroup - 标题组(HTML5)
+		◎ output - 表单输出(HTML5)
+		◎ section - 页面区段(HTML5)
+		◎ video - 视频(HTML5)
+
+	行内元素(inline element)
+		◎ a - 锚点
+		◎ abbr - 缩写
+		◎ acronym - 首字
+		◎ b - 粗体(不推荐)
+		◎ bdo - bidi override
+		◎ big - 大字体
+		◎ br - 换行
+		◎ cite - 引用
+		◎ code - 计算机代码(在引用源码的时候需要)
+		◎ dfn - 定义字段
+		◎ em - 强调
+		◎ font - 字体设定(不推荐)
+		◎ i - 斜体
+		◎ img - 图片
+		◎ input - 输入框
+		◎ kbd - 定义键盘文本
+		◎ label - 表格标签
+		◎ q - 短引用
+		◎ s - 中划线(不推荐)
+		◎ samp - 定义范例计算机代码
+		◎ select - 项目选择
+		◎ small - 小字体文本
+		◎ span - 常用内联容器，定义文本内区块
+		◎ strike - 中划线
+		◎ strong - 粗体强调
+		◎ sub - 下标
+		◎ sup - 上标
+		◎ textarea - 多行文本输入框
+		◎ tt - 电传文本
+		◎ u - 下划线
+		◎ var - 定义变量
+		>>行内元素设置width、height、padding-top、padding-bottom、maring-top、margin-bottom是无效的
+
+	可变元素(可变元素为根据上下文语境决定该元素为块元素或者内联元素)
+		◎ applet - java applet
+		◎ button - 按钮
+		◎ del - 删除文本
+		◎ iframe - inline frame
+		◎ ins - 插入的文本
+		◎ map - 图片区块(map)
+		◎ object - object对象
+		◎ script - 客户端脚本
+
+	常见的空元素:
+			<br> <hr> <img> <link> <meta> <input> <textarea> <select> <object>
+			鲜为人知的有：
+			<area> <base> <col> <command> <embed> <keygen> <param> <source> <track> <wbr>
+	替换元素：
+		浏览器根据元素的标签和属性，来决定元素的具体显示内容。
+		例如浏览器会根据img标签的src属性的值来获取图片信心并显示出来，
+		而如果查看html代码，则看不到图片的实际内容；又比如input标签的type属性来确定显示的是输入框还是单选按钮等。
+		在(X)html中的<input> <textarea> <select> <object>都是替换元素。这些元素往往没有实际内容，即是一个空元素。
+	不可替换元素：
+		HTML中大部分元素都是不可替换元素，其内容直接表现在浏览器。
+
+3.你真的了解HTML么？（雅虎面试题）
+	 有这么一段HTML，请挑毛病：
+	 <P>哥写的不是HTML，是寂寞。<br><br>我说：<br>不要迷恋哥，哥只是一个传说
+
+	 *考点1：html和 xhtml的区别
+	 这行代码在html 4.01 strict下是完全正确的，在xhtml 1.0 strict下是错误一堆的。所以明显是一个考点。在xhtml下所有标签是闭合的，p,br需要闭合, 标签不允许大写，P要小写。同时nbsp和br必须包含在容器里。html下这些都不是错。p在html里是可选闭合标签，是可以不用闭合的。
+	 这个考点告诉你xhtml是多么苛刻。这是基本考点，答对，你能拿到60分。
+	 *考点2：考样式分离
+	 用nbsp控制缩进是不合理的。应该用CSS干这事。所以应该删掉nbsp
+	 *考点3：合理使用标签
+	 br是强制折行标签，p是段落。原题用连续的br制造两个段落的效果，效果是达到了，但显然用的不合理，段落间距后期无法再控制。正确的做法是用两个p表现两个段落。“我说”后面是正常的文字折行用br是合理的。
+	 上面全答对，你就能拿到100分。
+
+	 对原题改进的结果：
+	 html 4.01:
+			<p>哥写的不是HTML，是寂寞。<p>我说：<br> 不要迷恋哥，哥只是一个传说
+	 xhtml 1.0:
+			<p>哥写的不是HTML，是寂寞。</p><p>我说：<br /> 不要迷恋哥，哥只是一个传说</p>
+	 加分：合理的用语义化标签
+	 在前面的基础上合理的用语义化标签，对内容进行必要的标记，是加分的。但过度的使用标签，就画蛇添足了。如“我说”的话，可以用q标签标注。
+			<p>哥写的不是HTML，是寂寞。
+			<p>我说：<br> <q>不要迷恋哥，哥只是一个传说</q>
+	 我觉得这就够了，如果再进一步，“我”用cite标注，“HTML” 用abbr或acronym标注（至于再讨论abbr和acronym的区别就太较真了），也OK。再复杂就没必要了。
+			<p> 哥写的不是<abbr title=”Hyper Text Markup Language”>HTML</abbr>，是寂寞。
+			<p><cite> 我</cite>说：<br> <q>不要迷恋哥，哥只是一个传说</q>
+
+4.请解释一下什么是语义化的HTML。
+	内容使用特定标签
+	->通过标签就能大概了解整体页面的布局分布;
+	->即使在没有样式CSS情况下也以一种文档格式显示;
+	->搜索引擎的爬虫也依赖于HTML标记来确定上下文和各个关键字的权重，利于SEO;
+	页面结构清晰
+	->便于维护。
+
+5.对WEB标准以及W3C的理解与认识？
+	标签闭合
+	标签小写
+	不乱嵌套
+	提高搜索机器人搜索几率
+	使用外链css和js脚本
+	结构行为表现的分离
+	文件下载与页面速度更快
+	内容能被更多的用户所访问
+	内容能被更广泛的设备所访问
+	更少的代码和组件，容易维护、改版方便，不需要变动页面内容
+	提供打印版本而不需要复制内容
+	提高网站易用性
+
+6. html5
+	 1>. html5有哪些新特性？如何处理HTML5新标签的浏览器兼容问题？如何区分HTML和HTML5？
+			* HTML5 现在已经不是 SGML 的子集，主要是关于图像，位置，存储，多任务等功能的增加。
+			绘画 canvas;
+			用于媒介回放的 video 和 audio 元素;
+			本地离线存储 (可对比cookie)
+				localStorage 长期存储数据，浏览器关闭后数据不丢失;
+				sessionStorage 的数据在浏览器关闭后自动删除;
+			语意化更好的内容元素，比如 article、footer、header、nav、section;
+			表单控件，calendar、date、time、email、url、search;
+			新的技术webworker, websocket, Geolocation;
+
+	2>. HTML5移除的元素：
+		纯表现的元素：basefont，big，center，font, s, strike, tt, u;
+		对可用性产生负面影响的元素：frame，frameset，noframes；
+
+	3>. 支持HTML5新标签：
+		 IE8/IE7/IE6支持通过document.createElement方法产生的标签，
+		 可以利用这一特性让这些浏览器支持HTML5新标签，
+		 浏览器支持新标签后，还需要添加标签默认的样式。
+
+		 当然也可以直接使用成熟的框架、比如html5shim;
+		 <!--[if lt IE 9]>
+			<script> src="http://html5shim.googlecode.com/svn/trunk/html5.js"</script>
+		 <![endif]-->
+
+	4>. HTML5的离线储存怎么使用，工作原理能不能解释一下？
+		在用户没有与因特网连接时，可以正常访问站点或应用，在用户与因特网连接时，更新用户机器上的缓存文件。
+		原理：HTML5的离线存储是基于一个新建的.appcache文件的缓存机制(不是存储技术)，通过这个文件上的解析清单离线存储资源，这些资源就会像cookie一样被存储了下来。之后当网络在处于离线状态下时，浏览器会通过被离线存储的数据进行页面展示。
+		如何使用：
+		1、页面头部像下面一样加入一个manifest的属性；
+		2、在cache.manifest文件的编写离线存储的资源；
+			CACHE MANIFEST
+			#v 0.11
+			CACHE:
+			js/app.js
+			css/style.css
+			NETWORK:
+			resourse/logo.png
+			FALLBACK:
+			offline.html
+		3、在离线状态时，操作window.applicationCache进行需求实现。
+
+	5>. 浏览器是怎么对HTML5的离线储存资源进行管理和加载的呢？
+		在线的情况下，浏览器发现html头部有manifest属性，它会请求manifest文件，如果是第一次访问app，那么浏览器就会根据manifest文件的内容下载相应的资源并且进行离线存储。如果已经访问过app并且资源已经离线存储了，那么浏览器就会使用离线的资源加载页面，然后浏览器会对比新的manifest文件与旧的manifest文件，如果文件没有发生改变，就不做任何操作，如果文件改变了，那么就会重新下载文件中的资源并进行离线存储。
+		离线的情况下，浏览器就直接使用离线存储的资源。
+
+	6>. HTML5的form如何关闭自动完成功能？
+		给不想要提示的 form 或某个 input 设置为 autocomplete=off。
+
+7.	iframe有那些缺点？
+	*iframe会阻塞主页面的Onload事件
+		window的onload事件需要在所有iframe加载完毕后(包含里面的元素)才会触发。在Safari和Chrome里，通过JavaScript动态设置iframe的SRC可以避免这种阻塞情况。
+	*搜索引擎的检索程序无法解读这种页面，不利于SEO;
+	*iframe和主页面共享连接池，而浏览器对相同域的连接有限制，所以会影响页面的并行加载。
+	使用iframe之前需要考虑这两个缺点。如果需要使用iframe，最好是通过javascript
+	动态给iframe添加src属性值，这样可以绕开以上两个问题。
+
+8.	Label的作用是什么？是怎么用的？（加 for 或 包裹）
+	label标签来定义表单控制间的关系,当用户选择该标签时，浏览器会自动将焦点转到和标签相关的表单控件上。
+	for
+		<label for="name">Number:</label>
+		<input type="text" name="name" id="name"/>
+	包裹
+		<label>Date:<input type="text" name="date"/></label>
+
+9.	如何实现浏览器内多个标签页之间的通信?(阿里)
+	WebSocket、SharedWorker;
+	也可以调用localstorge、cookies等本地存储方式;
+		localstorge另一个浏览上下文里被添加、修改或删除时，它都会触发一个事件，
+		我们通过监听事件，控制它的值来进行页面信息通信;
+	注意quirks：Safari 在无痕模式下设置localstorge值时会抛出 QuotaExceededError 的异常;
+
+10.	webSocket如何兼容低浏览器？(阿里)
+	Adobe Flash Socket 、
+	ActiveX HTMLFile (IE) 、
+	基于 multipart 编码发送 XHR 、
+	基于长轮询的 XHR
+
+11. 页面可见性（Page Visibility）API 可以有哪些用途？
+	通过visibilityState的值检测页面当前是否可见，以及打开网页的时间等;
+	在页面被切换到其他后台进程的时候，自动暂停音乐或视频的播放；
+
+12. 如何在页面上实现一个圆形的可点击区域？
+	1、map+area或者svg
+	2、border-radius
+	3、纯js实现 需要求一个点在不在圆上简单算法、获取鼠标坐标等等
+
+13. 实现不使用 border 画出1px高的线，在不同浏览器的Quirksmode和CSSCompat模式下都能保持同一效果。
+	<div style="height:1px;overflow:hidden;background:red"></div>
+
+14. title与h1的区别、b与strong的区别、i与em的区别？
+	title属性没有明确意义只表示是个标题，H1则表示层次明确的标题，对页面信息的抓取也有很大的影响:
+	strong是标明重点内容，有语气加强的含义，使用阅读设备阅读网络时：<strong>会重读，而<b>是展示强调内容。
+	i内容展示为斜体，em表示强调的文本;
+	Physical Style Elements -- 自然样式标签
+		b, i, u, s, pre
+	Semantic Style Elements -- 语义样式标签
+		strong, em, ins, del, code
+	应该准确使用语义样式标签, 但不能滥用, 如果不能确定时首选使用自然样式标签。
