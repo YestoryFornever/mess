@@ -1,12 +1,109 @@
+1.
+var a=2;
+function show(){
+window.setTimeout(function(){a=22},1000)
+var a=4;
+window.setTimeout(function(){ a=222},3000)
+}
+show();
+alert(a);
+==================================
+2.
+if ("a" in window) {
+var a = 1;
+}
+alert(a);
+=================================
+3.
+var a = 1;
+function a() {
+
+};
+alert(a);
+=================================
+4.
+function a(x) {
+    return x ;
+}
+var a;
+alert(a);
+================================
+5.
+var a=3222;
+function b(x, y, a) {
+arguments[2] = 10;
+alert(a);
+}
+b(1, 2, 3);
+alert(a)
+===================================
+var a=1;
+function x(){
+  a=2;
+}
+x();
+console.log(a);//2
+
+var a=1;
+function x(a){
+  a=2;
+}
+x(a);
+console.log(a);//1
+==================================
+var a=2;
+function show(){
+window.setTimeout(function(){alert(a)},1000)
+var a=4;
+}
+show();
+alert(a);
+==================================
+var z=3;
+(function(){
+var x = 1, y = z = 0;
+console.log(x);console.log(y);console.log(z);
+})();
+console.log(z);console.log(y);console.log(x);
+
+<script>
+   var x = 1, y = z = 0;
+   function add(n) {
+      return n = n+1;
+　 }
+
+   y = add(x);
+
+   function add(n) {
+      return n = n + 3;
+   }
+
+   z = add(x);
+</script>
+
+<script>
+   function add(n) {
+      return n = n+1;
+　 }
+   alert(add(1));
+</script>
+
+<script>
+   function add(n) {
+      return n = n+3;
+　 }
+   alert(add(1));
+</script>
+
 1>.	已知ID的input输入框，希望获取这个输入框的输入值，怎么做？（不使用第三方框架）
 	document.getElementById("id").value
 
-2>.	希望获取页面中所有的checkbox怎么做？（不使用第三方框架）
+2>.	希望获取页面中所有的checkbox怎么做？(不使用第三方框架)
 	var domList = document.getElementsByTagName('input')
 	var checkBoxList = [];
 	var len = domList.length;　　//缓存到局部变量
 	while (len--) {　　//使用while的效率会比for循环更高
-	　　if (domList[len].type == 'checkbox') {
+	　　if (domList[len].type == 'checkbox') { //用.type获取dom的property,而不是用getAttribute("type")获取dom的attribute
 		　　checkBoxList.push(domList[len]);
 	　　}
 	}
@@ -17,10 +114,9 @@
 	dom.style.color = '#000';
 
 4>.	当一个DOM节点被点击时，我们希望执行一个函数，应该怎么做？
-	直接在DOM里绑定事件：<div onclick='test()'><div>
-
-	在JS里通过onclick绑定：xxx.onclick = test
-	通过事件添加进行绑定：
+	*直接在DOM里绑定事件：<div onclick='test()'><div>
+	*在JS里通过onclick绑定：xxx.onclick = test
+	*通过事件添加进行绑定：
 		addEvent: function(element, type, handle){
 			try{ // Chrome、FireFox、Opera、Safari、IE9.0及其以上版本
 				element.addEventListener(type,handle,false);
@@ -41,38 +137,49 @@
 	*	var a;
 		alert(typeof a); // undefined
 		alert(b); // 报错
-	解释：Undefined是一个只有一个值的数据类型，这个值就是“undefined”，在使用var声明变量但并未对其赋值进行初始化时，这个变量的值就是undefined。而b由于未声明将报错。注意未申明的变量和声明了未赋值的是不一样的。
+	解释：Undefined是一个只有一个值的数据类型，这个值就是“undefined”，
+	在使用var声明变量但并未对其赋值进行初始化时，这个变量的值就是undefined。
+	而b由于未声明将报错。注意未申明的变量和声明了未赋值的是不一样的。
+
 6	*	var a = null;
 		alert(typeof a); //object
-	解释：null是一个只有一个值的数据类型，这个值就是null。表示一个空指针对象，所以用typeof检测会返回”object”。
+	解释：null是一个只有一个值的数据类型，这个值就是null。
+	表示一个空指针对象，所以用typeof检测会返回”object”。
+
 7	*	var undefined;
 		undefined == null; // true
 		1 == true;   // true
 		2 == true;   // false
+		!2 == false; // true
 		0 == false;  // true
 		0 == '';     // true
 		NaN == NaN;  // false
 		[] == false; // true
-		[] == ![];   // true
+		[] == ![] == false;   // true
+
 	* undefined与null相等，但不恒等（===）
 	* 一个是number一个是string时，会尝试将string转换为number
 	* 尝试将boolean转换为number，0或1
 	* 尝试将Object转换成number或string，取决于另外一个对比量的类型
 	* 所以，对于0、空字符串的判断，建议使用 “===” 。“===”会先判断两边的值类型，类型不匹配时为false。
-	那么问题来了，看下面的代码，输出什么，foo的值为什么？
+
 8	*	var foo = "11"+2-"1";
-		console.log(foo);
-		console.log(typeof foo);
-	执行完后foo的值为111，foo的类型为String。
+		console.log(foo);//111
+		console.log(typeof foo); //string
+	+转字符串; - == 转Number类型
+
 9	*	var a = new Object();
 		a.value = 1;
 		b = a;
 		b.value = 2;
 		alert(a.value);
-	答案：2（考察引用数据类型细节）
+	答案：2(考察引用数据类型细节)
+
 10	*	foo = foo||bar ，这行代码是什么意思？为什么要这样写？
 	答案：if(!foo) foo = bar; //如果foo存在，值不变，否则把bar的值赋给foo。
-	短路表达式：作为”&&”和”||”操作符的操作数表达式，这些表达式在进行求值时，只要最终的结果已经可以确定是真或假，求值过程便告终止，这称之为短路求值。
+	短路表达式：作为"&&"和"||"操作符的操作数表达式，这些表达式在进行求值时，
+	只要最终的结果已经可以确定是真或假，求值过程便告终止，这称之为短路求值。
+
 11	*	var foo = 1;
 		function(){
 			console.log(foo);
@@ -88,59 +195,63 @@
 				console.log(foo); // 2;
 			}
 		函数声明与变量声明会被JavaScript引擎隐式地提升到当前作用域的顶部，但是只提升名称不会提升赋值部分。
+
 12	* ["1", "2", "3"].map(parseInt) 答案是多少？
 		 [1, NaN, NaN] 因为 parseInt 需要两个参数 (val, radix)，
 		 其中 radix 表示解析时用的基数。
 		 map 传了 3 个 (element, index, array)，对应的 radix 不合法导致解析失败。
-	* [].forEach.call($$("*"),function(a){ a.style.outline="1px solid #"+(~~(Math.random()*(1<<24))).toString(16) }) 能解释一下这段代码的意思吗？
+
 13>. 根据要求写代码。
 	* 用js实现千位分隔符?(来源：前端农民工，提示：正则+replace)
-	function commafy(num) {
-		 num = num + '';
-		 var reg = /(-?d+)(d{3})/;
-
-		if(reg.test(num)){
-		 num = num.replace(reg, '$1,$2');
-		}
-		return num;
+	function commafy(num) {//仅给最后三个字符前加逗号
+	    num = num + '';
+	    var reg = /(-?\d+)(\d{3})/g;
+	    if(reg.test(num)){
+	        num = num.replace(reg, '$1,$2');
+	    }
+	    return num;
 	}
 14	*写一个获取非行间样式的函数
 	function getStyle(obj,attr,value)
 	{
-		if(!value)
-		{
-			if(obj.currentStyle){
-				return obj.currentStyle(attr)
-			}else{
-				obj.getComputedStyle(attr,false)
-			}
-		}else{
-			obj.style[attr]=value
-		}
+	    if(!obj)return;
+	    if(!value)
+	    {
+	        if(obj.currentStyle){
+	            return obj.currentStyle(attr)
+	        }else{
+	            return document.defaultView.getComputedStyle(obj,null)[attr];//或 window.getComputedStyle(obj,null)[attr];
+	        }
+	    }else{
+	        obj.style[attr]=value
+	    }
 	}
-15	*已知数组var stringArray = [“This”, “is”, “Baidu”, “Campus”]，Alert出”This is Baidu Campus”。
-	答案：alert(stringArray.join(“”))
-	已知有字符串foo=”get-element-by-id”,写一个function将其转化成驼峰表示法”getElementById”。
-		function combo(msg){
-			var arr=msg.split("-");
-			for(var i=1;i<arr.length;i++){
-				arr[i]=arr[i].charAt(0).toUpperCase()+arr[i].substr(1,arr[i].length-1);
-			}
-			msg=arr.join("");
-			return msg;
-		}
-	(考察基础API)
-16	*var numberArray = [3,6,2,4,1,5]; （考察基础API）
+
+	function getStyle(obj, style) {
+		var _style = (style == "float") ? "styleFloat" : style;
+		return document.defaultView
+			? document.defaultView.getComputedStyle(obj, null).getPropertyValue(style)
+			: obj.currentStyle[_style.replace(/-[a-z]/g, function() { return arguments[0].charAt(1).toUpperCase(); })];
+	}
+15	*已知数组var stringArray = ["a", "b", "c", "d"]，Alert出"a b c d"。
+	var stringArray = ["a", "b", "c", "d"];
+	console.log(stringArray.join(" "));
+
+(考察基础API)
+16	*var numberArray = [3,6,2,4,1,5];
 		1) 实现对该数组的倒排，输出[5,1,4,2,6,3]
-		2) 实现对该数组的降序排列，输出[6,5,4,3,2,1]
-			function combo(msg){
-				var arr=msg.split("-");
-				for(var i=1;i<arr.length;i++){
-					arr[i]=arr[i].charAt(0).toUpperCase()+arr[i].substr(1,arr[i].length-1);
+			numberArray.reverse();//倒排
+			function reverse(arr){
+				var rsltArr = [];
+				while(arr.length>0){
+					rsltArr.push(arr.pop());
 				}
-				msg=arr.join("");
-				return msg;
+				return rsltArr;
 			}
+		2) 实现对该数组的降序排列，输出[6,5,4,3,2,1]
+			numberArray.sort(function(pre,nex){return pre-nex;});//正序排序
+			numberArray.sort(function(pre,nex){return nex-pre;});//倒序排序
+
 17	*输出今天的日期，以YYYY-MM-DD的方式，比如今天是2014年9月26日，则输出2014-09-26
 		var d = new Date();
 		// 获取年，getFullYear()返回4位的数字
@@ -855,7 +966,29 @@
 				return ev;
 			}
 		};
+46.	*[].forEach.call($$("*"),function(a){ a.style.outline="1px solid #"+(~~(Math.random()*(1<<24))).toString(16) })
+	能解释一下这段代码的意思吗？
+	$$("*")===document.querySelectorAll("*");
+	(function() {
+	    [].forEach.call(document.querySelectorAll("*"), function(a){
+	        a.style.outline = "1px solid #"+(~~(Math.random()*(1<<24))).toString(16)
+	    });
+	})();
 
+47.	已知有字符串foo=”get-element-by-id”,写一个function将其转化成驼峰表示法”getElementById”。
+	function combo(msg){
+		var arr=msg.split("-");
+		for(var i=1;i<arr.length;i++){
+		   arr[i]=arr[i].charAt(0).toUpperCase()+arr[i].substr(1,arr[i].length-1);
+		}
+		msg=arr.join("");
+		return msg;
+	}
+
+	var foo="get-element-by-id";
+	foo.replace(/(-\w)/g,function(item){
+		return item[1].toUpperCase();
+	});
 ========================================================================================================
 markyun.Event = {
     // 页面加载完成后
@@ -1285,62 +1418,3 @@ month = month < 10 ? '0' + month : month;
 var day = d.getDate();
 day = day < 10 ? '0' + day : day;
 console.log(year + '-' + month + '-' + day);
-
-var numberArray = [3,6,2,4,1,5];//[3,6,10,2,4,1,5]
-numberArray.sort(function(pre,nex){return pre-nex;});//正序排序
-numberArray.sort(function(pre,nex){return nex-pre;});//倒序排序
-numberArray.reverse();//倒排
-function reverse(arr){
-    var rsltArr = [];
-    while(arr.length>0){
-        rsltArr.push(arr.pop());
-    }
-    return rsltArr;
-}
-
-var foo="get-element-by-id";
-foo.replace(/(-\w)/g,function(item){
-    return item[1].toUpperCase();
-});
-function combo(msg){
-    var arr=msg.split("-");
-    for(var i=1;i<arr.length;i++){
-       arr[i]=arr[i].charAt(0).toUpperCase()+arr[i].substr(1,arr[i].length-1);
-    }
-    msg=arr.join("");
-    return msg;
-}
-
-var stringArray = ["a", "b", "c", "d"];
-console.log(stringArray.join(" "));
-
-function getStyle(obj,attr,value)
-{
-    if(!obj)return;
-    if(!value)
-    {
-        if(obj.currentStyle){
-            return obj.currentStyle(attr)
-        }else{
-            //obj.getComputedStyle(attr,false)
-            return document.defaultView.getComputedStyle(obj,null)[attr];
-        }
-    }else{
-        obj.style[attr]=value
-    }
-}
-
-function commafy(num) {//仅给最后三个字符前加逗号
-    num = num + '';
-    var reg = /(-?\d+)(\d{3})/g;
-    if(reg.test(num)){
-        num = num.replace(reg, '$1,$2');
-    }
-    return num;
-}
-
-(function() {
-    [].forEach.call(document.querySelectorAll("*"), function(a){
-        a.style.outline = "1px solid #"+(~~(Math.random()*(1<<24))).toString(16)
-    });
-})();
