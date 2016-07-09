@@ -51,14 +51,14 @@
 
 7	*	var undefined;
 		undefined == null; // true
-		1 == true;   // true
-		2 == true;   // false
+		1 == true;	// true
+		2 == true;	// false
 		!2 == false; // true
 		0 == false;  // true
-		0 == '';     // true
+		0 == '';	  // true
 		NaN == NaN;  // false
 		[] == false; // true
-		[] == ![] == false;   // true
+		[] == ![] == false;	// true
 
 	* undefined与null相等，但不恒等（===）
 	* 一个是number一个是string时，会尝试将string转换为number
@@ -209,7 +209,7 @@
 			url = url.split("?")[1];
 			var map = url.split("&");
 			for(var i = 0, len = map.length; i < len; i++) {
-			   result[map[i].split("=")[0]] = map[i].split("=")[1];
+				result[map[i].split("=")[0]] = map[i].split("=")[1];
 			}
 			return result;
 		}
@@ -236,7 +236,7 @@
 25	*写一个function，清除字符串前后的空格。（兼容所有浏览器）
 	使用自带接口trim()，考虑兼容性：
 	// function trimSpace(str) {
-	//     return str.replace(/(^\s+|\s+$)/g,"");
+	//	  return str.replace(/(^\s+|\s+$)/g,"");
 	// }
 	if(!String.prototype.trimSpace){
 		String.prototype.trimSpace = function(){
@@ -257,7 +257,7 @@
 		Object.prototype.clone = function() {
 			var o = this.constructor === Array ? [] : {};
 			for(var e in this){
-				   o[e] = typeof this[e] === "object" ? this[e].clone() : this[e];
+					o[e] = typeof this[e] === "object" ? this[e].clone() : this[e];
 			}
 			return o;
 		}
@@ -290,10 +290,10 @@
 
 28	*小贤是一条可爱的小狗(Dog)，它的叫声很好听(wow)，每次看到主人的时候就会乖乖叫一声(yelp)。从这段描述可以得到以下对象：
 		function Dog() {
-		   this.wow = function() {
-				   alert('Wow');
+			this.wow = function() {
+					alert('Wow');
 		  }
-		   this.yelp = function() {
+			this.yelp = function() {
 				  this.wow();
 		  }
 		}
@@ -504,24 +504,24 @@
 	* 传递函数给whenReady()
 	* 当文档解析完毕且为操作准备就绪时，函数作为document的方法调用
 	*/
-	var whenReady = (function() {               //这个函数返回whenReady()函数
-		var funcs = [];             //当获得事件时，要运行的函数
-		var ready = false;          //当触发事件处理程序时,切换为true
+	var whenReady = (function() {					//这个函数返回whenReady()函数
+		var funcs = [];				 //当获得事件时，要运行的函数
+		var ready = false;			 //当触发事件处理程序时,切换为true
 
 		//当文档就绪时,调用事件处理程序
 		function handler(e) {
-		  if(ready) return;       //确保事件处理程序只完整运行一次
+		  if(ready) return;		 //确保事件处理程序只完整运行一次
 
 		  //如果发生onreadystatechange事件，但其状态不是complete的话,那么文档尚未准备好
 		  if(e.type === 'onreadystatechange' && document.readyState !== 'complete') {
-			   return;
+				return;
 		  }
 
 		  //运行所有注册函数
 		  //注意每次都要计算funcs.length
 		  //以防这些函数的调用可能会导致注册更多的函数
 		  for(var i=0; i<funcs.length; i++) {
-			   funcs[i].call(document);
+				funcs[i].call(document);
 		  }
 		  //事件处理函数完整执行,切换ready状态, 并移除所有函数
 		  ready = true;
@@ -530,7 +530,7 @@
 		//为接收到的任何事件注册处理程序
 		if(document.addEventListener) {
 		  document.addEventListener('DOMContentLoaded', handler, false);
-		  document.addEventListener('readystatechange', handler, false);            //IE9+
+		  document.addEventListener('readystatechange', handler, false);				//IE9+
 		  window.addEventListener('load', handler, false);
 		}else if(document.attachEvent) {
 		  document.attachEvent('onreadystatechange', handler);
@@ -544,17 +544,17 @@
 	})();
 	如果上述代码十分难懂，下面这个简化版：
 	function ready(fn){
-		if(document.addEventListener) {        //标准浏览器
+		if(document.addEventListener) {		  //标准浏览器
 			document.addEventListener('DOMContentLoaded', function() {
 				//注销事件, 避免反复触发
 				document.removeEventListener('DOMContentLoaded',arguments.callee, false);
-				fn();            //执行函数
+				fn();				//执行函数
 			}, false);
-		}else if(document.attachEvent) {        //IE
+		}else if(document.attachEvent) {		  //IE
 			document.attachEvent('onreadystatechange', function() {
 				if(document.readyState == 'complete') {
 					document.detachEvent('onreadystatechange', arguments.callee);
-					fn();        //函数执行
+					fn();		  //函数执行
 				}
 			});
 		}
@@ -784,7 +784,7 @@
 	function combo(msg){
 		var arr=msg.split("-");
 		for(var i=1;i<arr.length;i++){
-		   arr[i]=arr[i].charAt(0).toUpperCase()+arr[i].substr(1,arr[i].length-1);
+			arr[i]=arr[i].charAt(0).toUpperCase()+arr[i].substr(1,arr[i].length-1);
 		}
 		msg=arr.join("");
 		return msg;
@@ -829,15 +829,14 @@
 	}
 
 49. 
-检测
-    some every
-处理数组
-    map(return item) filter(return true/false 过滤)
-执行操作
-    forEach
+	检测
+		some every
+	处理数组
+		map(return item) filter(return true/false 过滤)
+	执行操作
+		forEach
 
-50.	*
-	function setcookie(name,value,days){  //给cookie增加一个时间变量
+50.	function setcookie(name,value,days){  //给cookie增加一个时间变量
 	　　var exp = new Date();
 	　　exp.setTime(exp.getTime() + days*24*60*60*1000); //设置过期时间为days天
 	　　document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();
@@ -885,107 +884,160 @@
 	})();
 ========================================================================================================
 
+51	ES3执行上下文
+		expulsion context(一个栈的概念)
+		Variable Object(变量对象) 包含了变量、函数声明、函数参数
+		执行上下文={
+			变量对象:{
+				变量,
+				函数声明,
+				函数参数
+			}
+		}
+		Active Object(激活对象)函数中特有
 
+		顺序为
+		1参数(若未传入,初始化为undefined)
+		2函数声明(若发生命名冲突,会覆盖)
+		3变量声明(初始化变量值为undefined,若发生命名冲突会忽略)
+		function fn (arg1, arg2) {
+			var arg3 = 0;
+			function fnX () {}
+			var arg4 = function fnY () {};
+			(function fnZ(){});
+			arg5 = 1;
+		}
+		fn(2);
 
+		AO(test)={
+			arg1:2,
+			arg2:undefined,
+			fnX:function fnX(){},
+			arg3:undefined,
+			arg4:undefined,
+			arg5:undefined
+		}
+		后续函数语句
+		arg3 = 0;
+		arg4 = function fnY(){};
+		(function fnZ(){});
+		arg5 = 1;
 
+		Exercise:
+		>>
+		alert(x);//function
+		var x = 10;
+		alert(x);//10
+		x=20;
+		function x(){}
+		alert(x);//20
+		if(true){
+			var a = 1;
+		}else{
+			var b = true;
+		}
+		alert(a);//1
+		alert(b);//undefined
+		>>
+		var a=2;
+		function show(){
+			window.setTimeout(function(){a=22},1000)
+			var a=4;
+			window.setTimeout(function(){ a=222},3000)
+		}
+		show();
+		alert(a);//2
+		>>
+		if ("a" in window) {
+		var a = 1;
+		}
+		alert(a);//1
+		>>
+		var a = 1;
+		function a(){};
+		alert(a);//1
+		>>
+		function a(x) {
+			return x ;
+		}
+		var a;
+		alert(a);//function a(x){...
+		>>
+		var a=1;
+		function b(x, y, a) {
+			arguments[2] = 10;
+			alert(a);//10
+		}
+		b(1, 2, 3);
+		alert(a)//1
+		>>
+		var a=1;
+		function x(){
+		  a=2;
+		}
+		x();
+		console.log(a);//2
+		>>
+		var a=1;
+		function x(a){
+		  a=2;
+		}
+		x(a);
+		console.log(a);//1
+		>>
+		var a=2;
+		function show(){
+			window.setTimeout(function(){alert(a)},1000)//4
+			var a=4;
+		}
+		show();
+		alert(a);//2
+		>>
+		var z=3;
+		(function(){
+			var x = 1, y = z = 0;
+			console.log(x);console.log(y);console.log(z);//1 0 0
+		})();
+		console.log(z);console.log(y);console.log(x);//1 error error
+52	this
+		全局this
+		普通函数this
+		对象方法this
+		对象原型链this
+		get/set方法this
+		构造器this(指向一个空的并且它的原型为构造器的prototype属性的对象)
+		call/apply方法this
+		bind方法this
 
-
-
-
-
-1.
-var a=2;
-function show(){
-window.setTimeout(function(){a=22},1000)
-var a=4;
-window.setTimeout(function(){ a=222},3000)
-}
-show();
-alert(a);
-==================================
-2.
-if ("a" in window) {
-var a = 1;
-}
-alert(a);
-=================================
-3.
-var a = 1;
-function a() {
-
-};
-alert(a);
-=================================
-4.
-function a(x) {
-	return x ;
-}
-var a;
-alert(a);
-================================
-5.
-var a=3222;
-function b(x, y, a) {
-arguments[2] = 10;
-alert(a);
-}
-b(1, 2, 3);
-alert(a)
-===================================
-var a=1;
-function x(){
-  a=2;
-}
-x();
-console.log(a);//2
-
-var a=1;
-function x(a){
-  a=2;
-}
-x(a);
-console.log(a);//1
-==================================
-var a=2;
-function show(){
-window.setTimeout(function(){alert(a)},1000)
-var a=4;
-}
-show();
-alert(a);
-==================================
-var z=3;
-(function(){
-var x = 1, y = z = 0;
-console.log(x);console.log(y);console.log(z);
-})();
-console.log(z);console.log(y);console.log(x);
-
-<script>
-   var x = 1, y = z = 0;
-   function add(n) {
-	  return n = n+1;
-　 }
-
-   y = add(x);
-
-   function add(n) {
-	  return n = n + 3;
-   }
-
-   z = add(x);
-</script>
-
-<script>
-   function add(n) {
-	  return n = n+1;
-　 }
-   alert(add(1));
-</script>
-
-<script>
-   function add(n) {
-	  return n = n+3;
-　 }
-   alert(add(1));
-</script>
+53	继承
+		hasOwnProperty
+		Object.create();
+		function Person (name,age) {
+			this.name = name;
+			this.age = age;
+		}
+		Person.prototype.hi = function() {
+			console.log("Hi,my name is "+this.name+",I'm"+this.age+"years old now.");
+		}
+		Person.prototype.LEGS_NUM = 2;
+		Person.prototype.ARMS_NUM = 2;
+		Person.prototype.walk = function(){
+			console.log(this.name+" is walking...");
+		};
+		function Student (name,age,className) {
+			Person.call(this,name,age);
+			this.className = className;
+		}
+		Student.prototype = Object.create(Person.prototype);
+		Student.prototype.constructor = Student;
+		Student.prototype.hi = function(){
+			console.log("Hi,my name is "+this.name+",I'm"+this.age+"years old now,and from"+this.className+".");
+		}
+		Student.prototype.learn = function(subject) {
+			console.log(this.name+" is learning "+subject+" at "+subject+" at "+this.className+".");
+		}
+		var xxx = new Student("xxx",26,'Class 3,Grade 2');
+		xxx.hi();
+		xxx.LEGS_NUM;
+		xxx.walking();
+		xxx.learn('math');
