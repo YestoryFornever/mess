@@ -24,9 +24,6 @@
 		层叠就是优先级，内联>内嵌>外链>导入
 
 5.CSS浏览器兼容问题
-	*你做的页面在哪些流览器测试过?这些浏览器的内核（渲染引擎）分别是什么?
-		Ie(Trident，即Ie内核) 火狐(Gecko) 谷歌(webkit) opera(Elektra 7.0 Presto 2013 年 Webkit) Safari(Webkit)
-	js引擎	 			Chakra								OdinMonkey V8					 Carakan
 	*写出几种IE6 BUG的解决方法
 	　　1 .双边距BUG float引起的 使用display
 	　　2 .3 像素问题 使用float引起的 使用dislpay:inline -3 px

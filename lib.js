@@ -1,3 +1,4 @@
+知道各种JS框架(Angular, Backbone, Ember, React, Meteor, Knockout...)么? 能讲出他们各自的优点和缺点么?
 jQuery>
 	1.	JQuery的源码看过吗？能不能简单概况一下它的实现原理？
 		var jquery = function(){
@@ -176,18 +177,18 @@ jQuery>
 
 Angular>
 Nodejs>
-	1.Node.js的适用场景？
-	2.	知道route, middleware, cluster, nodemon, pm2, server-side rendering么?
-	3.	对Node的优点和缺点提出了自己的看法？
+	22.Node.js的适用场景？
+	23.	知道route, middleware, cluster, nodemon, pm2, server-side rendering么?
+	24.	对Node的优点和缺点提出了自己的看法？
 		*（优点）因为Node是基于事件驱动和无阻塞的，所以非常适合处理并发请求，
 		因此构建在Node上的代理服务器相比其他技术实现（如Ruby）的服务器表现要好得多。
 		此外，与Node代理服务器交互的客户端代码是由javascript语言编写的，
 		因此客户端和服务器端都用同一种语言编写，这是非常美妙的事情。
 		*（缺点）Node是一个相对新的开源项目，所以不太稳定，它总是一直在变，
 		而且缺少足够多的第三方库支持。看起来，就像是Ruby/Rails当年的样子。
-前端框架相关
-		* react-router 路由系统的实现原理？
-		* React中如何解决第三方类库的问题?
-		87.	知道各种JS框架(Angular, Backbone, Ember, React, Meteor, Knockout...)么? 能讲出他们各自的优点和缺点么?
+React
+	25 react-router 路由系统的实现原理？
+	26 React中如何解决第三方类库的问题?
 
-		88.	Underscore 对哪些 JS 原生对象进行了扩展以及提供了哪些好用的函数方法？
+Underscore 
+	27对哪些 JS 原生对象进行了扩展以及提供了哪些好用的函数方法？

@@ -1,33 +1,25 @@
 281
 每天40题，一周搞定
-HTML:14
-jquery:22
+html:14
+jscode:54
+
+lib:27
+es6:3
+browser7
 
 CSS:58
+javascript:46
+others:86
 
-js:46
-
-代码题:45
-
-node:3
-其他:86
-ES6:3
-前端框架相关:2
-
-jquery源码
-html5离线存储
-javascript代码
-JavaScript 预编译问题
-
-	前端同学，来，说说es3，es5，es6的区别；
-	各个浏览器内核的区别；
-	页面具体的渲染流程；
-	说说hybrid和h5的优缺点；
-	在谈谈当下流行的react到底是个什么东东，解决了什么问题；
-	amd，cmd是什么；
-	mvc，mvp，mvvm等怎么区分，
-	以及应用场景；谈谈你对其他前端框架或者前端库的了解，underscore，jquery，backbone，angular，requirejs，seajs，bootstrap，flux，knockout...；
-	再来谈谈前端工程化打包工具，gunt，webpack啥的会用么，会写插件么；
+前端同学，来，说说es3，es5，es6的区别；
+各个浏览器内核的区别；
+页面具体的渲染流程；
+说说hybrid和h5的优缺点；
+在谈谈当下流行的react到底是个什么东东，解决了什么问题；
+amd，cmd是什么；
+mvc，mvp，mvvm等怎么区分，
+以及应用场景；谈谈你对其他前端框架或者前端库的了解，underscore，jquery，backbone，angular，requirejs，seajs，bootstrap，flux，knockout...；
+再来谈谈前端工程化打包工具，gunt，webpack啥的会用么，会写插件么；
 
 		1.都使用和了解过哪些编辑器？都使用和了解过哪些日常工具？
 		3.国内外的js牛人都知道哪些？
@@ -73,13 +65,6 @@ JavaScript 预编译问题
 		注释
 
 		21.useraget.nav
-
-		
-		23.常见的浏览器内核有哪些？
-			Trident内核：IE,MaxThon,TT,The World,360,搜狗浏览器等。[又称MSHTML]
-			Gecko内核：Netscape6及以上版本，FF,MozillaSuite/SeaMonkey等
-			Presto内核：Opera7及以上。[Opera内核原为：Presto，现为：Blink;]
-			Webkit内核：Safari,Chrome等。 [ Chrome的：Blink（WebKit的分支）]
 
 		24.	解释一下 Backbone 的 MVC 实现方式？
 
