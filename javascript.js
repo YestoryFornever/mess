@@ -185,6 +185,7 @@
 
 4.封装
 	1>. 简述javascript封装
+	
 5.this
 	1>.this关键字的使用场合和用法（如在构造函数中、setTimeout中）
 	2>.写出3个使用this的典型应用
