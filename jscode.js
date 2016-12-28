@@ -31,7 +31,8 @@ function addEvent(dom, type, fn){
 }
 
 function fnStyle(dom, style, value){
-	if(dom.value){
+	if(!dom)return;
+	if(value){
 		dom.style[style]=value;
 	}else{
 		if(dom.currentStyle){
@@ -39,8 +40,13 @@ function fnStyle(dom, style, value){
 			return dom.currentStyle[_style.replace(/(-\w)/g,function(match){
 				return match[1].toUpperCase();
 			})];
+			/*return dom.currentStyle[_style.replace(/-[a-z]/g, function() { 
+				return arguments[0].charAt(1).toUpperCase();//转为驼峰式
+			})];*/
 		}else{
-			document.defaultView.getComputedStyle(dom,null)[style];
+			return document.defaultView.getComputedStyle(dom,null)[style];
+			//或return window.getComputedStyle(dom,null)[style];
+			//或return window.getComputedStyle(dom,null).getPropertyValue(style);
 		}
 	}
 }
@@ -401,21 +407,24 @@ AMadDog.yelp();
 		return num;
 	}
 14	*写一个获取非行间样式的函数
-	function fnStyle(obj,attr,value){
-		if(!obj)return;
-		if(!value){
-			if(obj.currentStyle){
-				var _attr = (attr == "float") ? "styleFloat" : attr;
-				return obj.currentStyle[_attr.replace(/-[a-z]/g, function() { 
-					return arguments[0].charAt(1).toUpperCase();//转为驼峰式
-				})]; 
-			}else{
-				return document.defaultView.getComputedStyle(obj,null)[attr];
-				//或return window.getComputedStyle(obj,null)[attr];
-				//或return window.getComputedStyle(obj,null).getPropertyValue(attr);
-			}
+	function fnStyle(dom, style, value){
+		if(!dom)return;
+		if(value){
+			dom.style[style]=value;
 		}else{
-			obj.style[attr]=value
+			if(dom.currentStyle){
+				var _style = style=="float"?"styleFloat":style;
+				return dom.currentStyle[_style.replace(/(-\w)/g,function(match){
+					return match[1].toUpperCase();
+				})];
+				/*return dom.currentStyle[_style.replace(/-[a-z]/g, function() { 
+					return arguments[0].charAt(1).toUpperCase();//转为驼峰式
+				})];*/
+			}else{
+				return document.defaultView.getComputedStyle(dom,null)[style];
+				//或return window.getComputedStyle(dom,null)[style];
+				//或return window.getComputedStyle(dom,null).getPropertyValue(style);
+			}
 		}
 	}
 15	*已知数组var stringArray = ["a", "b", "c", "d"]，Alert出"a b c d"。
