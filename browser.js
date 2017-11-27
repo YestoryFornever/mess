@@ -47,8 +47,26 @@ JS引擎：解析和执行javascript来实现网页的动态效果。
 4. 把 Script 标签放在页面的最底部的body封闭之前和封闭之后有什么区别？浏览器会如何解析它们？
 	执行顺序
 
-5. 我们给一个dom同时绑定两个点击事件，
-	一个用捕获，
-	一个用冒泡。
-	会执行几次事件，
-	会先执行冒泡还是捕获？
+5. 我们给一个dom同时绑定两个点击事件，一个用捕获，一个用冒泡。
+	会执行几次事件?2
+	会先执行冒泡还是捕获?捕获
+	父元素捕获
+	子元素冒泡
+	子元素捕获
+	父元素冒泡
+	var btn = document.querySelector('button');
+	var div = document.querySelector('div');
+
+	btn.addEventListener('click', function(){
+		console.log('bubble','btn');
+	},false);
+	btn.addEventListener('click', function(){
+		console.log('capture','btn');
+	},true);
+
+	div.addEventListener('click', function(){
+		console.log('bubble','div');
+	},false);
+	div.addEventListener('click', function(){
+		console.log('capture','div');
+	},true);
