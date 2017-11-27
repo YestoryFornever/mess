@@ -303,3 +303,8 @@
 	Semantic Style Elements -- 语义样式标签
 		strong, em, ins, del, code
 	应该准确使用语义样式标签, 但不能滥用, 如果不能确定时首选使用自然样式标签。
+
+
+12 .img标签上title与alt属性的区别是什么?
+　　alt 当图片不显示是 用文字代表。
+　　title 鼠标移上去显示的提示
