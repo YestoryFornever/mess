@@ -1,69 +1,50 @@
 1.	CSS的盒模型?
-	介绍一下标准的CSS的盒子模型？低版本IE的盒子模型有什么不同的？
-	Css盒模型:内容，border ,margin，padding
-	（1）有两种， IE 盒子模型、W3C 盒子模型;
-	（2）盒模型： 内容(content)、填充(padding)、边界(margin)、 边框(border);
-	（3）区别： IE的content部分把 border 和 padding计算了进去;
+	介绍一下标准的CSS的盒子模型？
+	有两种， IE 盒子模型、W3C 盒子模型;
+	盒模型： 内容(content)、填充(padding)、边界(margin)、 边框(border);
+2. 低版本IE的盒子模型有什么不同的？
+	IE的content部分把 border 和 padding计算了进去;
 
-2.	页面导入样式时，使用link和@import有什么区别？
-	内联 内嵌 外链 导入
-	区别 ：同时加载
-　　前者无兼容性，后者CSS 2.1 以下浏览器不支持
-　　Link 支持使用javascript改变样式，后者不可
-	（1）link属于XHTML标签，除了加载CSS外，还能用于定义RSS, 定义rel连接属性等作用；而@import是CSS提供的，只能用于加载CSS;
-	（2）页面被加载的时，link会同时被加载，而@import引用的CSS会等到页面被加载完再加载;
-	（3）import是CSS 2.1 提出的，只在IE5以上才能被识别，而link是XHTML标签，无兼容问题;
+3.	页面导入样式时，使用link和@import有什么区别？
+	1）前者无兼容性，后者CSS 2.1 （只在IE5以上才能被识别）
+	2）Link 支持使用javascript改变样式，后者不可
+	3）link属于XHTML标签，除了加载CSS外，还能用于定义RSS, 定义rel连接属性等作用；而@import是CSS提供的，只能用于加载CSS;
+	4）页面被加载的时，link会同时被加载，而@import引用的CSS会等到页面被加载完再加载;
 
-3.介绍所知道的CSS hack技巧（如：_, *, +, \9, !important）
-		_marging \\IE 6
-		+margin \\IE 7
-		Marging:0 auto \9 所有Ie
-		Margin \0 \\IE 8
+4. CSS层叠是什么？介绍一下
+	层叠就是优先级，内联>内嵌>外链>导入
 
-4.CSS层叠是什么？介绍一下
-		层叠就是优先级，内联>内嵌>外链>导入
-
-5.CSS浏览器兼容问题
-	*写出几种IE6 BUG的解决方法
-	　　1 .双边距BUG float引起的 使用display
-	　　2 .3 像素问题 使用float引起的 使用dislpay:inline -3 px
-	　　3 .超链接hover 点击后失效 使用正确的书写顺序 link visited hover active
-	　　4 .Ie z-index问题 给父级添加position:relative
-	　　5 .Png 透明 使用js代码 改
-	　　6 .Min-height 最小高度 !Important 解决’
-	　　7 .select 在ie6下遮盖 使用iframe嵌套
-	　　8 .为什么没有办法定义 1 px 左右的宽度容器(IE6默认的行高造成的，使用over:hidden,zoom:0.08 line-height:1 px)
-	　　9 .ie 6 不支持!important
-	*常见兼容性问题？
-		* 经常遇到的浏览器的兼容性有哪些？原因，解决方法是什么，常用hack的技巧 ？
-		* png24位的图片在iE6浏览器上出现背景，解决方案是做成PNG8.
-		* 浏览器默认的margin和padding不同。解决方案是加一个全局的*{margin:0;padding:0;}来统一。
-		* IE6双边距bug:块属性标签float后，又有横行的margin情况下，在ie6显示margin比设置的大。
-		浮动ie产生的双倍距离 #box{ float:left; width:10px; margin:0 0 0 100px;}
-		这种情况之下IE会产生20px的距离，解决方案是在float的标签样式控制中加入 ——_display:inline;将其转化为行内属性。(_这个符号只有ie6会识别)
-		渐进识别的方式，从总体中逐渐排除局部。
-		首先，巧妙的使用“\9”这一标记，将IE游览器从所有情况中分离出来。
-		接着，再次使用“+”将IE8和IE7、IE6分离开来，这样IE8已经独立识别。
-		css
-			.bb{
-				background-color:#f1ee18;/*所有识别*/
-				.background-color:#00deff\9; /*IE6、7、8识别*/
-				+background-color:#a200ff;/*IE6、7识别*/
-				_background-color:#1e0bd1;/*IE6识别*/
-			}
-		*IE下,可以使用获取常规属性的方法来获取自定义属性,
-		 也可以使用getAttribute()获取自定义属性;
-		 Firefox下,只能使用getAttribute()获取自定义属性。
-		 解决方法:统一通过getAttribute()获取自定义属性。
-		*IE下,even对象有x,y属性,但是没有pageX,pageY属性;
-		 Firefox下,event对象有pageX,pageY属性,但是没有x,y属性。
-		*解决方法：（条件注释）缺点是在IE浏览器下可能会增加额外的HTTP请求数。
-		*Chrome 中文界面下默认会将小于 12px 的文本强制按照 12px 显示,
-		 可通过加入 CSS 属性 -webkit-text-size-adjust: none; 解决。
-		超链接访问过后hover样式就不出现了 被点击访问过的超链接样式不在具有hover和active了解决方法是改变CSS属性的排列顺序:
+5. CSS常见兼容性问题？
+	>*{margin:0;padding:0;}
+	>z-index问题 给父级添加position:relative
+	>IE下,可以使用获取常规属性的方法来获取自定义属性,
+	也可以使用getAttribute()获取自定义属性;
+	Firefox下,只能使用getAttribute()获取自定义属性。
+	解决方法:统一通过getAttribute()获取自定义属性。
+	>IE下,even对象有x,y属性,但是没有pageX,pageY属性;
+	Firefox下,event对象有pageX,pageY属性,但是没有x,y属性。
+	>Chrome 中文界面下默认会将小于 12px 的文本强制按照 12px 显示,
+	可通过加入 CSS 属性 -webkit-text-size-adjust: none; 解决。
+	>写出几种IEBUG的解决方法
+		1)双倍边距BUG float引起的 使用 {_display:inline;}
+			将其转化为行内属性。(_这个符号只有ie6会识别)
+		2)超链接hover
+		被点击访问过的超链接样式不在具有hover和active了解决方法是改变CSS属性的排列顺序:
 		L-V-H-A :a:link {} a:visited {} a:hover {} a:active {}
+		3）渐进识别的方式，从总体中逐渐排除局部。
+		.xxx{
+			background-color:#f1ee18;/*所有识别*/
+			.background-color:#00deff\9; /*IE6、7、8识别*/
+			+background-color:#a200ff;/*IE6、7识别*/
+			_background-color:#1e0bd1;/*IE6识别*/
+		}
+		4)png24位的图片在iE6浏览器上出现背景，解决方案是做成PNG8
+		5)min-height 最小高度 !Important 解决
+		6)为什么没有办法定义 1 px 左右的宽度容器
+		(IE6默认的行高造成的，使用{over:hidden,zoom:0.08;line-height:1px})
+		7)ie 6 不支持!important
 
-6.position的值relative和absolute定位原点是？
+6. position的值relative和absolute定位原点是？
 	absolute
 	生成绝对定位的元素，相对于值不为 static的第一个父元素进行定位。
 	fixed （老IE不支持）
@@ -75,23 +56,36 @@
 	inherit
 	规定从父元素继承 position 属性的值。
 
-7.CSS3的新内容
-	@Font-face 特性
-	Word-wrap & Text-overflow 样式
-	文字渲染（Text-decoration）
-	CSS3 的多列布局（multi-column layout）
-	边框和颜色（color, border）
-	CSS3 的渐变效果（Gradient）
-	CSS3 的阴影（Shadow）和反射（Reflect）效果
-	CSS3 的背景效果
-	CSS3 的盒子模型
-	CSS3 的 Transitions, Transforms 和 Animation
+7. CSS3的新内容
+	>@Font-face 加载服务器端的字体文件，让客户端显示客户端所没有安装的字体
+	>word-wrap & text-overflow
+	>text-decoration
+	>CSS3 的多列布局（multi-column layout）
+		Column-count：表示布局几列。
+		Column-rule：表示列与列之间的间隔条的样式
+		Column-gap：表示列于列之间的间隔
+	>边框和颜色（color, border）
+		透明度
+		渐变效果（Gradient）
+		阴影
+	>背景影响范围效果
+		* background-clip: border-box; 背景从 border 开始显示 ;
+		* background-clip: padding-box; 背景从 padding 开始显示 ;
+		* background-clip: content-box; 背景显 content 区域开始显示 ;
+		* background-clip: no-clip; 默认属性，等同于 border-box;
+	>flex
+	>动画
+		Transitions
+		Transforms
+		Animation
 
-8.什么是FOUC？你如何来避免FOUC？
+8. 什么是FOUC？你如何来避免FOUC？
+	文档样式短暂失效(Flash of Unstyled Content),简称为FOUC
+	使得css文件加载在html之后导致页面闪烁、花屏
 	1. 由于css引入使用了@import
 	2. 或者存在多个style标签
 	3. 以及css文件在页面底部引入
-	使得css文件加载在html之后导致页面闪烁、花屏
+	
 	用link加载css文件，放在head标签里面
 
 9. CSS选择符有哪些?
@@ -112,8 +106,8 @@
 　　选择器{属性1:值1;属性2:值2;……}
 
 12 .img标签上title与alt属性的区别是什么?
-　　Alt 当图片不显示是 用文字代表。
-　　Title 为该属性提供信息
+　　alt 当图片不显示是 用文字代表。
+　　title 鼠标移上去显示的提示
 
 13 .描述css reset的作用和用途。
 	Reset重置浏览器的css默认属性 浏览器的品种不同，样式不同，然后重置，让他们统一
@@ -378,3 +372,10 @@ SASS (SASS、LESS没有本质区别，只因为团队前端都是用的SASS)
 还有层级、mixin、变量、循环、函数等，具有很方便的UI组件模块化开发能力，极大的提高工作效率。
 - 后处理器例如：PostCSS，通常被视为在完成的样式表中根据CSS规范处理CSS，让其更有效；目前最常做的
 是给CSS属性添加浏览器私有前缀，实现跨浏览器兼容性的问题。
+
+-------------------------------------------------------------
+3.介绍所知道的CSS hack技巧（如：_, *, +, \9, !important）
+_marging \\IE 6
++margin \\IE 7
+Marging:0 auto \9 所有Ie
+Margin \0 \\IE 8
