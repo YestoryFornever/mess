@@ -1,25 +1,27 @@
-281
-每天40题，一周搞定
-html:14
-jscode:54
+1. es3，es5，es6的区别；
+	es3=>es5 语法糖
+	es5=>es6 模块 export import
+2. 各个浏览器内核的区别；
+	ie+其他 chrome+opera firefox
+3. 页面具体的渲染流程；
+	html页面自上而下解析，
+	遇到script或者link会阻塞（仅阻塞执行不阻塞加载）
+4. 说说hybrid和h5的优缺点；
+	h5是网页，依赖浏览器，兼容浏览器
+	hybrid是app，兼容系统
+5. 在谈谈当下流行的react到底是个什么东东，解决了什么问题；
+	组件化
+	虚拟dom，性能
+	配合单向数据流易于维护
+6. amd，cmd是什么；
+	模块化思想
+	amd: require	提前执行	依赖前置
+	cmd: import		延迟执行	依赖就近
+7. mvc，mvp，mvvm等怎么区分，以及应用场景；
 
-lib:27
-es6:3
-browser7
-
-CSS:58
-javascript:46
-others:86
-
-前端同学，来，说说es3，es5，es6的区别；
-各个浏览器内核的区别；
-页面具体的渲染流程；
-说说hybrid和h5的优缺点；
-在谈谈当下流行的react到底是个什么东东，解决了什么问题；
-amd，cmd是什么；
-mvc，mvp，mvvm等怎么区分，
-以及应用场景；谈谈你对其他前端框架或者前端库的了解，underscore，jquery，backbone，angular，requirejs，seajs，bootstrap，flux，knockout...；
-再来谈谈前端工程化打包工具，gunt，webpack啥的会用么，会写插件么；
+8. 谈谈你对其他前端框架或者前端库的了解，
+underscore，jquery，backbone，angular，requirejs，seajs，bootstrap，flux，knockout...；
+9. 再来谈谈前端工程化打包工具，gunt，webpack啥的会用么，会写插件么；
 
 		1.都使用和了解过哪些编辑器？都使用和了解过哪些日常工具？
 		3.国内外的js牛人都知道哪些？
