@@ -1,46 +1,62 @@
-#文档流相关#
-	1. position的值relative和absolute定位原点是？
+#文档流相关（display / float / position）#
+	1. display有哪些值？说明他们的作用。
+		none			不显示。
+		block			块。
+		inline			行内。
+		inline-block	行内，但可以设置宽高。
+		list			item 象块类型元素一样显示，并添加样式列表标记。
+		table			此元素会作为块级表格来显示。
+		inherit			规定应该从父元素继承 display 属性的值。
+
+	2. position的值relative和absolute定位原点是?
 		absolute
-		生成绝对定位的元素，相对于值不为 static的第一个父元素进行定位。
+			生成绝对定位的元素，相对于值不为 static的第一个父元素进行定位。
 		fixed （老IE不支持）
-		生成绝对定位的元素，相对于浏览器窗口进行定位。
+			生成绝对定位的元素，相对于浏览器窗口进行定位。
 		relative
-		生成相对定位的元素，相对于其正常位置进行定位。
+			生成相对定位的元素，相对于其正常位置进行定位。
 		static
-		默认值。没有定位，元素出现在正常的流中（忽略 top, bottom, left, right z-index 声明）。
+			默认值。没有定位，元素出现在正常的流中（忽略 top, bottom, left, right z-index 声明）。
 		inherit
-		规定从父元素继承 position 属性的值。
+			规定从父元素继承 position 属性的值。
 
-	2. 清除浮动的几种方式，各自的优缺点
+	3. 清除浮动的几种方式，各自的优缺点。
 	请解释一下为什么会出现浮动和什么时候需要清除浮动？清除浮动的方式
-	　　1> 使用空标签清除浮动 clear:both(理论上能清楚任何标签，增加无意义的标签)
-	　　2> 使用overflow:auto(空标签元素清除浮动而不得不增加无意代码的弊端,使用zoom:1用于兼容IE)
-	　　3> 是用afert伪元素清除浮动(用于非IE浏览器)
-
-	3. display有哪些值？说明他们的作用。
-		block 象块类型元素一样显示。
-		none缺省值。象行内元素类型一样显示。
-		inline-block象行内元素一样显示，但其内容象块类型元素一样显示。
-		list-item 象块类型元素一样显示，并添加样式列表标记。
-		table 此元素会作为块级表格来显示
-		inherit 规定应该从父元素继承 display 属性的值
+	　　1> 新增空标签清除浮动 clear:both；
+	　　2> 父元素添加overflow:hidden；
+	　　3> 是用afert伪元素清除浮动
+			.clearfix:after{
+				content: "";//设置内容为空
+				height: 0;//高度为0
+				line-height:0;//行高为0
+				display: block;//将文本转为块级元素
+				visibility: hidden;//将元素隐藏
+				clear: both//清除浮动
+			}
+			.clearfix{
+				zoom: 1; //为了兼容IE
+			}
 	
 	4. position跟display、margin collapse、overflow、float这些特性相互叠加后会怎么样？
-		（skill > css 有文章解释）
-		css有三种定位体系:常规流/浮动/绝对定位。
-
-		所谓常规流就是元素没有浮动和绝对定位时在页面上的正常布局显示，
-		即是块级元素就独占一行，是内联元素(行内元素)就可以和其它内联元素并排一行。
-		元素是块级元素还是内联元素取决于display的值。
-
-		在有关css的定位体系中，position float display这三个值相互影响，总体上来看，有一个优先级的关系:
-			1 若position值为absolute或者fixed，float的计算值为none，display的计算值要进行转换。
-			2 若postion为static或者relative，float不为none，
-				对于根元素，display的值要进行转化，对于非根元素，用display的特性值。
-			3 若postion的值不是absolute或者fixed，float的值为none，则按照display的设定值显示
-			因此，可以看成postion的优先级最高，float其次 display的最低。
-
-		追问：normal flow、containing block、bfc、margin collapse，base line，writing mode，bidi
+		if(display==none){
+			position = 无效
+			float = 无效
+		}else{
+			if(position==absolute||position==fixed){
+				float = none;
+				display(inline => block);//这是由于position(absolute/fixed)、float!=none、元素为根元素时需要块布局
+			}else{
+				if(float!=none){
+					display(inline => block);//这是由于position(absolute/fixed)、float!=none、元素为根元素时需要块布局
+				}else{
+					if(元素为根元素){
+						display(inline => block);//这是由于position(absolute/fixed)、float!=none、元素为根元素时需要块布局
+					}else{
+						display不变
+					}
+				}
+			}
+		}
 
 #盒模型相关#
 	1.	CSS的盒模型?
@@ -53,10 +69,15 @@
 
 #选择器相关#
 
-	1. 浏览器是怎样解析CSS选择器的？
+	1. 浏览器是怎样解析CSS选择器的?
+		由子至父依次过滤
 
 	2 .CSS的基本语句构成是?
-	　　选择器{属性1:值1;属性2:值2;……}
+	　　选择器{
+			属性1:值1;
+			属性2:值2;
+			……
+		}
 
 	3. CSS层叠是什么？介绍一下
 		层叠就是优先级，!important>内联>内嵌>外链>导入
@@ -73,8 +94,7 @@
 		9 .伪类选择器（a:hover, li:nth-child）
 
 	5. css定义的权重
-	CSS权重优先级是如何计算的
-	以下是权重的规则：标签的权重为1，class的权重为10，id的权重为100，以下例子是演示各种定义的权重值：
+		以下是权重的规则：标签的权重为1，class的权重为10，id的权重为100，以下例子是演示各种定义的权重值：//经验证11个class并不能覆盖id的样式
 		/*权重为1*/
 		div{
 		}
@@ -96,32 +116,44 @@
 	如果权重相同，则最后定义的样式会起作用，但是应该避免这种情况出现
 
 	6. CSS哪些属性可以继承？
-		可继承的样式： font-size font-family color, UL LI DL DD DT;
-		不可继承的样式： border padding margin width height ;
+		可继承的样式：font-size font-family color, ul li dl dd dt;
+		不可继承的样式：border padding margin width height ;
 
 #css3相关#
-	1. @Font-face 加载服务器端的字体文件，让客户端显示客户端所没有安装的字体
+	1. @Font-face 
+		加载服务器端的字体文件，让客户端显示客户端所没有安装的字体
+
 	2. word-wrap & text-overflow
+		word-wrap 是否允许在单词内断句
+		word-break 决定使用何种方式来进行单词内断句
+
 	3. 文字特效(text-decoration text-shadow)
+
 	4. 多列布局(multi-column layout)
 		olumn-count：表示布局几列。
 		olumn-rule：表示列与列之间的间隔条的样式
 		olumn-gap：表示列于列之间的间隔
+
 	5. 边框和颜色（color, border）
 		透明度
 		渐变效果（Gradient）
 		阴影和反射（Shadow/Reflect）
+
 	6. 背景影响范围效果
 		* background-clip: border-box; 背景从 border 开始显示;
 		* background-clip: padding-box; 背景从 padding 开始显示;
 		* background-clip: content-box; 背景显 content 区域开始显示;
 		* background-clip: no-clip; 默认属性，等同于 border-box;
+
 	7. flex
+
 	8. 动画
 		Transitions
 		Transforms
 		Animation
+
 	9. 新增各种CSS选择器:not(.xxx)
+
 	10. 新增伪类
 		p:first-of-type选择属于其父元素的首个<p>元素的每个<p>元素
 		p:last-of-type选择属于其父元素的最后<p>元素的每个<p>元素
@@ -136,10 +168,16 @@
 		:checked单选框或复选框被选中
 
 #兼容相关#
-	1. position:fixed;在android下无效怎么处理？
+	1. position:fixed;在android下无效怎么处理?
+		header添加
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
 
 	2. Chrome中文界面下默认会将小于12px的文本强制按照12px显示,
-		可通过加入CSS属性 -webkit-text-size-adjust: none; 解决。
+		// -webkit-text-size-adjust: none; 已经不生效了
+		display: inline-block; /* Or block */
+		font - size: 12.5px;
+		-webkit - transform: scale(0.8);
+		transform: scale(0.8);
 
 	3. 各个浏览器盒模型表现不同
 		*{margin:0;padding:0;}
