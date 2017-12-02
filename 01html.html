@@ -155,7 +155,7 @@
 	不可替换元素：
 		HTML中大部分元素都是不可替换元素，其内容直接表现在浏览器。
 
-3.你真的了解HTML么？（雅虎面试题）
+*3.你真的了解HTML么？（雅虎面试题）
 	 有这么一段HTML，请挑毛病：
 	 <P>哥写的不是HTML，是寂寞。<br><br>我说：<br>不要迷恋哥，哥只是一个传说
 
@@ -181,7 +181,7 @@
 			<p> 哥写的不是<abbr title=”Hyper Text Markup Language”>HTML</abbr>，是寂寞。
 			<p><cite> 我</cite>说：<br> <q>不要迷恋哥，哥只是一个传说</q>
 
-4.请解释一下什么是语义化的HTML。
+*4.请解释一下什么是语义化的HTML。
 	内容使用特定标签
 	->通过标签就能大概了解整体页面的布局分布;
 	->即使在没有样式CSS情况下也以一种文档格式显示;
@@ -189,7 +189,7 @@
 	页面结构清晰
 	->便于维护。
 
-5.对WEB标准以及W3C的理解与认识？
+*5.对WEB标准以及W3C的理解与认识？
 	标签闭合
 	标签小写
 	不乱嵌套
@@ -203,7 +203,7 @@
 	提供打印版本而不需要复制内容
 	提高网站易用性
 
-6. html5
+*6. html5
 	 1>. html5有哪些新特性？如何处理HTML5新标签的浏览器兼容问题？如何区分HTML和HTML5？
 			* HTML5 现在已经不是 SGML 的子集，主要是关于图像，位置，存储，多任务等功能的增加。
 			绘画 canvas;
@@ -261,7 +261,7 @@
 	使用iframe之前需要考虑这两个缺点。如果需要使用iframe，最好是通过javascript
 	动态给iframe添加src属性值，这样可以绕开以上两个问题。
 
-8.	Label的作用是什么？是怎么用的？（加 for 或 包裹）
+*8.	Label的作用是什么？是怎么用的？（加 for 或 包裹）
 	label标签来定义表单控制间的关系,当用户选择该标签时，浏览器会自动将焦点转到和标签相关的表单控件上。
 	for
 		<label for="name">Number:</label>
@@ -269,32 +269,19 @@
 	包裹
 		<label>Date:<input type="text" name="date"/></label>
 
-9.	如何实现浏览器内多个标签页之间的通信?(阿里)
-	WebSocket、SharedWorker;
-	也可以调用localstorge、cookies等本地存储方式;
-		localstorge另一个浏览上下文里被添加、修改或删除时，它都会触发一个事件，
-		我们通过监听事件，控制它的值来进行页面信息通信;
-	注意quirks：Safari 在无痕模式下设置localstorge值时会抛出 QuotaExceededError 的异常;
-
-10.	webSocket如何兼容低浏览器？(阿里)
-	Adobe Flash Socket 、
-	ActiveX HTMLFile (IE) 、
-	基于 multipart 编码发送 XHR 、
-	基于长轮询的 XHR
-
-11. 页面可见性（Page Visibility）API 可以有哪些用途？
+9. 页面可见性（Page Visibility）API 可以有哪些用途？
 	通过visibilityState的值检测页面当前是否可见，以及打开网页的时间等;
 	在页面被切换到其他后台进程的时候，自动暂停音乐或视频的播放；
 
-12. 如何在页面上实现一个圆形的可点击区域？
+10. 如何在页面上实现一个圆形的可点击区域？
 	1、map+area或者svg
 	2、border-radius
 	3、纯js实现 需要求一个点在不在圆上简单算法、获取鼠标坐标等等
 
-13. 实现不使用 border 画出1px高的线，在不同浏览器的Quirksmode和CSSCompat模式下都能保持同一效果。
+11. 实现不使用 border 画出1px高的线，在不同浏览器的Quirksmode和CSSCompat模式下都能保持同一效果。
 	<div style="height:1px;overflow:hidden;background:red"></div>
 
-14. title与h1的区别、b与strong的区别、i与em的区别？
+12. title与h1的区别、b与strong的区别、i与em的区别？
 	title属性没有明确意义只表示是个标题，H1则表示层次明确的标题，对页面信息的抓取也有很大的影响:
 	strong是标明重点内容，有语气加强的含义，使用阅读设备阅读网络时：<strong>会重读，而<b>是展示强调内容。
 	i内容展示为斜体，em表示强调的文本;
@@ -305,6 +292,6 @@
 	应该准确使用语义样式标签, 但不能滥用, 如果不能确定时首选使用自然样式标签。
 
 
-12 .img标签上title与alt属性的区别是什么?
+13 .img标签上title与alt属性的区别是什么?
 　　alt 当图片不显示是 用文字代表。
 　　title 鼠标移上去显示的提示
