@@ -189,9 +189,21 @@ Nodejs>
 React
 	25 react-router 路由系统的实现原理？
 	26 React中如何解决第三方类库的问题?
+	5. 在谈谈当下流行的react到底是个什么东东，解决了什么问题；
+	组件化
+	虚拟dom，性能
+	配合单向数据流易于维护
 
 Underscore 
 	27对哪些 JS 原生对象进行了扩展以及提供了哪些好用的函数方法？
 
+Node
+	1. Nodejs是否了解过？到什么程度？说说个人的理解和看法
+
 8. 谈谈你对其他前端框架或者前端库的了解，
 	underscore，jquery，backbone，angular，requirejs，seajs，bootstrap，flux，knockout...；
+
+16. 你使用过那些Javascript库？
+	jquery seajs yui
+
+36. 常使用的库有哪些？常用的前端开发工具？开发过什么应用或组件？

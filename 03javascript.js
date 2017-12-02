@@ -1,5 +1,3 @@
-
-
 3.继承
 	1>.	Javascript继承有哪两种形式？你能解释一下JavaScript中的继承是如何工作的吗？
 		子构造函数中执行父构造函数，并用call\apply改变this
@@ -122,6 +120,7 @@
 		}
 		var sayAlert = say667();
 		sayAlert()//执行结果应该弹出的667
+
 7.数据类型
 	1>.	Javascript的数据类型都有什么？
 		基本数据类型：String, Boolean, Number, Undefined, Null
@@ -156,48 +155,7 @@
 		原始数据类型直接存储在栈(stack)中的简单数据段，占据空间小、大小固定，属于被频繁使用数据，所以放入栈中存储；
 		引用数据类型存储在堆(heap)中的对象,占据空间大、大小不固定,如果存储在栈中，将会影响程序运行的性能；引用数据类型在栈中存储了指针，该指针指向堆中该实体的起始地址。当解释器寻找引用值时，会首先检索其
 		在栈中的地址，取得地址后从堆中获得实体
-8.cookie
-	1>. 简述cookie操作以及cookie的属性
-	2>.	请描述一下 cookies，sessionStorage 和 localStorage 的区别？
-		cookie是网站为了标示用户身份而储存在用户本地终端（Client Side）上的数据（通常经过加密）。
-		cookie数据始终在同源的http请求中携带（即使不需要），记会在浏览器和服务器间来回传递。
-		sessionStorage和localStorage不会自动把数据发给服务器，仅在本地保存。
 
-		存储大小：
-			cookie数据大小不能超过4k。
-			sessionStorage和localStorage 虽然也有存储大小的限制，但比cookie大得多，可以达到5M或更大。
-
-		有期时间：
-			localStorage存储持久数据，浏览器关闭后数据不丢失除非主动删除数据；
-			sessionStorage数据在当前浏览器窗口关闭后自动删除。
-			cookie设置的cookie过期时间之前一直有效，即使窗口或浏览器关闭
-9.IE和FireFox的兼容性都知道哪些？
-		1>.IE与FF脚本兼容性问题
-			obj.addEventListener(sEv, fn, false);
-			obj.attachEvent('on'+sEv,fn);
-			detachevet
-			removeEventListener
-			DOMContentLoaded
-			onreadystatechangecomplete
-			DOMMouseScroll FF
-			onmousewheel 非FF
-			event.wheelDelta 上滚120 下-120
-			event.detail 上滚-3 下3
-			obj.getCurrentStyle[attr]
-			getComputedStyle(obj,false)[attr]
-			XMLHttpRequest
-			ActiveXObject('Mircorsoft.XMLHttp')
-			FF本地能设置读取cookie 其他不行
-			eventev
-			事件源
-			srcElement||target
-			toElement||relatedTarget
-			obj.setCapture();只有ie认
-			obj.releaseCapture();
-		2>.IE和标准下有哪些兼容性的写法
-			Var ev = ev || window.event
-			document.documentElement.clientWidth || document.body.clientWidth
-			Var target = ev.srcElement||ev.target
 10. DOM操作（添加、移除、移动、复制、创建和查找结点）——基础题，一般不会问
 	1）创建新节点
 	createDocumentFragment()//创建一个DOM片段
@@ -216,8 +174,10 @@
 		obj.innersetBefore
 		obj.replaceChild
 		obj.removeChild
+
 11. Javascript是一门什么样的语言，它有哪些特点？
 	没有标准答案
+
 12.	事件
 	1>.Javascript的事件流模型都有什么？
 		“事件冒泡”：事件开始由最具体的元素接受，然后逐级向上传播
@@ -254,6 +214,7 @@
 	JSON对象转换为JSON字符串：
 	var last=obj.toJSONString();
 	var last=JSON.stringify(obj);
+
 14.	Javascript中callee和caller的作用？
 	答案：
 	caller是返回一个对函数的引用，该函数调用了当前函数；
@@ -433,7 +394,7 @@
 	当需要从局部函数查找某一属性或方法时，如果当前作用域没有找到，就会上溯到上层作用域查找，
 	直至全局函数，这种组织形式就是作用域链。
 
-26.eval是做什么的？
+26. eval是做什么的？
 它的功能是把对应的字符串解析成JS代码并运行；
 应该避免使用eval，不安全，非常耗性能（2次，一次解析成js语句，一次执行）。
 由JSON字符串转换为JSON对象的时候可以用eval，var obj =eval('('+ str +')');
@@ -563,6 +524,7 @@ jsonp、 iframe、window.name、window.postMessage、服务器上设置代理页
 			b.doSomething()
 			// ...
 		})
+
 39.异步加载JS的方式有哪些？
 (1) defer，只支持IE
 (2) async：
@@ -591,3 +553,26 @@ jsonp、 iframe、window.name、window.postMessage、服务器上设置代理页
 46.把 Script 标签 放在页面的最底部的body封闭之前 和封闭之后有什么区别？浏览器会如何解析它们？
 
 
+47. 我们给一个dom同时绑定两个点击事件，一个用捕获，一个用冒泡。
+	会执行几次事件?2
+	会先执行冒泡还是捕获?捕获
+	父元素捕获
+	子元素冒泡
+	子元素捕获
+	父元素冒泡
+	var btn = document.querySelector('button');
+	var div = document.querySelector('div');
+
+	btn.addEventListener('click', function(){
+		console.log('bubble','btn');
+	},false);
+	btn.addEventListener('click', function(){
+		console.log('capture','btn');
+	},true);
+
+	div.addEventListener('click', function(){
+		console.log('bubble','div');
+	},false);
+	div.addEventListener('click', function(){
+		console.log('capture','div');
+	},true);

@@ -11,3 +11,7 @@
 	
 3. ECMAScript6 怎么写class，为什么会出现class这种东西?
 	原型写法与普通面向对象差别比较大
+
+4. es3，es5，es6的区别；
+	es3=>es5 语法糖
+	es5=>es6 模块 export import

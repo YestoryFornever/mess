@@ -44,29 +44,82 @@
 	需要设置 cancelBubble 为 true，
 	Mozzilla 中，需要调用 stopPropagation();
 
-4. 把 Script 标签放在页面的最底部的body封闭之前和封闭之后有什么区别？浏览器会如何解析它们？
-	执行顺序
+9.IE和FireFox的兼容性都知道哪些？
+	1>.IE与FF脚本兼容性问题
+		obj.addEventListener(sEv, fn, false);
+		obj.attachEvent('on'+sEv,fn);
+		detachevet
+		removeEventListener
+		DOMContentLoaded
+		onreadystatechangecomplete
+		DOMMouseScroll FF
+		onmousewheel 非FF
+		event.wheelDelta 上滚120 下-120
+		event.detail 上滚-3 下3
+		obj.getCurrentStyle[attr]
+		getComputedStyle(obj,false)[attr]
+		XMLHttpRequest
+		ActiveXObject('Mircorsoft.XMLHttp')
+		FF本地能设置读取cookie 其他不行
+		eventev
+		事件源
+		srcElement||target
+		toElement||relatedTarget
+		obj.setCapture();只有ie认
+		obj.releaseCapture();
+	2>.IE和标准下有哪些兼容性的写法
+		Var ev = ev || window.event
+		document.documentElement.clientWidth || document.body.clientWidth
+		Var target = ev.srcElement||ev.target
 
-5. 我们给一个dom同时绑定两个点击事件，一个用捕获，一个用冒泡。
-	会执行几次事件?2
-	会先执行冒泡还是捕获?捕获
-	父元素捕获
-	子元素冒泡
-	子元素捕获
-	父元素冒泡
-	var btn = document.querySelector('button');
-	var div = document.querySelector('div');
-
-	btn.addEventListener('click', function(){
-		console.log('bubble','btn');
-	},false);
-	btn.addEventListener('click', function(){
-		console.log('capture','btn');
-	},true);
-
-	div.addEventListener('click', function(){
-		console.log('bubble','div');
-	},false);
-	div.addEventListener('click', function(){
-		console.log('capture','div');
-	},true);
+#css兼容相关#
+		1. position:fixed;在android下无效怎么处理?
+			header添加
+			<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+	
+		2. Chrome中文界面下默认会将小于12px的文本强制按照12px显示,
+			// -webkit-text-size-adjust: none; 已经不生效了
+			display: inline-block; /* Or block */
+			font - size: 12.5px;
+			-webkit - transform: scale(0.8);
+			transform: scale(0.8);
+	
+		3. 各个浏览器盒模型表现不同
+			*{margin:0;padding:0;}
+	
+		4. z-index不生效
+			给父级添加position:relative
+	
+		5. IE下,even对象有x,y属性,但是没有pageX,pageY属性;
+			Firefox下,event对象有pageX,pageY属性,但是没有x,y属性。
+	
+		6. 写出几种IEBUG的解决方法
+			1)双倍边距BUG float引起的 使用 {_display:inline;}
+				将其转化为行内属性。(_这个符号只有ie6会识别)
+	
+			2)超链接hover
+				被点击访问过的超链接样式不在具有hover和active了解决方法是改变CSS属性的排列顺序:
+				L-V-H-A :a:link {} a:visited {} a:hover {} a:active {}
+	
+			3）渐进识别的方式，从总体中逐渐排除局部。
+				.xxx{
+					background-color:#f1ee18;/*所有识别*/
+					.background-color:#00deff\9; /*IE6、7、8识别*/
+					+background-color:#a200ff;/*IE6、7识别*/
+					_background-color:#1e0bd1;/*IE6识别*/
+				}
+			4)png24位的图片在iE6浏览器上出现背景，解决方案是做成PNG8
+	
+			5)min-height 最小高度 !Important 解决
+	
+			6)为什么没有办法定义 1 px 左右的宽度容器
+	
+			(IE6默认的行高造成的，使用{over:hidden,zoom:0.08;line-height:1px})
+	
+			7)ie 6 不支持!important
+		
+		7. 介绍所知道的CSS hack技巧（如：_, *, +, \9, !important）
+			_marging //IE 6
+			+margin //IE 7
+			margin:0 auto \9 //所有Ie
+			margin \0 //IE 8

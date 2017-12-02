@@ -1,3 +1,5 @@
+#浏览器兼容相关见browser#
+
 #文档流相关（display / float / position）#
 	1. display有哪些值？说明他们的作用。
 		none			不显示。
@@ -167,60 +169,28 @@
 		:disabled 控制表单控件的禁用状态
 		:checked单选框或复选框被选中
 
-#兼容相关#
-	1. position:fixed;在android下无效怎么处理?
-		header添加
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
-
-	2. Chrome中文界面下默认会将小于12px的文本强制按照12px显示,
-		// -webkit-text-size-adjust: none; 已经不生效了
-		display: inline-block; /* Or block */
-		font - size: 12.5px;
-		-webkit - transform: scale(0.8);
-		transform: scale(0.8);
-
-	3. 各个浏览器盒模型表现不同
-		*{margin:0;padding:0;}
-
-	4. z-index不生效
-		给父级添加position:relative
-
-	5. IE下,even对象有x,y属性,但是没有pageX,pageY属性;
-		Firefox下,event对象有pageX,pageY属性,但是没有x,y属性。
-
-	6. 写出几种IEBUG的解决方法
-		1)双倍边距BUG float引起的 使用 {_display:inline;}
-			将其转化为行内属性。(_这个符号只有ie6会识别)
-
-		2)超链接hover
-			被点击访问过的超链接样式不在具有hover和active了解决方法是改变CSS属性的排列顺序:
-			L-V-H-A :a:link {} a:visited {} a:hover {} a:active {}
-
-		3）渐进识别的方式，从总体中逐渐排除局部。
-			.xxx{
-				background-color:#f1ee18;/*所有识别*/
-				.background-color:#00deff\9; /*IE6、7、8识别*/
-				+background-color:#a200ff;/*IE6、7识别*/
-				_background-color:#1e0bd1;/*IE6识别*/
-			}
-		4)png24位的图片在iE6浏览器上出现背景，解决方案是做成PNG8
-
-		5)min-height 最小高度 !Important 解决
-
-		6)为什么没有办法定义 1 px 左右的宽度容器
-
-		(IE6默认的行高造成的，使用{over:hidden,zoom:0.08;line-height:1px})
-
-		7)ie 6 不支持!important
-	
-	7. 介绍所知道的CSS hack技巧（如：_, *, +, \9, !important）
-		_marging //IE 6
-		+margin //IE 7
-		margin:0 auto \9 //所有Ie
-		margin \0 //IE 8
-
 #性能相关#
-	1. CSS优化、提高性能的方法有哪些？
+	1，减少css嵌套，最好不要套三层以上，一般情况下块级元素加上类，里面的内联元素不用加，css写的时候块级class套内联tag，这样不仅可以减少css文件大小，还能减少性能浪费。
+	
+	2，不要在ID选择器前面进行嵌套，ID本来就是唯一的而且人家权值那么大，前方嵌套完全是浪费性能。
+	
+	3，建立公共样式类，把长段相同样式提取出来作为公共类使用，比如我们常用的清除浮动，单行超出显示省略号等等等，当然如果你使用sass，继承会让你更加方便，同时我是比较提倡使用sass的，之后肯定也会写一篇sass的博客。
+	
+	4，缩写css，其中包括缩写maigin，padding，颜色值等等，要是有两个或者两个以上的margin-****，写成margin: * * * *有助于文件大小。
+	
+	5，减少通配符*或者类似[hidden="true"]这类选择器的使用，挨个查找所有...这性能能好吗？当然重置样式这些必须的东西是不能少的。
+	
+	6，有些人喜欢在类名前面加上标签名：p.ty_p 来进行更加精确的定位，但是这样往往效率更差，类名应该在全局范围除非公用是唯一的，所以这种做法是应该便面的。
+	
+	7，巧妙运用css的继承机制，在css中很多属性是可以继承的比如颜色字体等等，父节点定义了，子节点就无需定义。
+	
+	8，拆分出公共css文件，对于比较大的项目我们可以将大部分页面的公共结构的样式提取出来放到单独css文件里，这样一次下载后就放到缓存里，当然这种做法会增加请求，具体做法应以实际情况而定。
+	
+	9，不用css表达式，可能大家接触比较少，但是要记住的是无论我们怎么炫酷，到了最后都是静态的，所以表达式只是让你的代码显得更加炫酷，但是他对性能的浪费可能是超乎你的想象的，因为它并不只是计算一次，一些小的事件可能都会增加它为了有效准确而进行计算求值的次数。
+	
+	10，少用css rest，可能你会觉得重置样式是规范，但是其实其中有很多的操作是不必要不友好的，有需求有兴趣的朋友可以选择normolize.css
+	
+	11，cssSprite，合成所有icon图片，用宽高加上bacgroud-position的背景图方式显现出我们要的icon图，这是一种十分实用的技巧，极大减少了http请求。
 
 #预处理器/后处理器#
 	1. 使用 CSS 预处理器吗？喜欢那个？
@@ -369,3 +339,5 @@
 	23. overflow: scroll时不能平滑滚动的问题怎么处理？
 
 	24. 有一个高度自适应的div，里面有两个div，一个高度100px，希望另一个填满剩下的高度。
+
+	4. 瀑布流或者流式布局是否有了解？（是否是css相关）

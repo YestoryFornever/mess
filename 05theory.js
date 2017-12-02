@@ -1,4 +1,4 @@
-#AJAX#
+#AJAX相关#
     1.http状态码有那些？分别代表是什么意思？
     1**(信息类)：表示接收到请求并且继续处理
         100——客户必须继续发出请求
@@ -152,19 +152,20 @@
     ActiveX HTMLFile (IE) 、
     基于 multipart 编码发送 XHR 、
     基于长轮询的 XHR
+
+    8.cookie
+	1>. 简述cookie操作以及cookie的属性
+	2>.	请描述一下 cookies，sessionStorage 和 localStorage 的区别？
+		cookie是网站为了标示用户身份而储存在用户本地终端（Client Side）上的数据（通常经过加密）。
+		cookie数据始终在同源的http请求中携带（即使不需要），记会在浏览器和服务器间来回传递。
+		sessionStorage和localStorage不会自动把数据发给服务器，仅在本地保存。
+
+		存储大小：
+			cookie数据大小不能超过4k。
+			sessionStorage和localStorage 虽然也有存储大小的限制，但比cookie大得多，可以达到5M或更大。
+
+		有期时间：
+			localStorage存储持久数据，浏览器关闭后数据不丢失除非主动删除数据；
+			sessionStorage数据在当前浏览器窗口关闭后自动删除。
+			cookie设置的cookie过期时间之前一直有效，即使窗口或浏览器关闭
     
-#理论#
-    1 .前端页面由哪三层构成，分别是什么?作用是什么?
-        结构层 HTML 表示层 CSS 行为层 js
-    
-    2. 对BFC规范(块级格式化上下文：block formatting context)的理解？
-        （W3C CSS 2.1 规范中的一个概念,它是一个独立容器，决定了元素如何对其内容进行定位,以及与其他元素的关系和相互作用。）
-        一个页面是由很多个 Box 组成的,元素的类型和 display 属性,决定了这个 Box 的类型。
-        不同类型的 Box,会参与不同的 Formatting Context（决定如何渲染文档的容器）,因此Box内的元素会以不同的方式渲染,也就是说BFC内部的元素和外部的元素不会互相影响。
-    
-    3. 什么是响应式设计？响应式设计的基本原理是什么？如何兼容低版本的IE？
-    
-    4. 如果需要手动写动画，你认为最小时间间隔是多久，为什么？（阿里）
-        多数显示器默认频率是60Hz，即1秒刷新60次，所以理论上最小间隔为1/60＊1000ms ＝ 16.7ms
-    
-    5. png、jpg、gif 这些图片格式解释一下，分别什么时候用。有没有了解过webp？
