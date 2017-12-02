@@ -14,6 +14,7 @@ jQuery>
 	2.	jquery.extend 与 jquery.fn.extend的区别？
 		jquery.extend 		=>		$.fn();
 		jquery.fn.extend 	=>		$("x").fn();
+		
 	3.	说说基本架构或者Jquery.fn.init中都做了哪些判断
 		if ( !selector ) {
 			//处理 $(""), $(null), $(undefined), $(false)
@@ -200,10 +201,10 @@ Underscore
 Node
 	1. Nodejs是否了解过？到什么程度？说说个人的理解和看法
 
-8. 谈谈你对其他前端框架或者前端库的了解，
-	underscore，jquery，backbone，angular，requirejs，seajs，bootstrap，flux，knockout...；
+	8. 谈谈你对其他前端框架或者前端库的了解，
+		underscore，jquery，backbone，angular，requirejs，seajs，bootstrap，flux，knockout...；
 
-16. 你使用过那些Javascript库？
-	jquery seajs yui
+	16. 你使用过那些Javascript库？
+		jquery seajs yui
 
-36. 常使用的库有哪些？常用的前端开发工具？开发过什么应用或组件？
+	36. 常使用的库有哪些？常用的前端开发工具？开发过什么应用或组件？
