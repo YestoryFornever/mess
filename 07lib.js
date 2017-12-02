@@ -192,3 +192,6 @@ React
 
 Underscore 
 	27对哪些 JS 原生对象进行了扩展以及提供了哪些好用的函数方法？
+
+8. 谈谈你对其他前端框架或者前端库的了解，
+	underscore，jquery，backbone，angular，requirejs，seajs，bootstrap，flux，knockout...；
