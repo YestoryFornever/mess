@@ -64,9 +64,14 @@
 	hasOwnProerty用于检查某一属性是不是存在于对象本身，继承来的父亲的属性不算．
 	isEnumerable用来检测某一属性是否可遍历，也就是能不能用for..in循环来取到.
 
-11. replace
+11. 
 
 12. 正则
+	邮箱验证
+	/^\w+@\w+.com(.cn)?$/
+	URL验证
+	贪婪匹配
+	懒惰匹配
 
 13. javascript 正则相关方法
 	match【str.match(RegExp)】
@@ -102,15 +107,18 @@
 		["a", "b", "c", "d"]
 
 14. 柯里化函数
-	seven(times(five()))
 	function five(x){
-		return arguments.length>0?x(5):5;
+		return arguments.length>0?x(5):5
+	}
+	function seven(x){
+		return arguments.length>0?x(7):7;
 	}
 	function minus(x) {
 		return function (y) {
 			return y - x;
 		}
 	}
+	seven(minus(five()))
 
 15. jquery
 	见lib
