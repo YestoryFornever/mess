@@ -1,4 +1,68 @@
-突击：
+(function () { console.log("(" + arguments.callee.toString() + ")();") })();
+
+function addEvent(dom, type, fn) {
+	if (dom.addEventListener) {
+		dom.addEventListener(type, fn);
+	} else if (dom.attachEvent) {
+		dom.attachEvent("on" + type, fn);
+	} else {
+		dom["on" + type] = fn;
+	}
+}
+
+function fnStyle(dom, style, value) {
+	if (!dom) return;
+	if (value) {
+		dom.style[style] = value;
+	} else {
+		if (dom.currentStyle) {
+			var _style = style == "float" ? "styleFloat" : style;
+			return dom.currentStyle[_style.replace(/(-\w)/g, function (match) {
+				return match[1].toUpperCase();
+			})];
+			/*return dom.currentStyle[_style.replace(/-[a-z]/g, function() { 
+				return arguments[0].charAt(1).toUpperCase();//转为驼峰式
+			})];*/
+		} else {
+			return document.defaultView.getComputedStyle(dom, null)[style];
+			//或return window.getComputedStyle(dom,null)[style];
+			//或return window.getComputedStyle(dom,null).getPropertyValue(style);
+		}
+	}
+}
+
+if (!Object.prototype.clone) {//复制引用型数据
+	Object.prototype.clone = function () {
+		var o = this.constructor === Array ? [] : {};
+		for (var e in this) {
+			o[e] = typeof this[e] === "object" ? this[e].clone() : this[e];
+		}
+		return o;
+	}
+}
+
+function Dog() {
+	this.wow = function () {
+		console.log("wow");
+	}
+	this.yelp = function () {
+		this.wow();
+	}
+}
+function MadDog() {
+	this.yelp = function () {
+		var self = this;
+		setInterval(function () {
+			self.wow();
+		}, 500);
+	}
+}
+var ADog = new Dog();
+MadDog.prototype = ADog;
+var AMadDog = new MadDog();
+AMadDog.yelp();
+
+========================================================================================================
 
 1. 前端模块化
 	模块化思想
@@ -8,11 +72,11 @@
 2. MVC
 	let M={},V={},C={};
 	M.data = 'hello world';
-	V.render = function(x){alert(x.data);}
-	C.action = function(obj){
-		obj.render();
+	V.render = function(){alert(M.data);}
+	C.click = function(){
+		V.render();
 	}
-	C.action(V);
+	C.click();
 
 3. css position float display
 	if(display==none){
@@ -42,7 +106,7 @@
 	javascript 6 闭包
 	闭包这个术语，无论中文翻译还是英文解释都太２Ｂ了，我必须骂人，因为它什么其实都不是．
 	非要讲它是什么的话，两个字函数，
-	更多字嵌套函数的父子自我引用关系．
+	更多字,嵌套函数的父子自我引用关系．
 	所有函数都是闭包．通俗的说，闭包就是作用域范围，因为js是函数作用域，所以函数就是闭包．
 	全局函数的作用域范围就是全局，所以无须讨论．
 	更多的应用其实是在内嵌函数，这就会涉及到内嵌作用域，或者叫作用域链．
@@ -56,55 +120,7 @@
 
 8. get post 区别
 
-9. javascript this
 
-10. defineProperty, hasOwnProperty, isEnumerable都是做什么用的？
-	参考答案：
-	Object.defineProperty(obj, prop, descriptor)用来给对象定义属性,有value,writable,configurable,enumerable,set/get等.
-	hasOwnProerty用于检查某一属性是不是存在于对象本身，继承来的父亲的属性不算．
-	isEnumerable用来检测某一属性是否可遍历，也就是能不能用for..in循环来取到.
-
-11. 
-
-12. 正则
-	邮箱验证
-	/^\w+@\w+.com(.cn)?$/
-	URL验证
-	贪婪匹配
-	懒惰匹配
-
-13. javascript 正则相关方法
-	match【str.match(RegExp)】
-		找到字符串中一个或多个（正则含有g时）匹配正则表达式的字符串
-		没有找到会返回null
-		demo:"1 plus 2 equal 3".match(/\d+/g)将返回['1','2','3']
-
-	exec【RegExp.exec(str)】
-		返回数组，数组第一项为匹配的字符串
-		第二项往后是匹配的子字符串
-		数组带有两个属性
-		index 匹配到的索引
-		input 被匹配的字符串
-		/pl(u)(s)/.exec("1 plus 2 equal 3")
-		["plus", "u", "s", index: 2, input: "1 plus 2 equal 3"]
-
-	test【RegExp.test(str)】
-		检测str是否匹配RegExp
-		/a/.test("abc")
-		true
-	
-	search 【string.search(RegExp)】
-		匹配string中符合RegExp的子字符串的位置，如果没找到返回-1
-		'abc'.search(/b/)
-		1
-	
-	replace 【string.search(RegExp)】
-		'1a2b3c4d'.replace(/\d/g,(item,index,all)=>{return 'x'})
-		"xaxbxcxd"
-	
-	split 【string.search(RegExp)】
-		'a b c d'.split(/\s/)
-		["a", "b", "c", "d"]
 
 14. 柯里化函数
 	function five(x){
