@@ -135,6 +135,7 @@
 			}
 		}
 	}
+	
 15	*已知数组var stringArray = ["a", "b", "c", "d"]，Alert出"a b c d"。
 	var stringArray = ["a", "b", "c", "d"];
 	console.log(stringArray.join(" "));

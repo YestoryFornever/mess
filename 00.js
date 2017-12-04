@@ -10,23 +10,23 @@ function addEvent(dom, type, fn) {
 	}
 }
 
-function fnStyle(dom, style, value) {
+function fnStyle(dom, key, val) {
 	if (!dom) return;
-	if (value) {
-		dom.style[style] = value;
+	if (val) {
+		dom.style[key] = val;
 	} else {
-		if (dom.currentStyle) {
-			var _style = style == "float" ? "styleFloat" : style;
-			return dom.currentStyle[_style.replace(/(-\w)/g, function (match) {
+		if (dom.currentStyle) {//IE
+			var _key = key == "float" ? "styleFloat" : key;
+			return dom.currentStyle[_key.replace(/(-\w)/g, function (match) {
 				return match[1].toUpperCase();
 			})];
-			/*return dom.currentStyle[_style.replace(/-[a-z]/g, function() { 
+			/*return dom.currentStyle[_key.replace(/-[a-z]/g, function() { 
 				return arguments[0].charAt(1).toUpperCase();//转为驼峰式
 			})];*/
-		} else {
-			return document.defaultView.getComputedStyle(dom, null)[style];
-			//或return window.getComputedStyle(dom,null)[style];
-			//或return window.getComputedStyle(dom,null).getPropertyValue(style);
+		} else {//其他
+			return document.defaultView.getComputedStyle(dom, null)[key];
+			//或return window.getComputedStyle(dom,null)[key];
+			//或return window.getComputedStyle(dom,null).getPropertyValue(key);
 		}
 	}
 }
@@ -41,7 +41,7 @@ if (!Object.prototype.clone) {//复制引用型数据
 	}
 }
 
-function Dog() {
+/* function Dog() {
 	this.wow = function () {
 		console.log("wow");
 	}
@@ -59,6 +59,26 @@ function MadDog() {
 }
 var ADog = new Dog();
 MadDog.prototype = ADog;
+var AMadDog = new MadDog();
+AMadDog.yelp(); */
+
+function Dog() { }
+Dog.prototype.wow = function () {
+	console.log("wow");
+}
+Dog.prototype.yelp = function () {
+	this.wow();
+}
+var ADog = new Dog();
+function MadDog() { }
+MadDog.prototype = ADog;
+MadDog.prototype.yelp = function () {
+	var self = this;
+	setInterval(function () {
+		self.wow();
+	}, 500);
+}
+
 var AMadDog = new MadDog();
 AMadDog.yelp();
 
