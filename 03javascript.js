@@ -275,7 +275,7 @@
 	顺序为
 	1参数(若未传入, 初始化为undefined)
 	2函数声明(若发生命名冲突, 会覆盖)
-	3变量声明(初始化变量值为undefined, 若发生命名冲突会忽略)
+	3变量声明(初始化变量值为undefined, 若发生命名冲突会忽略, 即原则上不使用 undefined 覆盖有效的值)
 	function fn(arg1, arg2) {
 		var arg3 = 0;
 		function fnX() { }
@@ -332,10 +332,10 @@
 			var a = 1;
 			function a() { };
 			alert(a);//1
-				>>
-				function a(x) {
-					return x;
-				}
+		>>
+			function a(x) {
+				return x;
+			}
 			var a;
 			alert(a);//function a(x){...
 		>>
@@ -374,28 +374,23 @@
 				var x = 1, y = z = 0;
 				console.log(x); console.log(y); console.log(z);//1 0 0
 			})();
-			console.log(z); console.log(y); console.log(x);//1 error error
+			console.log(z); console.log(y); console.log(x);//0 error error
 
 #正则#
 	1. 正则
 		邮箱验证
 			/^\w +@\w +.com(.cn) ? $ /
 				URL验证
-			贪婪匹配
+		贪婪匹配
 		懒惰匹配
 
 	2. javascript 正则相关方法
-		match【str.match(RegExp) 】
-			找到字符串中一个或多个（正则含有g时）匹配正则表达式的字符串
-			没有找到会返回null
-			demo: "1 plus 2 equal 3".match(/\d+/g)将返回['1', '2', '3']
-
 		exec【RegExp.exec(str) 】
 			返回数组，数组第一项为匹配的字符串
 			第二项往后是匹配的子字符串
 			数组带有两个属性
 			index 匹配到的索引
-		input 被匹配的字符串
+			input 被匹配的字符串
 			/ pl(u)(s) /.exec("1 plus 2 equal 3")
 			["plus", "u", "s", index: 2, input: "1 plus 2 equal 3"]
 
@@ -403,6 +398,11 @@
 			检测str是否匹配RegExp
 			/ a /.test("abc")
 			true
+
+		match【str.match(RegExp) 】
+			找到字符串中一个或多个（正则含有g时）匹配正则表达式的字符串
+			没有找到会返回null
+			demo: "1 plus 2 equal 3".match(/\d+/g)将返回['1', '2', '3']
 
 		search 【string.search(RegExp) 】
 			匹配string中符合RegExp的子字符串的位置，如果没找到返回 - 1
@@ -416,6 +416,7 @@
 		split 【string.search(RegExp) 】
 			'a b c d'.split(/\s/)
 			["a", "b", "c", "d"]
+
 #数据类型#
 	1. 判断执行方向（自左向右）
 		"a" == "a" == true
@@ -427,12 +428,12 @@
 		var a = { n: 1 }
 		var b = a;
 		a.x = a = { n: 2 }//全等于b.x = a = {n:2}
-		// (a.x) = (a = {n:2}) 
-		// 先计算(a.x)
-		// (已通过a.x计算好内存存放位置) = (a = {n:2})
-		// 再执行 (a = {n:2})
-		// a 指向了一个新的对象， 同时这个表达式返回这个对象
-		// 执行 (a.x先前计算出的内存位置) = 上面说的新的对象
+		a.x = a = { n: 2 }
+		// 先划分出内存，再进行赋值；
+		// 划分内存是先把a指向的内存开辟出一个x属性，值为undefined
+		// 赋值运算自右向左
+		// a = {n:2} 此时a已经指向其他地址
+		// 再执行 b.x = a;
 		console.log(a.x);//undefind
 		console.log(b.x);//{n:2}
 		console.log(b.x === a); // true
@@ -548,10 +549,9 @@
 		Asynchronous Module Definition，异步模块定义，所有的模块将被异步加载，模块加载不影响后面语句运行。所有依赖某些模块的语句均放置在回调函数中。
 
 		区别：
-
-		1. 对于依赖的模块，AMD 是提前执行，CMD 是延迟执行。不过 RequireJS 从 2.0 开始，也改成可以延迟执行（根据写法不同，处理方式不同）。CMD 推崇 as lazy as possible.
-					2. CMD 推崇依赖就近，AMD 推崇依赖前置。看代码：
-
+		amd: require	依赖前置	提前执行【不过 RequireJS 从 2.0 开始，也改成可以延迟执行（根据写法不同，处理方式不同）】
+		cmd: import		依赖就近	延迟执行
+		
 		// CMD
 		define(function (require, exports, module) {
 			var a = require('./a')
