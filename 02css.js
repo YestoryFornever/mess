@@ -68,6 +68,8 @@
 
 	2. 低版本IE的盒子模型有什么不同的？
 		IE的content部分把 border 和 padding计算了进去;
+		W3C标准盒子模型的宽高（width / height）不包含padding和border;
+		IE盒子模型的宽高（width / height）包含padding和border。
 
 #选择器相关#
 
@@ -191,6 +193,41 @@
 	10，少用css rest，可能你会觉得重置样式是规范，但是其实其中有很多的操作是不必要不友好的，有需求有兴趣的朋友可以选择normolize.css
 	
 	11，cssSprite，合成所有icon图片，用宽高加上bacgroud-position的背景图方式显现出我们要的icon图，这是一种十分实用的技巧，极大减少了http请求。
+	修复解析错误（Parsing errors should be fixed）
+		避免使用多类选择符（Don't use adjoining classes）
+			IE6以及更古老的浏览器对类似.foo.bar的多类选择符解析不正确，
+			参考IE6下的多类选择符一文。
+		移除空的css规则（Remove empty rules）
+			这个规则不包含任何属性，类似：.foo { }空规则的产生原因一般来说是为了预留样式。
+			去除这些空规则无疑能减少css文档体积。
+		正确使用display的属性（Use correct properties for a display）
+			由于display的作用，某些样式组合会无效，徒增样式体积的同时也影响解析性能。
+			CSS Lint会检查一下几点：display:inline后不应该再使用width、height、margin、padding以及float。
+			display:inline-block后不应该再使用float。
+			display:block后不应该再使用vertical-align。
+			display:table-*后不应该再使用margin或者float。
+		不滥用浮动（Don't use too many floats）
+			虽然浮动不可避免，但不可否认很多css bug是由于浮动而引起。
+			CSS Lint一旦检测出样式文件中有超过10次的浮动便会提示警告。
+		不滥用web字体（Don't use too many web fonts）
+			对于中文网站来说Web Fonts可能很陌生，国外却很流行。
+			web fonts通常体积庞大，
+			而且一些浏览器在下载web fonts时会阻塞页面渲染损伤性能。
+		不声明过多的font-size（Don't use too may font- size declarations）
+			这是设计层面的问题，设计精良的页面不会有过多的font - size声明。
+		不在选择符中使用ID标识符（Don't use IDs in selectors）
+			主要考虑到样式重用性以及与页面的耦合性。
+		不给h1~h6元素定义过多的样式（Don't qualify headings）
+			全站统一定义一遍heading元素即可，若需额外定制样式，可使用其他选择符作为代替。
+		不重复定义h1~h6元素（Heading styles should only be defined once）
+		值为0时不需要任何单位（Zero values don't need units）
+		标准化各种浏览器前缀（Vendor prefixed properties should also have the standard）
+			通常将浏览器前缀置于前面，将标准样式属性置于最后，
+			类似：.foo {-moz-border-radius: 5px;border-radius: 5px; }
+		使用CSS渐变等高级特性，需指定所有浏览器的前缀（CSS gradients require all browser prefixes）
+		避免让选择符看起来像正则表达式（Avoid selectors that look like regular expressions）
+			CSS3添加了一些类似~=等复杂属性，也不是所有浏览器都支持，需谨慎使用。
+		遵守盒模型规则（Beware of broken box models）
 
 #预处理器/后处理器#
 	1. 使用 CSS 预处理器吗？喜欢那个？
