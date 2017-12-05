@@ -1,5 +1,5 @@
 (function () { console.log("(" + arguments.callee.toString() + ")();") })();
-
+-----------------------------------------------
 function addEvent(dom, type, fn) {
 	if (dom.addEventListener) {
 		dom.addEventListener(type, fn);
@@ -9,7 +9,7 @@ function addEvent(dom, type, fn) {
 		dom["on" + type] = fn;
 	}
 }
-
+-----------------------------------------------
 function fnStyle(dom, key, val) {
 	if (!dom) return;
 	if (val) {
@@ -30,7 +30,7 @@ function fnStyle(dom, key, val) {
 		}
 	}
 }
-
+-----------------------------------------------
 if (!Object.prototype.clone) {//复制引用型数据
 	Object.prototype.clone = function () {
 		var o = this.constructor === Array ? [] : {};
@@ -40,7 +40,22 @@ if (!Object.prototype.clone) {//复制引用型数据
 		return o;
 	}
 }
+-----------------------------------------------
+constructor
+	let b = 2;
+	b.constructor === Number
 
+typeof(所有引用型的对象都返回"object",无法区分比如 Array、Object)
+	"undefined"
+	"boolean"
+	"number"
+	"string"
+	"object"
+
+instanceof(判断是否是某构造函数的实例)
+	AMadDog instanceof Dog
+	return true
+-----------------------------------------------
 /* function Dog() {
 	this.wow = function () {
 		console.log("wow");
@@ -81,7 +96,45 @@ MadDog.prototype.yelp = function () {
 
 var AMadDog = new MadDog();
 AMadDog.yelp();
+-----------------------------------------------
+	排序
+		function(arr) {
+			return arr.sort((a, b) => a - b);
+		}
+		冒泡
+			function(arr) {
+				for (let i = 0; i < arr.length; i++) {
+					for (let j = 0; j < arr.length - 1 - i; j++) {
+						if (arr[j] > arr[j + 1]) {
+							let tmp = arr[j];
+							arr[j] = arr[j + 1];
+							arr[j + 1] = tmp;
+						}
+					}
+				}
+			}
+		快速排序
+			Array.prototype.quick = function () {
+				var len = this.length;
+				if (len <= 1)
+					return this.slice(0);
+				var left = [];
+				var right = [];
+				var mid = [this[0]];
+				for (var i = 1; i < len; i++)
+					if (this[i] < mid[0])
+						left.push(this[i]);
+					else
+						right.push(this[i]);
+				return left.quick().concat(mid.concat(right.quick()));
+			};
 
+			var arr = [5, 3, 7, 4, 1, 9, 8, 6, 2];
+			arr = arr.quick();
+			for (i = 0; i < arr.length; i++)
+				document.body.innerHTML += arr[i] + " ";
+			document.body.innerHTML += "<br>";
+-----------------------------------------------
 ========================================================================================================
 
 1. 前端模块化
@@ -139,8 +192,6 @@ AMadDog.yelp();
 7. slice substr substring splice
 
 8. get post 区别
-
-
 
 14. 柯里化函数
 	function five(x){

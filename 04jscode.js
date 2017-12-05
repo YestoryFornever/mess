@@ -867,37 +867,11 @@
 		return str == str.split('').reverse().join('');
 	}
 
-快速排序
-	Array.prototype.quick_sort = function() {
-		var len = this.length;
-		if (len <= 1)
-			return this.slice(0);
-		var left = [];
-		var right = [];
-		var mid = [this[0]];
-		for (var i = 1; i < len; i++)
-			if (this[i] < mid[0])
-				left.push(this[i]);
-			else
-				right.push(this[i]);
-		return left.quick_sort().concat(mid.concat(right.quick_sort()));
-	};
-
-	var arr = [5, 3, 7, 4, 1, 9, 8, 6, 2];
-	arr = arr.quick_sort();
-	for (i = 0; i < arr.length; i++)
-		document.body.innerHTML += arr[i] + " ";
-	document.body.innerHTML += "<br>";
-
 不借助临时变量，进行两个整数的交换
-	function swap(a , b) {  
-	b = b - a;
-	a = a + b;
-	b = a - b;
-	return [a,b];
-	}
- 
-	module.exports = swap;
+	b = a+b;
+	a = b-a;
+	b = b-a;
+
 实现类似getElementByClassName
 	function queryClassName(node, name) {  
 	var starts = '(^|[ \n\r\t\f])',
@@ -922,21 +896,43 @@
 	}
 
 排序
-	function(arr){
-		return arr.sort((a,b)=>a-b);
-	}
+		function(arr){
+			return arr.sort((a,b)=>a-b);
+		}
 	冒泡
-	function(arr){
-		for(let i=0;i<arr.length;i++){
-			for(let j=0;j<arr.length-1-i;j++){
-				if(arr[j]>arr[j+1]){
-					let tmp = arr[j];
-					arr[j] = arr[j+1];
-					arr[j+1] = tmp;
+		function(arr){
+			for(let i=0;i<arr.length;i++){
+				for(let j=0;j<arr.length-1-i;j++){
+					if(arr[j]>arr[j+1]){
+						let tmp = arr[j];
+						arr[j] = arr[j+1];
+						arr[j+1] = tmp;
+					}
 				}
 			}
 		}
-	}
+	快速排序
+		Array.prototype.quick_sort = function() {
+			var len = this.length;
+			if (len <= 1)
+				return this.slice(0);
+			var left = [];
+			var right = [];
+			var mid = [this[0]];
+			for (var i = 1; i < len; i++)
+				if (this[i] < mid[0])
+					left.push(this[i]);
+				else
+					right.push(this[i]);
+			return left.quick_sort().concat(mid.concat(right.quick_sort()));
+		};
+
+		var arr = [5, 3, 7, 4, 1, 9, 8, 6, 2];
+		arr = arr.quick_sort();
+		for (i = 0; i < arr.length; i++)
+			document.body.innerHTML += arr[i] + " ";
+		document.body.innerHTML += "<br>";
+
 #正则表达式#
 	1. 正则表达式有系统的学习过么？（邮箱验证、URL验证、贪婪匹配、懒惰匹配）
 	match、exec、test、search、replace、split
