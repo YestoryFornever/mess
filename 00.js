@@ -134,6 +134,26 @@ AMadDog.yelp();
 			for (i = 0; i < arr.length; i++)
 				document.body.innerHTML += arr[i] + " ";
 			document.body.innerHTML += "<br>";
+
+	
+		if(!Array.prototype.q){
+			Array.prototype.q = function(){
+				if(this.length<=1)
+					return this.slice(0);
+				let left = [],right = [];
+				let mid = this[0];
+				let i=1;
+				while(i<this.length){
+					if(this[i]<mid){
+						left.push(this[i]);
+					}else{
+						right.push(this[i]);
+					}
+					i++;
+				}
+				return left.q().concat([mid].concat(right.q()));
+			}
+		}
 -----------------------------------------------
 如何使 fn() 相当于 new fn()
 	var x = function () {// 01定义x方法，此时x的prototype已创建
