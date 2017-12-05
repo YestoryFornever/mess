@@ -260,6 +260,30 @@
 	4. 封装
 		1 >. 简述javascript封装
 
+	5. 对作用域上下文和this的理解，看下列代码：
+		var User = {
+			count: 1,
+			getCount: function () {
+				return this.count;
+			}
+		};
+		User.getCount();  // 1
+		User.getCount.bind(this)();// undefined
+		问两处console输出什么？为什么？
+		答案是1和undefined。
+		func是在winodw的上下文中被执行的，所以会访问不到count属性。
+		继续追问，那么如何确保Uesr总是能访问到func的上下文，即正确返回1。正确的方法是使用Function.prototype.bind。兼容各个浏览器完整代码如下：
+		if (!Function.prototype.bind) {
+			Function.prototype.bind = function (context) {
+				var that = this;
+				return function () {
+					return that.apply(context, arguments);
+				}
+			}
+		}
+		var func = User.getCount.bind(User);
+		console.log(func());
+
 #变量声明提升 执行上下文#
 	expulsion context(一个栈的概念)
 	Variable Object(变量对象) 包含了变量、函数声明、函数参数

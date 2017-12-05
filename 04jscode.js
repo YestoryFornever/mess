@@ -476,31 +476,6 @@
 		console.log.apply(console, args);
 	};
 
-34	*对作用域上下文和this的理解，看下列代码：
-		var User = {
-			count: 1,
-			getCount: function(){
-				return this.count;
-			}
-		};
-		//console.log(User.getCount());  // what?
-		var func = User.getCount.bind(User);
-		//console.log(func());  // what?
-	问两处console输出什么？为什么？
-	答案是1和undefined。
-	func是在winodw的上下文中被执行的，所以会访问不到count属性。
-	继续追问，那么如何确保Uesr总是能访问到func的上下文，即正确返回1。正确的方法是使用Function.prototype.bind。兼容各个浏览器完整代码如下：
-	if(!Function.prototype.bind){
-		Function.prototype.bind = function(context) {
-			var that = this;
-			return function () {
-				return that.apply(context,arguments);
-			}
-		}
-	}
-	var func = User.getCount.bind(User);
-	console.log(func());
-
 35	*原生JS的window.onload与Jquery的$(document).ready(function(){})有什么不同？如何用原生JS实现Jq的ready方法？
 	window.onload()方法是必须等到页面内包括图片的所有元素加载完毕后才能执行。
 	$(document).ready()是DOM结构绘制完毕后就执行，不必等到加载完毕。
