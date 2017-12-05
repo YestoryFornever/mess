@@ -336,3 +336,9 @@ AMadDog.yelp();
 17. Node相关
 
 18. React/Redux相关
+	store 状态仓储
+	state 状态
+	action view发出的动作
+	dispatch view通过dispatch方法派发action
+	reducer 状态转换器，收到action变更状态
+	container 
