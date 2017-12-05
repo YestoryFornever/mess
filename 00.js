@@ -207,8 +207,24 @@ AMadDog.yelp();
 	好吧，不用的时候就引用设为空，死结就解开了．
 
 6. 说几个webpack常用插件
-
-7. slice substr substring splice
+	HtmlWebpackPlugin 设置项目起始页面【包括title、favicon等】
+	CopyWebpackPlugin 复制
+	CommonsChunkPlugin 公共部分打包
+	HotModuleReplacementPlugin 热部署
+	less-loader postcss-loader css-loader style-loader
+	url-loader
+	babel-loader
+	
+7. 	Array 
+		slice 根据某数组创建一个新数组，原数组不变
+			数据起止点即可：arr.slice(2,4);不包含结尾项
+		splice 增删改
+			arr.splice(其实操作位置，删除数目，新增项1，新增项2...);
+	String
+		slice 根据某字符串创建一个新字符串，原字符串不变，负数为从后向前
+			string.slice(2,4);不包含结尾项
+		substring 根据某字符串创建一个新字符串，原字符串不变，负数被忽略
+		substr 从某下标开始取指定数目的字符
 
 8. get post 区别
 
