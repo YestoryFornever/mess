@@ -135,6 +135,25 @@ AMadDog.yelp();
 				document.body.innerHTML += arr[i] + " ";
 			document.body.innerHTML += "<br>";
 -----------------------------------------------
+如何使 fn() 相当于 new fn()
+	var x = function () {// 01定义x方法，此时x的prototype已创建
+		return new x.fn.init();// 06 x() 相当于 new x()
+	}
+	x.fn = x.prototype = { a: 1 };// 02设置x的prototype指向另一对象M 03将x的fn属性指向x的prototype指向的对象M
+	x.fn.init = function () {// 04设置x的prototype新增方法init
+		this.b = 2;
+	}
+	x.fn.init.prototype = x.fn; // 05设置x.fn.init的prototype也指向对象M
+	/* 此时 x.fn.init.prototype === x.prototype, 因此new x.fn.init()相当于new x() */
+
+	var y = function () {
+		return new y.init();
+	}
+	y.prototype = { a: 1 };
+	y.init = function () {
+		this.b = 2;
+	}
+	y.init.prototype = y.prototype;
 ========================================================================================================
 
 1. 前端模块化

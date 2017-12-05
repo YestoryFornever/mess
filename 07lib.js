@@ -15,7 +15,8 @@ jQuery>
 		jquery.extend 		=>		$.fn();
 		jquery.fn.extend 	=>		$("x").fn();
 		
-	3.	说说基本架构或者Jquery.fn.init中都做了哪些判断
+	3.	说说基本架构或者
+		Jquery.fn.init中都做了哪些判断
 		if ( !selector ) {
 			//处理 $(""), $(null), $(undefined), $(false)
 		}
