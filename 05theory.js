@@ -148,10 +148,10 @@
     注意quirks：Safari 在无痕模式下设置localstorge值时会抛出 QuotaExceededError 的异常;
     
     #10. webSocket如何兼容低浏览器？(阿里)
-    Adobe Flash Socket 、
-    ActiveX HTMLFile (IE) 、
-    基于 multipart 编码发送 XHR 、
-    基于长轮询的 XHR
+        Adobe Flash Socket 、
+        ActiveX HTMLFile (IE) 、
+        基于 multipart 编码发送 XHR 、
+        基于长轮询的 XHR
 
     8.cookie
 	1>. 简述cookie操作以及cookie的属性
@@ -165,8 +165,8 @@
 			sessionStorage和localStorage 虽然也有存储大小的限制，但比cookie大得多，可以达到5M或更大。
 
 		有期时间：
-			localStorage存储持久数据，浏览器关闭后数据不丢失除非主动删除数据；
-			sessionStorage数据在当前浏览器窗口关闭后自动删除。
+			localStorage 存储持久数据，浏览器关闭后数据不丢失除非主动删除数据；
+			sessionStorage 数据在当前浏览器窗口关闭后自动删除。
 			cookie设置的cookie过期时间之前一直有效，即使窗口或浏览器关闭
     
 1 .前端页面由哪三层构成，分别是什么?作用是什么?
