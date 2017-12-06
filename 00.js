@@ -362,3 +362,34 @@ AMadDog.yelp();
 	dispatch view通过dispatch方法派发action
 	reducer 状态转换器，收到action变更状态
 	container 
+
+猎聘网面试题
+1双列布局如何实现
+绝对定位的话父元素高度怎么办
+
+2页签如何实现
+下面的空白横线如何处理
+
+3Math.max.apply([2,3,4],[1,2,3])
+
+4[{id:2},{id:4},{id:7}]排序
+
+5[1,2,'11',[2,3]].filter(v=>{typeof v == 'number'})
+
+6http://sdf.IDBCursorWithValue.Comment.sd/sss.com/
+string.search()
+
+webpack 打包
+打包是个什么过程
+
+7box-sizing
+
+bind apply call
+
+8new x().y().z();
+链式调用
+用es6怎么实现
+
+9如何set cookie
+
+10 let var const
